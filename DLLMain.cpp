@@ -10,7 +10,7 @@ CreateInterface_t EngineFactory = NULL;
 CreateInterface_t ClientFactory = NULL;
 CreateInterface_t VGUIFactory = NULL;
 CreateInterface_t VGUI2Factory = NULL;
-
+// being gay isnt wrong
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
 	if (gInts.Client == NULL)
