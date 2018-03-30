@@ -49,6 +49,7 @@ void CCheatMenu::Render(void)
 	if (gCvars.aimbot_switch)
 	{
 		i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
+		i = AddItem(i, " - Silent", &gCvars.aimbot_silent, 0, 1, 1, false);
 		i = AddItem(i, " - Key", &gCvars.aimbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Hitscan", &gCvars.aimbot_hitscan, 0, 1, 1, false);
 		i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
@@ -139,7 +140,7 @@ void CCheatMenu::DrawMenu(void)
 	gDrawManager.OutlineRect(x - 1, (y - (h + 4)) - 1, w + 2, (iMenuItems * h + 21) + 2, Color(0, 0, 0, 255));
 	gDrawManager.OutlineRect(x + 1, (y - (h + 4)) + 1, w - 2, (iMenuItems * h + 21) - 2, Color(0, 0, 0, 255));
 
-	gDrawManager.DrawString(x + 4, y - 16, clrColor, "potassium menu");
+	gDrawManager.DrawString(x + 4, y - 16, clrColor, "Dumpster Fire");
 
 	for (int i = 0; i < iMenuItems; i++)
 	{

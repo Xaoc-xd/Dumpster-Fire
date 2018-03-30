@@ -35,12 +35,26 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 	ClampAngle(vAngs);
 	gCvars.iAimbotIndex = pEntity->GetIndex();
+	silentMovementFix(pCommand, vAngs);
 	pCommand->viewangles = vAngs;
 
-	gInts.Engine->SetViewAngles(pCommand->viewangles);
+	if (!gCvars.aimbot_silent)
+		gInts.Engine->SetViewAngles(pCommand->viewangles);
+
 
 	if (gCvars.aimbot_autoshoot)
 		pCommand->buttons |= IN_ATTACK;
+}
+
+void CAimbot::silentMovementFix(CUserCmd *pUserCmd, Vector angles)
+{
+	Vector vecSilent(pUserCmd->forwardmove, pUserCmd->sidemove, pUserCmd->upmove);
+	float flSpeed = sqrt(vecSilent.x * vecSilent.x + vecSilent.y * vecSilent.y);
+	Vector angMove;
+	VectorAngles(vecSilent, angMove);
+	float flYaw = DEG2RAD(angles.y - pUserCmd->viewangles.y + angMove.y);
+	pUserCmd->forwardmove = cos(flYaw) * flSpeed;
+	pUserCmd->sidemove = sin(flYaw) * flSpeed;
 }
 
 int CAimbot::GetBestTarget(CBaseEntity* pLocal)

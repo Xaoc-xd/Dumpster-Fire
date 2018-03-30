@@ -12,6 +12,7 @@ public:
 
 	float aimbot_switch;
 	float aimbot_active;
+	float aimbot_silent;
 	float aimbot_key;
 	float aimbot_hitscan;
 	float aimbot_hitbox;

@@ -7,6 +7,8 @@ public:
 
 	void Run(CBaseEntity* pLocal, CUserCmd* pCommand);
 
+	void silentMovementFix(CUserCmd * pUserCmd, Vector angles);
+
 private:
 
 	int GetBestTarget(CBaseEntity* pLocal);
