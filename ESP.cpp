@@ -1,6 +1,11 @@
 #include "ESP.h"
 #include "CDrawManager.h"
+/*
 
+aaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHH
+
+
+*/
 CESP gESP;
 
 void CESP::Run(CBaseEntity* pLocal)

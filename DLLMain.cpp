@@ -13,6 +13,7 @@ CreateInterface_t VGUI2Factory = NULL;
 // being gay isnt wrong
 // being gay is very, very wrong
 // no homo zone
+// test
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
 	if (gInts.Client == NULL)
