@@ -10,6 +10,7 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 {
 	try
 	{
+		if (gCvars.misc_noscope && !strcmp(gInts.Panels->GetName(vguiPanel), "HudScope")) { return; }
 		VMTManager& hook = VMTManager::GetHook(pPanels); 
 		hook.GetMethod<void(__thiscall*)(PVOID, unsigned int, bool, bool)>(gOffsets.iPaintTraverseOffset)(pPanels, vguiPanel, forceRepaint, allowForce); //Call the original.
 

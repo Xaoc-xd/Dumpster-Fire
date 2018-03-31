@@ -116,6 +116,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Bunnyhop", &gCvars.misc_bunnyhop, 0, 1, 1, false);
 		i = AddItem(i, " - Autostrafe", &gCvars.misc_autostrafe, 0, 1, 1, false);
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
+		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
 	}
 
 	iMenuItems = i;

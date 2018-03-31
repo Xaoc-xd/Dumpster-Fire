@@ -38,6 +38,7 @@ public:
 	float misc_bunnyhop;
 	float misc_autostrafe;
 	float misc_noisemaker_spam;
+	float misc_noscope;
 
 	float playerlist_switch;
 	float PlayerMode[64] = {
