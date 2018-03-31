@@ -1,39 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Panels.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CDrawManager.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="DLLMain.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VMTHooks.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CSignature.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CNetVars.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CBaseEntity.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CMenu.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Aimbot.cpp">
       <Filter>Hacks\Aimbot</Filter>
     </ClCompile>
@@ -46,64 +13,44 @@
     <ClCompile Include="Misc.cpp">
       <Filter>Hacks\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="CBaseEntity.cpp">
+      <Filter>SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="DLLMain.cpp" />
+    <ClCompile Include="VMTHooks.cpp">
+      <Filter>Tools\VMT</Filter>
+    </ClCompile>
+    <ClCompile Include="CNetVars.cpp">
+      <Filter>SDK\NetVars</Filter>
+    </ClCompile>
+    <ClCompile Include="CDrawManager.cpp">
+      <Filter>Tools\CDraw</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Tools\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Tools\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="CSignature.cpp">
+      <Filter>Tools\CSignature</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Hooks\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="Panels.cpp">
+      <Filter>Hooks\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="CMenu.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CDrawManager.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CGlobalVars.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="getvfunc.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Panels.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponList.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VMTHooks.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CSignature.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CNetVars.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="bspflags.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CMenu.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Aimbot.h">
       <Filter>Hacks\Aimbot</Filter>
     </ClInclude>
     <ClInclude Include="Triggerbot.h">
       <Filter>Hacks\Triggerbot</Filter>
-    </ClInclude>
-    <ClInclude Include="studio.h">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ESP.h">
       <Filter>Hacks\ESP</Filter>
@@ -111,14 +58,59 @@
     <ClInclude Include="Misc.h">
       <Filter>Hacks\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="SDK.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="VMTHooks.h">
+      <Filter>Tools\VMT</Filter>
+    </ClInclude>
+    <ClInclude Include="getvfunc.h">
+      <Filter>Tools\VMT</Filter>
+    </ClInclude>
+    <ClInclude Include="CNetVars.h">
+      <Filter>SDK\NetVars</Filter>
+    </ClInclude>
+    <ClInclude Include="CDrawManager.h">
+      <Filter>Tools\CDraw</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponList.h">
+      <Filter>SDK\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>SDK\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Tools\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>SDK\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="bspflags.h">
+      <Filter>SDK\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="studio.h">
+      <Filter>SDK\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Tools\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="CSignature.h">
+      <Filter>Tools\CSignature</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Hooks\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Panels.h">
+      <Filter>Hooks\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="CMenu.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="CGlobalVars.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{79b023fd-cbc8-41db-bfda-b06ff3b945f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source">
-      <UniqueIdentifier>{7561bd3e-f399-43c0-80fd-202de503f606}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Hacks">
       <UniqueIdentifier>{bd4db70f-c9e9-4991-848f-748551954a06}</UniqueIdentifier>
     </Filter>
@@ -133,6 +125,45 @@
     </Filter>
     <Filter Include="Hacks\Misc">
       <UniqueIdentifier>{338f8ff1-8354-487f-9830-cc45a33039d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{bb1e4dd0-0d43-43a8-a824-c42f26467487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{ae107a47-ad3c-44fe-965b-af8cc6ff7e5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\VMT">
+      <UniqueIdentifier>{fc7b8130-59c8-49fc-a861-cb2082199ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\NetVars">
+      <UniqueIdentifier>{5a4ee5ba-f6db-4cb3-84fd-c0d4a2eb882c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\CDraw">
+      <UniqueIdentifier>{deec0be8-e6a4-4f1d-b718-204e71036a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Headers">
+      <UniqueIdentifier>{693b42ce-a61b-4197-ae27-1672240396f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Log">
+      <UniqueIdentifier>{7d28f884-5701-40cd-8d3f-1c5d0eec7299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Util">
+      <UniqueIdentifier>{55b1df47-719d-4d78-bfa5-42ca21e3641b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\CSignature">
+      <UniqueIdentifier>{9a6ba539-3ed8-4dcc-aac2-8acd285ca857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks">
+      <UniqueIdentifier>{d55039f9-c1a0-4bec-94c5-16a3f00c57ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\Client">
+      <UniqueIdentifier>{50e03ef2-c39c-4da6-9c2a-719fe81e5c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hooks\Panels">
+      <UniqueIdentifier>{92d8cbd9-aa1d-4ac7-94bf-2e18f02507a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{ea6e7ff9-2282-475c-98ff-a9479ec8b242}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ public:
 	float aimbot_hitscan;
 	float aimbot_hitbox;
 	float aimbot_autoshoot;
-	float aimbot_fov;
+	float aimbot_fov = 180;
 	float aimbot_silent;
 	float aimbot_ignore_cloak;
 	float aimbot_smooth;

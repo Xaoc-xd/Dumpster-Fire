@@ -18,7 +18,7 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 	Vector finalAngles = gInts.Engine->GetViewAngles();
 	Vector clientAngles = finalAngles;
-	Vector lowestDist(180, 180, 0);
+	float lowestDist = 180;
 
 	for (int i = 1; i <= gInts.Engine->GetMaxClients(); i++)
 	{
@@ -54,7 +54,7 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		VectorAngles(direction, angles);
 		ClampAngle(angles); // Making sure it stays within TF2's angle range
 
-							// Get the distance of the target from our crosshair
+		// Get the distance of the target from our crosshair
 		Vector angleDiff = angles - clientAngles;
 		float ydist = angleDiff.y;
 
@@ -66,14 +66,14 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 		// Check to see if it's outside of our FOV range
 		angleDiff = Vector(abs(ydist), abs(angleDiff.x), 0);
-		if (angleDiff.y > gCvars.aimbot_fov)
-			continue;
-		if (angleDiff.x > gCvars.aimbot_fov)
+		// Pythagoream theorem best theorem
+		float trueDist = sqrt(pow(angleDiff.x, 2) + pow(angleDiff.y, 2));
+		if (trueDist > gCvars.aimbot_fov)
 			continue;
 
 		// Check for lower FOV distance than last target
-		if (angleDiff.x + angleDiff.y < lowestDist.x + lowestDist.y)
-			gCvars.iAimbotIndex = i, lowestDist = angleDiff, finalAngles = angles;
+		if (trueDist < lowestDist)
+			gCvars.iAimbotIndex = i, lowestDist = trueDist, finalAngles = angles;
 	}
 	if (gCvars.aimbot_silent)
 		Util->silentMovementFix(pCommand, finalAngles);
@@ -94,7 +94,6 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 	if (gCvars.aimbot_autoshoot && gCvars.iAimbotIndex != -1)
 		pCommand->buttons |= IN_ATTACK;
-
 }
 
 
