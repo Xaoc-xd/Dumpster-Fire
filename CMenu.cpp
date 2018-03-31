@@ -3,13 +3,15 @@
 #include "CDrawManager.h"
 #include "Util.h"
 
+#include <algorithm>
+
 CCheatMenu gCheatMenu;
 
 int ScreenH;
 int ScreenW;
 
 char* szKeyNames[] = {
-	"None", "Mouse 1", "Mouse 2", "Mouse 3", "Mouse 4", "Mouse 5", "Shift", "Alt", "F",
+	"None", "Mouse 1", "Mouse 2", "Mouse 3", "Mouse 4", "Mouse 5", "Shift", "Alt", "F"
 };
 
 char* szHealthModes[] = {
@@ -27,6 +29,8 @@ char* szHitboxes[] =
 	"Right Lower Arm", "Right Hand", "Left Hip", "Left Knee", "Left Foot",
 	"Right Hip", "Right Knee", "Right Foot",
 };
+
+char* ChatSpams[] = { "OFF", "NullCore", "LMAOBOX", "Lithium", "Cathook", "Empty Lines", "Speedhook", "Freebox" };
 
 int CCheatMenu::AddItem(int nIndex, char szTitle[30], float* value, float flMin, float flMax, float flStep, bool isClassSwitch)
 {
@@ -101,7 +105,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Box", &gCvars.esp_box, 0, 1, 1, false);
 		if (gCvars.esp_box)
 		{
-			i = AddItem(i, "--Thickness", &gCvars.esp_box_thickness, 0, 4, 1, false);
+			i = AddItem(i, " - Thickness", &gCvars.esp_box_thickness, 1, 4, 1, false);
 		}
 		i = AddItem(i, " - Name", &gCvars.esp_name, 0, 1, 1, false);
 		i = AddItem(i, " - Class", &gCvars.esp_class, 0, 1, 1, false);
@@ -124,6 +128,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Autostrafe", &gCvars.misc_autostrafe, 0, 1, 1, false);
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
+		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 7, 1, false);
 	}
 
 	iMenuItems = i;
@@ -191,7 +196,12 @@ void CCheatMenu::DrawMenu(void)
 
 				else if (pMenu[i].flMax == 8)
 				{
-					gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
+						gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
+				}
+
+				else if (pMenu[i].flMax == 7)
+				{
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", ChatSpams[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 2)
@@ -246,7 +256,12 @@ void CCheatMenu::DrawMenu(void)
 
 				else if (pMenu[i].flMax == 8)
 				{
-					gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
+						gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
+				}
+
+				else if (pMenu[i].flMax == 7)
+				{
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? clrColor : Color(105, 105, 105, 255), "%s", ChatSpams[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 2)

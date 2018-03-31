@@ -4,6 +4,7 @@
 #include "Aimbot.h"
 #include "Triggerbot.h"
 #include "Misc.h"
+#include "ChatSpam.h"
 
 //============================================================================================
 bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_frametime, CUserCmd* pCommand)
@@ -23,6 +24,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 		gMisc.Run(pLocal, pCommand);
 		gAim.Run(pLocal, pCommand);
 		gTrigger.Run(pLocal, pCommand);
+		gChatSpam.Run(pLocal, pCommand);
 	}
 	catch(...)
 	{

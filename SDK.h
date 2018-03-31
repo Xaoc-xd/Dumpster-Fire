@@ -323,6 +323,11 @@ public:
 		typedef DWORD* ( __thiscall* OriginalFn )( PVOID );
 		return getvfunc<OriginalFn>( this, 72 )( this );
 	}
+	void ClientCmd(const char* szCommandString)
+	{
+		typedef void(__thiscall* ClientCmdFn)(void*, const char*);
+		return getvfunc<ClientCmdFn>(this, 7)(this, szCommandString);
+	}
 	void ClientCmd_Unrestricted( const char* chCommandString )
 	{
 		typedef void ( __thiscall* OriginalFn )( PVOID, const char * );
@@ -810,6 +815,7 @@ public:
 	CEntList* EntList;
 	EngineClient* Engine;
 	IPanel* Panels;
+	CGlobals* globals;
 	ISurface* Surface;
 	ClientModeShared* ClientMode;
 	CHLClient* Client;

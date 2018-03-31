@@ -55,6 +55,9 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 			}
 		}
 
+		gInts.globals = *reinterpret_cast<CGlobals **>(gSignatures.GetEngineSignature("A1 ? ? ? ? 8B 11 68") + 8);
+		XASSERT(gInts.globals);
+
 		DWORD dwClientModeAddress = gSignatures.GetClientSignature("8B 0D ? ? ? ? 8B 02 D9 05");
 		XASSERT(dwClientModeAddress);
 		gInts.ClientMode = **(ClientModeShared***)(dwClientModeAddress + 2);

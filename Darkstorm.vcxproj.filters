@@ -44,6 +44,9 @@
     <ClCompile Include="CMenu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="ChatSpam.cpp">
+      <Filter>Hacks\ChatSpam</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -109,6 +112,9 @@
     <ClInclude Include="CGlobalVars.h">
       <Filter>Menu</Filter>
     </ClInclude>
+    <ClInclude Include="ChatSpam.h">
+      <Filter>Hacks\ChatSpam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -164,6 +170,9 @@
     </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{ea6e7ff9-2282-475c-98ff-a9479ec8b242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks\ChatSpam">
+      <UniqueIdentifier>{b8a5d3bd-c69b-4e4b-af95-2c4d900ed772}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

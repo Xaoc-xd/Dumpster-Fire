@@ -31,7 +31,7 @@ public:
 	float esp_active;
 	float esp_enemyonly;
 	float esp_box;
-	float esp_box_thickness;
+	float esp_box_thickness = 1;
 	float esp_name;
 	float esp_class;
 	float esp_health;
@@ -43,6 +43,7 @@ public:
 	float misc_autostrafe;
 	float misc_noisemaker_spam;
 	float misc_noscope;
+	float misc_chatspam_selection;
 
 	float playerlist_switch;
 	float PlayerMode[64] = {

@@ -8,6 +8,11 @@ void CUtil::VectorTransform(const Vector& vSome, const matrix3x4& vMatrix, Vecto
 		vOut[i] = vSome.Dot((Vector&)vMatrix[i]) + vMatrix[i][3];
 }
 
+float CUtil::RandFloatRange(float min, float max)
+{
+	return (min + 1) + (((float)rand()) / (float)RAND_MAX) * (max - (min + 1));
+}
+
 bool CUtil::IsVisible(void* pLocal, void* pEntity, Vector vStart, Vector vEnd)
 {
 	trace_t Trace;

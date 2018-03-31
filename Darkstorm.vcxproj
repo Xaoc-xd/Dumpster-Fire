@@ -91,6 +91,7 @@
     <ClCompile Include="Aimbot.cpp" />
     <ClCompile Include="CBaseEntity.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
+    <ClCompile Include="ChatSpam.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CMenu.cpp" />
     <ClCompile Include="CNetVars.cpp" />
@@ -109,6 +110,7 @@
     <ClInclude Include="bspflags.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CGlobalVars.h" />
+    <ClInclude Include="ChatSpam.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="CMenu.h" />
     <ClInclude Include="CNetVars.h" />
