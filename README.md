@@ -38,11 +38,12 @@ Uses Stick's Potassium Cheat.
 * Class - Render a player's class
 * Health - Render a player's health (can be either text or bar)
 * Smiley Face - Render a poorly created smiley face over the entity's head
-* Box Thickness - Modify the pixel width of a box.
+* Box Thickness - Modify the pixel width of a box
 
 ## Misc
 
 * Bunnyhop - Continue jumping by holding your jump key
 * Autostrafe - Automatically strafe while airborne to gain speed
-* Noisemaker Spam - Continuiously spam a Noisemaker.
-* No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle.
+* Noisemaker Spam - Continuiously spam a Noisemaker
+* No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle
+* Chat Spam - Spams chat with lots of popular cheat's chat spam messages
