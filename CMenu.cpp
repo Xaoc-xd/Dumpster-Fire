@@ -30,7 +30,7 @@ char* szHitboxes[] =
 	"Right Hip", "Right Knee", "Right Foot",
 };
 
-char* ChatSpams[] = { "OFF", "NullCore", "LMAOBOX", "Lithium", "Cathook", "Empty Lines", "Speedhook", "Freebox" };
+char* ChatSpams[] = { "OFF", "NullCore", "LMAOBOX", "Lithium", "Cathook", "Empty Lines", "Speedhook", "Freebox", "Catbot", "Dumpster Fire" };
 
 char* KillSays[] = { "OFF", "NiggerHOOK", "NullCore", "File" };
  
@@ -140,7 +140,8 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Autostrafe", &gCvars.misc_autostrafe, 0, 1, 1, false);
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
-		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 7, 1, false);
+		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 9, 1, false);
+		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false);
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 	}
 
@@ -212,7 +213,7 @@ void CCheatMenu::DrawMenu(void)
 						gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
 				}
 
-				else if (pMenu[i].flMax == 7)
+				else if (pMenu[i].flMax == 9)
 				{
 					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", ChatSpams[(int)pMenu[i].value[0]]);
 				}
@@ -277,7 +278,7 @@ void CCheatMenu::DrawMenu(void)
 						gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
 				}
 
-				else if (pMenu[i].flMax == 7)
+				else if (pMenu[i].flMax == 9)
 				{
 					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? clrColor : Color(105, 105, 105, 255), "%s", ChatSpams[(int)pMenu[i].value[0]]);
 				}

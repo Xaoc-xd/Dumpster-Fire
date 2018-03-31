@@ -52,6 +52,7 @@ public:
 	float misc_noisemaker_spam;
 	float misc_noscope;
 	float misc_chatspam_selection;
+	float misc_chatspam_delay;
 	float misc_killsay_selection;
 
 	float playerlist_switch;

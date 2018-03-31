@@ -38,19 +38,21 @@ void CChatSpam::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		source = &ChatSpams::builtin_lithium; break;
 	case 4:
 		source = &ChatSpams::builtin_cathook; break;
-	case 5://Empty lines
-		source = &ChatSpams::builtin_empty;
-		break;
+	case 5: //Empty lines
+		source = &ChatSpams::builtin_empty; break;
 	case 6:
-		source = &ChatSpams::builtin_speedhook;
-		break;
+		source = &ChatSpams::builtin_speedhook; break;
 	case 7:
 		source = &ChatSpams::builtin_freelbox; break;
+	case 8:
+		source = &ChatSpams::builtin_catbot; break;
+	case 9:
+		source = &ChatSpams::builtin_dumpsterfire; break;
 	default:
 		return;
 	}
 	if (!source || !source->size()) return;
-	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - last_spam_point).count() > 300)
+	if (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - last_spam_point).count() > gCvars.misc_chatspam_delay)
 	{
 
 		if (current_index >= source->size()) current_index = 0;
