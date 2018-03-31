@@ -1,26 +1,15 @@
-# potassium
+# Dumpster Fire
 
-Potassium is the name of a Team Fortress 2 hack that I am working on.
+Paste central with a ton of random people.
 
-If you're going to use this for your hack, please give me credits, thanks.
-
-## Credits: 
-
-* Gir489 - Creating DarkStorm base
-
-* Rud - Helped me make cheats in the first place
-
-* TDiff - My partner in crime
-
-* F1ssi0N - Cyberbullying me and for DynVars class
-
-* Diane/Blackfire - Cyberbully and F1ssi0N wannabe
+Uses Stick's Potassium Cheat.
 
 ## Features:
 
 ### Aimbot
 
 * Master Switch - Toggle Aimbot on/off
+* Silent Aim - No viewangle locking aimbot
 * Key - Set a (somewhat) custom key to use for aiming
 * Hitscan - Aim at best available hitbox
 * Hitbox - Choose a hitbox you would prefer to aim at
@@ -44,8 +33,11 @@ If you're going to use this for your hack, please give me credits, thanks.
 * Name - Render a player's name
 * Class - Render a player's class
 * Health - Render a player's health (can be either text or bar)
+* Smiley Face - Render a poorly created smiley face over the entity's head
+* Box Thickness - Modify the pixel width of a box.
 
 ## Misc
 
 * Bunnyhop - Continue jumping by holding your jump key
 * Autostrafe - Automatically strafe while airborne to gain speed
+* Noisemaker Spam - Continuiously spam a Noisemaker.
