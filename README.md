@@ -41,3 +41,4 @@ Uses Stick's Potassium Cheat.
 * Bunnyhop - Continue jumping by holding your jump key
 * Autostrafe - Automatically strafe while airborne to gain speed
 * Noisemaker Spam - Continuiously spam a Noisemaker.
+* No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle.
