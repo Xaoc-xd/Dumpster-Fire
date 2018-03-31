@@ -272,15 +272,21 @@ public:
 		typedef float ( __thiscall* OriginalFn )( PVOID );
 		return getvfunc<OriginalFn>( this, 14 )( this );
 	}
-	void GetViewAngles( Vector& va )
+		void GetViewAngles( Vector& va )
 	{
 		typedef void ( __thiscall* OriginalFn )( PVOID, Vector& va );
 		return getvfunc<OriginalFn>( this, 19 )( this, va );
 	}
-	void SetViewAngles( Vector& va )
+	Vector GetViewAngles()
 	{
-		typedef void ( __thiscall* OriginalFn )( PVOID, Vector& va );
-		return getvfunc<OriginalFn>( this, 20 )( this, va );
+		Vector out;
+		GetViewAngles(out);
+		return out;
+	}
+	void SetViewAngles(Vector& va)
+	{
+		typedef void(__thiscall* OriginalFn)(PVOID, Vector& va);
+		return getvfunc<OriginalFn>(this, 20)(this, va);
 	}
 	int GetMaxClients( void )
 	{

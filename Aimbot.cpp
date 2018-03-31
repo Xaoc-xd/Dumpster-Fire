@@ -16,36 +16,90 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	if (!pLocal->GetActiveWeapon())
 		return;
 
-	CBaseEntity* pEntity = GetBaseEntity(GetBestTarget(pLocal));
+	Vector finalAngles = gInts.Engine->GetViewAngles();
+	Vector clientAngles = finalAngles;
+	Vector lowestDist(180, 180, 0);
 
-	if (!pEntity)
-		return;
+	for (int i = 1; i <= gInts.Engine->GetMaxClients(); i++)
+	{
+		if (i == me)
+			continue;
+		CBaseEntity* pEntity = GetBaseEntity(i);
+		if (pEntity == NULL || pEntity->IsDormant())
+			continue;
 
-	int iBestHitbox = GetBestHitbox(pLocal, pEntity);
+		// Deciding if we should aim or not
+		if (pEntity->GetLifeState() != LIFE_ALIVE ||
+			pEntity->GetTeamNum() == pLocal->GetTeamNum())
+			continue;
 
-	if (iBestHitbox == -1)
-		return;
+		if (!gCvars.PlayerMode[i])
+			continue;
 
-	Vector vEntity = pEntity->GetHitboxPosition(iBestHitbox);
+		if (pEntity->GetCond() & TFCond_Ubercharged ||
+			pEntity->GetCond() & TFCond_UberchargeFading ||
+			pEntity->GetCond() & TFCond_Bonked)
+			continue;
 
-	Vector vLocal = pLocal->GetEyePosition();
+		if (gCvars.aimbot_ignore_cloak && pEntity->GetCond() & TFCond_Cloaked)
+			continue;
 
-	Vector vAngs;
-	VectorAngles((vEntity - vLocal), vAngs);
+		int hitbox = GetBestHitbox(pLocal, pEntity);
+		Vector start = pLocal->GetEyePosition(), targetPos = pEntity->GetHitboxPosition(hitbox);
+		if (!canHit(pLocal, pEntity, start, targetPos)) // vischecking
+			continue;
+		Vector direction = targetPos - start; // A line in the direction of our target
 
-	ClampAngle(vAngs);
-	gCvars.iAimbotIndex = pEntity->GetIndex();
-	silentMovementFix(pCommand, vAngs);
-	pCommand->viewangles = vAngs;
+		Vector angles; // Converting that line direction to angles
+		VectorAngles(direction, angles);
+		ClampAngle(angles); // Making sure it stays within TF2's angle range
 
-	if (!gCvars.aimbot_silent)
-		gInts.Engine->SetViewAngles(pCommand->viewangles);
+							// Get the distance of the target from our crosshair
+		Vector angleDiff = angles - clientAngles;
+		float ydist = angleDiff.y;
 
-	if (gCvars.aimbot_autoshoot)
+		// The max degrees between two points on a circle is 180 if you want the shortest path
+		if (ydist > 180)
+			ydist -= 360;
+		else if (ydist < -180)
+			ydist += 360;
+
+		// Check to see if it's outside of our FOV range
+		angleDiff = Vector(abs(ydist), abs(angleDiff.x), 0);
+		if (angleDiff.y > gCvars.aimbot_fov)
+			continue;
+		if (angleDiff.x > gCvars.aimbot_fov)
+			continue;
+
+		// Check for lower FOV distance than last target
+		if (angleDiff.x + angleDiff.y < lowestDist.x + lowestDist.y)
+			gCvars.iAimbotIndex = i, lowestDist = angleDiff, finalAngles = angles;
+	}
+	if (gCvars.aimbot_silent)
+		Util->silentMovementFix(pCommand, finalAngles);
+	if (gCvars.aimbot_smooth)
+	{
+		Vector smoothedAngle;
+		SmoothAngle(pCommand->viewangles, finalAngles, smoothedAngle, gCvars.aimbot_smooth_amt);
+		pCommand->viewangles = smoothedAngle;
+		gInts.Engine->SetViewAngles(smoothedAngle);
+	}
+	else
+	{
+		pCommand->viewangles = finalAngles;
+
+		if (!gCvars.aimbot_silent)
+			gInts.Engine->SetViewAngles(pCommand->viewangles);
+	}
+
+	if (gCvars.aimbot_autoshoot && gCvars.iAimbotIndex != -1)
 		pCommand->buttons |= IN_ATTACK;
+
 }
 
-void CAimbot::silentMovementFix(CUserCmd *pUserCmd, Vector angles)
+
+
+/*void CAimbot::silentMovementFix(CUserCmd *pUserCmd, Vector angles)
 {
 	Vector vecSilent(pUserCmd->forwardmove, pUserCmd->sidemove, pUserCmd->upmove);
 	float flSpeed = sqrt(vecSilent.x * vecSilent.x + vecSilent.y * vecSilent.y);
@@ -54,6 +108,30 @@ void CAimbot::silentMovementFix(CUserCmd *pUserCmd, Vector angles)
 	float flYaw = DEG2RAD(angles.y - pUserCmd->viewangles.y + angMove.y);
 	pUserCmd->forwardmove = cos(flYaw) * flSpeed;
 	pUserCmd->sidemove = sin(flYaw) * flSpeed;
+}
+sorry bro but im doing this my way <3*/
+bool CAimbot::canHit(void* you, void* target, Vector vStart, Vector vEnd/*, trace_t *result*/)
+{
+	trace_t Trace;
+	Ray_t Ray;
+	CTraceFilter Filter;
+
+	Filter.pSkip = you;
+
+	Ray.Init(vStart, vEnd);
+	gInts.EngineTrace->TraceRay(Ray, MASK_SHOT, &Filter, &Trace);
+
+	//if (result != nullptr)
+	//  result[0] = Trace;
+
+	return (Trace.m_pEnt == target);
+}
+void CAimbot::SmoothAngle(Vector& currentAngle, Vector& aimAngle, Vector& smoothedAngle, float fSmoothPercentage)
+{
+	ClampAngle(aimAngle);
+	smoothedAngle = aimAngle - currentAngle;
+	smoothedAngle = currentAngle + smoothedAngle / 100.f * fSmoothPercentage;
+	ClampAngle(smoothedAngle);
 }
 
 int CAimbot::GetBestTarget(CBaseEntity* pLocal)
@@ -72,6 +150,7 @@ int CAimbot::GetBestTarget(CBaseEntity* pLocal)
 		CBaseEntity* pEntity = GetBaseEntity(i);
 
 		if (!pEntity)
+
 			continue;
 
 		if (pEntity->IsDormant())

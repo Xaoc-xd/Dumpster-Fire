@@ -12,7 +12,8 @@ public:
 
 	bool IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
+	void silentMovementFix(CUserCmd *pUserCmd, Vector angles);
+	
 	PVOID InitKeyValue();
 };
-
 extern CUtil* Util;

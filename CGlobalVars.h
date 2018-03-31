@@ -12,11 +12,15 @@ public:
 
 	float aimbot_switch;
 	float aimbot_active;
-	float aimbot_silent;
 	float aimbot_key;
 	float aimbot_hitscan;
 	float aimbot_hitbox;
 	float aimbot_autoshoot;
+	float aimbot_fov;
+	float aimbot_silent;
+	float aimbot_ignore_cloak;
+	float aimbot_smooth;
+	float aimbot_smooth_amt;
 
 	float triggerbot_switch;
 	float triggerbot_active;

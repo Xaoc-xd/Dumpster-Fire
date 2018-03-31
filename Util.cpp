@@ -22,7 +22,16 @@ bool CUtil::IsVisible(void* pLocal, void* pEntity, Vector vStart, Vector vEnd)
 
 	return (Trace.m_pEnt == pEntity);
 }
-
+void CUtil::silentMovementFix(CUserCmd *pUserCmd, Vector angles) //Fix for silent movement    creds gir + f1ssi0n
+{
+	Vector vecSilent(pUserCmd->forwardmove, pUserCmd->sidemove, pUserCmd->upmove);
+	float flSpeed = sqrt(vecSilent.x * vecSilent.x + vecSilent.y * vecSilent.y);
+	Vector angMove;
+	VectorAngles(vecSilent, angMove);
+	float flYaw = DEG2RAD(angles.y - pUserCmd->viewangles.y + angMove.y);
+	pUserCmd->forwardmove = cos(flYaw) * flSpeed;
+	pUserCmd->sidemove = sin(flYaw) * flSpeed;
+}
 bool CUtil::IsKeyPressed(int i)
 {
 	switch (i)
