@@ -26,6 +26,11 @@ int CBaseEntity::GetClassNum()
 	DYNVAR_RETURN(int, this, "DT_TFPlayer", "m_PlayerClass", "m_iClass");
 }
 
+const char* CBaseEntity::GetModelName()
+{
+	return gInts.ModelInfo->GetModelName(this->GetModel());
+}
+
 char* CBaseEntity::szGetClass()
 {
 	DYNVAR(iClass, int, "DT_TFPlayer", "m_PlayerClass", "m_iClass");

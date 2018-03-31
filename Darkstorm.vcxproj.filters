@@ -47,6 +47,9 @@
     <ClCompile Include="ChatSpam.cpp">
       <Filter>Hacks\ChatSpam</Filter>
     </ClCompile>
+    <ClCompile Include="RemoveConditions.cpp">
+      <Filter>Hacks\RemoveConditions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -115,6 +118,9 @@
     <ClInclude Include="ChatSpam.h">
       <Filter>Hacks\ChatSpam</Filter>
     </ClInclude>
+    <ClInclude Include="RemoveConditions.h">
+      <Filter>Hacks\RemoveConditions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -173,6 +179,9 @@
     </Filter>
     <Filter Include="Hacks\ChatSpam">
       <UniqueIdentifier>{b8a5d3bd-c69b-4e4b-af95-2c4d900ed772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks\RemoveConditions">
+      <UniqueIdentifier>{31f1fb93-5e97-41de-99b1-325b0fb44c56}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

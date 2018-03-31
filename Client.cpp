@@ -5,6 +5,7 @@
 #include "Triggerbot.h"
 #include "Misc.h"
 #include "ChatSpam.h"
+#include "RemoveConditions.h"
 
 //============================================================================================
 bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_frametime, CUserCmd* pCommand)
@@ -23,6 +24,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 
 		gMisc.Run(pLocal, pCommand);
 		gAim.Run(pLocal, pCommand);
+		gCond.Run(pLocal, pCommand);
 		gTrigger.Run(pLocal, pCommand);
 		gChatSpam.Run(pLocal, pCommand);
 	}

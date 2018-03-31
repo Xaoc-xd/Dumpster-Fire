@@ -120,6 +120,11 @@ public:
 class CBaseEntity
 {
 public:
+	int GetOwner()
+	{
+		DYNVAR_RETURN(int, this, "DT_BaseEntity", "m_hOwnerEntity");
+	}
+
 	Vector& GetAbsOrigin()
 	{
 		typedef Vector& (__thiscall* OriginalFn)(PVOID);
@@ -167,6 +172,10 @@ public:
 		typedef int(__thiscall* OriginalFn)(PVOID);
 		return getvfunc<OriginalFn>(pNetworkable, 9)(pNetworkable);
 	}
+	/*const char* CBaseEntity::GetModelName()
+	{
+		return gInts.ModelInfo->GetModelName(this->GetModel());
+	}*/
 	void GetRenderBounds(Vector& mins, Vector& maxs)
 	{
 		PVOID pRenderable = (PVOID)(this + 0x4);
@@ -194,6 +203,7 @@ public:
 	int GetFlags();
 	BYTE GetLifeState();
 	int GetClassNum();
+	const char * GetModelName();
 	char* szGetClass();
 	int GetCond();
 	CBaseCombatWeapon* GetActiveWeapon();
@@ -241,6 +251,7 @@ public:
 	{
 		DYNVAR_RETURN(int, this, "DT_EconEntity", "m_AttributeManager", "m_Item", "m_iItemDefinitionIndex");
 	}
+
 };
 
 
@@ -618,7 +629,404 @@ public:
 	CGameTrace() {}
 	CGameTrace(const CGameTrace& vOther);
 };
+/*
+class INetChannel : public INetChannelInfo
+{
+public:
+	virtual ~INetChannel(void)
+	{
+	};
 
+	virtual void SetDataRate(float rate) = 0;
+	virtual bool RegisterMessage(INetMessage *msg) = 0;
+	virtual bool StartStreaming(unsigned int challengeNr) = 0;
+	virtual void ResetStreaming(void) = 0;
+	virtual void SetTimeout(float seconds) = 0;
+	//virtual void SetDemoRecorder(IDemoRecorder *recorder) = 0;
+	virtual void SetChallengeNr(unsigned int chnr) = 0;
+
+	virtual void Reset(void) = 0;
+	virtual void Clear(void) = 0;
+	virtual void Shutdown(const char *reason) = 0;
+
+	virtual void ProcessPlayback(void) = 0;
+	virtual bool ProcessStream(void) = 0;
+	virtual void ProcessPacket(struct netpacket_s *packet, bool bHasHeader) = 0;
+
+	virtual bool SendNetMsg(INetMessage &msg, bool bForceReliable = false, bool bVoice = false) = 0;
+#ifdef POSIX
+	FORCEINLINE bool SendNetMsg(INetMessage const &msg, bool bForceReliable = false, bool bVoice = false)
+	{
+		return SendNetMsg(*((INetMessage *)&msg), bForceReliable, bVoice);
+	}
+#endif
+	//virtual bool SendData(bf_write &msg, bool bReliable = true) = 0;
+	virtual bool SendFile(const char *filename, unsigned int transferID) = 0;
+	virtual void DenyFile(const char *filename, unsigned int transferID) = 0;
+	virtual void RequestFile_OLD(const char *filename, unsigned int transferID) = 0; // get rid of this function when we version the
+	virtual void SetChoked(void) = 0;
+	//virtual int SendDatagram(bf_write *data) = 0;
+	virtual bool Transmit(bool onlyReliable = false) = 0;
+
+	virtual const netadr_t &GetRemoteAddress(void) const = 0;
+	virtual INetChannelHandler *GetMsgHandler(void) const = 0;
+	virtual int GetDropNumber(void) const = 0;
+	virtual int GetSocket(void) const = 0;
+	virtual unsigned int GetChallengeNr(void) const = 0;
+	virtual void GetSequenceData(int &nOutSequenceNr, int &nInSequenceNr, int &nOutSequenceNrAck) = 0;
+	virtual void SetSequenceData(int nOutSequenceNr, int nInSequenceNr, int nOutSequenceNrAck) = 0;
+
+	virtual void UpdateMessageStats(int msggroup, int bits) = 0;
+	virtual bool CanPacket(void) const = 0;
+	virtual bool IsOverflowed(void) const = 0;
+	virtual bool IsTimedOut(void) const = 0;
+	virtual bool HasPendingReliableData(void) = 0;
+
+	virtual void SetFileTransmissionMode(bool bBackgroundMode) = 0;
+	virtual void SetCompressionMode(bool bUseCompression) = 0;
+	virtual unsigned int RequestFile(const char *filename) = 0;
+	virtual float GetTimeSinceLastReceived(void) const = 0; // get time since last received packet in seconds
+
+	virtual void SetMaxBufferSize(bool bReliable, int nBYTEs, bool bVoice = false) = 0;
+
+	virtual bool IsNull() const = 0;
+	virtual int GetNumBitsWritten(bool bReliable) = 0;
+	virtual void SetInterpolationAmount(float flInterpolationAmount) = 0;
+	virtual void SetRemoteFramerate(float flFrameTime, float flFrameTimeStdDeviation) = 0;
+
+	// Max # of payload BYTEs before we must split/fragment the packet
+	virtual void SetMaxRoutablePayloadSize(int nSplitSize) = 0;
+	virtual int GetMaxRoutablePayloadSize() = 0;
+
+	virtual int GetProtocolVersion() = 0;
+};
+
+*/
+class INetMessage;
+class INetChannel;
+class INetChannelHandler
+{
+public:
+	virtual ~INetChannelHandler(void)
+	{
+	};
+
+	virtual void ConnectionStart(INetChannel *chan) = 0; // called first time network channel is established
+
+	virtual void ConnectionClosing(const char *reason) = 0; // network channel is being closed by remote site
+
+	virtual void ConnectionCrashed(const char *reason) = 0; // network error occured
+
+	virtual void PacketStart(int incoming_sequence, int outgoing_acknowledged) = 0; // called each time a new packet arrived
+
+	virtual void PacketEnd(void) = 0; // all messages has been parsed
+
+	virtual void FileRequested(const char *fileName, unsigned int transferID) = 0; // other side request a file for download
+
+	virtual void FileReceived(const char *fileName, unsigned int transferID) = 0; // we received a file
+
+	virtual void FileDenied(const char *fileName, unsigned int transferID) = 0; // a file request was denied by other side
+
+	virtual void FileSent(const char *fileName, unsigned int transferID) = 0; // we sent a file
+};
+
+
+typedef struct netadr_s
+{
+public:
+	netadr_s()
+	{
+		SetIP(0);
+		SetPort(0);
+		//SetType(NA_IP);
+	}
+	netadr_s(const char *pch)
+	{
+		SetFromString(pch);
+	}
+	void Clear(); // invalids Address
+
+				  //void SetType(netadrtype_t type);
+	void SetPort(unsigned short port);
+	bool SetFromSockadr(const struct sockaddr *s);
+	void SetIP(unsigned int unIP); // Sets IP.  unIP is in host order (little-endian)
+	void SetIPAndPort(unsigned int unIP, unsigned short usPort)
+	{
+		SetIP(unIP);
+		SetPort(usPort);
+	}
+	void SetFromString(const char *pch, bool bUseDNS = false); // if bUseDNS is true then do a DNS lookup if needed
+
+	bool CompareAdr(const netadr_s &a, bool onlyBase = false) const;
+	bool CompareClassBAdr(const netadr_s &a) const;
+	bool CompareClassCAdr(const netadr_s &a) const;
+
+	//netadrtype_t GetType() const;
+	unsigned short GetPort() const;
+	const char *ToString(bool onlyBase = false) const; // returns xxx.xxx.xxx.xxx:ppppp
+	void ToSockadr(struct sockaddr *s) const;
+	unsigned int GetIP() const;
+
+	bool IsLocalhost() const;   // true, if this is the localhost IP
+	bool IsLoopback() const;	// true if engine loopback buffers are used
+	bool IsReservedAdr() const; // true, if this is a private LAN IP
+	bool IsValid() const;		// ip & port != 0
+	void SetFromSocket(int hSocket);
+	// These function names are decorated because the Xbox360 defines macros for ntohl and htonl
+	unsigned long addr_ntohl() const;
+	unsigned long addr_htonl() const;
+	bool operator==(const netadr_s &netadr) const
+	{
+		return (CompareAdr(netadr));
+	}
+	bool operator<(const netadr_s &netadr) const;
+
+public: // members are public to avoid to much changes
+		//netadrtype_t type;
+	unsigned char ip[4];
+	unsigned short port;
+} netadr_t;
+
+
+class INetMessage;
+class INetChannelHandler;
+class INetChannelInfo
+{
+public:
+
+	enum
+	{
+		GENERIC = 0,	// must be first and is default group
+		LOCALPLAYER,	// bytes for local player entity update
+		OTHERPLAYERS,	// bytes for other players update
+		ENTITIES,		// all other entity bytes
+		SOUNDS,			// game sounds
+		EVENTS,			// event messages
+		TEMPENTS,		// temp entities
+		USERMESSAGES,	// user messages
+		ENTMESSAGES,	// entity messages
+		VOICE,			// voice data
+		STRINGTABLE,	// a stringtable update
+		MOVE,			// client move cmds
+		STRINGCMD,		// string command
+		SIGNON,			// various signondata
+		TOTAL,			// must be last and is not a real group
+	};
+
+	virtual const char  *GetName(void) const = 0;	// get channel name
+	virtual const char  *GetAddress(void) const = 0; // get channel IP address as string
+	virtual float		GetTime(void) const = 0;	// current net time
+	virtual float		GetTimeConnected(void) const = 0;	// get connection time in seconds
+	virtual int			GetBufferSize(void) const = 0;	// netchannel packet history size
+	virtual int			GetDataRate(void) const = 0; // send data rate in byte/sec
+
+	virtual bool		IsLoopback(void) const = 0;	// true if loopback channel
+	virtual bool		IsTimingOut(void) const = 0;	// true if timing out
+	virtual bool		IsPlayback(void) const = 0;	// true if demo playback
+
+	virtual float		GetLatency(int flow) const = 0;	 // current latency (RTT), more accurate but jittering
+	virtual float		GetAvgLatency(int flow) const = 0; // average packet latency in seconds
+	virtual float		GetAvgLoss(int flow) const = 0;	 // avg packet loss[0..1]
+	virtual float		GetAvgChoke(int flow) const = 0;	 // avg packet choke[0..1]
+	virtual float		GetAvgData(int flow) const = 0;	 // data flow in bytes/sec
+	virtual float		GetAvgPackets(int flow) const = 0; // avg packets/sec
+	virtual int			GetTotalData(int flow) const = 0;	 // total flow in/out in bytes
+	virtual int			GetTotalPackets(int flow) const = 0;
+	virtual int			GetSequenceNr(int flow) const = 0;	// last send seq number
+	virtual bool		IsValidPacket(int flow, int frame_number) const = 0; // true if packet was not lost/dropped/chocked/flushed
+	virtual float		GetPacketTime(int flow, int frame_number) const = 0; // time when packet was send
+	virtual int			GetPacketBytes(int flow, int frame_number, int group) const = 0; // group size of this packet
+	virtual bool		GetStreamProgress(int flow, int *received, int *total) const = 0;  // TCP progress if transmitting
+	virtual float		GetTimeSinceLastReceived(void) const = 0;	// get time since last recieved packet in seconds
+	virtual	float		GetCommandInterpolationAmount(int flow, int frame_number) const = 0;
+	virtual void		GetPacketResponseLatency(int flow, int frame_number, int *pnLatencyMsecs, int *pnChoke) const = 0;
+	virtual void		GetRemoteFramerate(float *pflFrameTime, float *pflFrameTimeStdDeviation, float *pflFrameStartTimeStdDeviation) const = 0;
+
+	virtual float		GetTimeoutSeconds() const = 0;
+};
+
+class INetMessage;
+class INetChannel : public INetChannelInfo
+{
+public:
+	virtual ~INetChannel(void)
+	{
+	};
+
+	virtual void SetDataRate(float rate) = 0;
+	virtual bool RegisterMessage(INetMessage *msg) = 0;
+	virtual bool StartStreaming(unsigned int challengeNr) = 0;
+	virtual void ResetStreaming(void) = 0;
+	virtual void SetTimeout(float seconds) = 0;
+	//virtual void SetDemoRecorder(IDemoRecorder *recorder) = 0;
+	virtual void SetChallengeNr(unsigned int chnr) = 0;
+
+	virtual void Reset(void) = 0;
+	virtual void Clear(void) = 0;
+	virtual void Shutdown(const char *reason) = 0;
+
+	virtual void ProcessPlayback(void) = 0;
+	virtual bool ProcessStream(void) = 0;
+	virtual void ProcessPacket(struct netpacket_s *packet, bool bHasHeader) = 0;
+
+	virtual bool SendNetMsg(INetMessage &msg, bool bForceReliable = false, bool bVoice = false) = 0;
+#ifdef POSIX
+	FORCEINLINE bool SendNetMsg(INetMessage const &msg, bool bForceReliable = false, bool bVoice = false)
+	{
+		return SendNetMsg(*((INetMessage *)&msg), bForceReliable, bVoice);
+	}
+#endif
+	//virtual bool SendData(bf_write &msg, bool bReliable = true) = 0;
+	virtual bool SendFile(const char *filename, unsigned int transferID) = 0;
+	virtual void DenyFile(const char *filename, unsigned int transferID) = 0;
+	virtual void RequestFile_OLD(const char *filename, unsigned int transferID) = 0; // get rid of this function when we version the
+	virtual void SetChoked(void) = 0;
+	//virtual int SendDatagram(bf_write *data) = 0;
+	virtual bool Transmit(bool onlyReliable = false) = 0;
+
+	virtual const netadr_t &GetRemoteAddress(void) const = 0;
+	virtual INetChannelHandler *GetMsgHandler(void) const = 0;
+	virtual int GetDropNumber(void) const = 0;
+	virtual int GetSocket(void) const = 0;
+	virtual unsigned int GetChallengeNr(void) const = 0;
+	virtual void GetSequenceData(int &nOutSequenceNr, int &nInSequenceNr, int &nOutSequenceNrAck) = 0;
+	virtual void SetSequenceData(int nOutSequenceNr, int nInSequenceNr, int nOutSequenceNrAck) = 0;
+
+	virtual void UpdateMessageStats(int msggroup, int bits) = 0;
+	virtual bool CanPacket(void) const = 0;
+	virtual bool IsOverflowed(void) const = 0;
+	virtual bool IsTimedOut(void) const = 0;
+	virtual bool HasPendingReliableData(void) = 0;
+
+	virtual void SetFileTransmissionMode(bool bBackgroundMode) = 0;
+	virtual void SetCompressionMode(bool bUseCompression) = 0;
+	virtual unsigned int RequestFile(const char *filename) = 0;
+	virtual float GetTimeSinceLastReceived(void) const = 0; // get time since last received packet in seconds
+
+	virtual void SetMaxBufferSize(bool bReliable, int nBYTEs, bool bVoice = false) = 0;
+
+	virtual bool IsNull() const = 0;
+	virtual int GetNumBitsWritten(bool bReliable) = 0;
+	virtual void SetInterpolationAmount(float flInterpolationAmount) = 0;
+	virtual void SetRemoteFramerate(float flFrameTime, float flFrameTimeStdDeviation) = 0;
+
+	// Max # of payload BYTEs before we must split/fragment the packet
+	virtual void SetMaxRoutablePayloadSize(int nSplitSize) = 0;
+	virtual int GetMaxRoutablePayloadSize() = 0;
+
+	virtual int GetProtocolVersion() = 0;
+};
+
+class INetMessage
+{
+public:
+	virtual ~INetMessage()
+	{
+	};
+
+	// Use these to setup who can hear whose voice.
+	// Pass in client indices (which are their ent indices - 1).
+
+	virtual void SetNetChannel(INetChannel *netchan) = 0; // netchannel this message is from/for
+	virtual void SetReliable(bool state) = 0;			  // set to true if it's a reliable message
+
+	virtual bool Process(void) = 0; // calles the recently set handler to process this message
+
+	virtual bool ReadFromBuffer(uintptr_t &buffer) = 0; // returns true if parsing was OK
+	virtual bool WriteToBuffer(uintptr_t &buffer) = 0; // returns true if writing was OK
+
+	virtual bool IsReliable(void) const = 0; // true, if message needs reliable handling
+
+	virtual int GetType(void) const = 0;		 // returns module specific header tag eg svc_serverinfo
+	virtual int GetGroup(void) const = 0;		 // returns net message group of this message
+	virtual const char *GetName(void) const = 0; // returns network message name, eg "svc_serverinfo"
+	virtual INetChannel *GetNetChannel(void) const = 0;
+	virtual const char *ToString(void) const = 0; // returns a human readable string about message content
+};
+
+/*
+typedef struct netadr_s
+{
+public:
+	netadr_s()
+	{
+		SetIP(0);
+		SetPort(0);
+		//SetType(NA_IP);
+	}
+	netadr_s(const char *pch)
+	{
+		SetFromString(pch);
+	}
+	void Clear(); // invalids Address
+
+				  //void SetType(netadrtype_t type);
+	void SetPort(unsigned short port);
+	bool SetFromSockadr(const struct sockaddr *s);
+	void SetIP(unsigned int unIP); // Sets IP.  unIP is in host order (little-endian)
+	void SetIPAndPort(unsigned int unIP, unsigned short usPort)
+	{
+		SetIP(unIP);
+		SetPort(usPort);
+	}
+	void SetFromString(const char *pch, bool bUseDNS = false); // if bUseDNS is true then do a DNS lookup if needed
+
+	bool CompareAdr(const netadr_s &a, bool onlyBase = false) const;
+	bool CompareClassBAdr(const netadr_s &a) const;
+	bool CompareClassCAdr(const netadr_s &a) const;
+
+	//netadrtype_t GetType() const;
+	unsigned short GetPort() const;
+	const char *ToString(bool onlyBase = false) const; // returns xxx.xxx.xxx.xxx:ppppp
+	void ToSockadr(struct sockaddr *s) const;
+	unsigned int GetIP() const;
+
+	bool IsLocalhost() const;   // true, if this is the localhost IP
+	bool IsLoopback() const;	// true if engine loopback buffers are used
+	bool IsReservedAdr() const; // true, if this is a private LAN IP
+	bool IsValid() const;		// ip & port != 0
+	void SetFromSocket(int hSocket);
+	// These function names are decorated because the Xbox360 defines macros for ntohl and htonl
+	unsigned long addr_ntohl() const;
+	unsigned long addr_htonl() const;
+	bool operator==(const netadr_s &netadr) const
+	{
+		return (CompareAdr(netadr));
+	}
+	bool operator<(const netadr_s &netadr) const;
+
+public: // members are public to avoid to much changes
+		//netadrtype_t type;
+	unsigned char ip[4];
+	unsigned short port;
+} netadr_t;
+class INetMessage
+{
+public:
+	virtual ~INetMessage()
+	{
+	};
+
+	// Use these to setup who can hear whose voice.
+	// Pass in client indices (which are their ent indices - 1).
+
+	virtual void SetNetChannel(INetChannel *netchan) = 0; // netchannel this message is from/for
+	virtual void SetReliable(bool state) = 0;			  // set to true if it's a reliable message
+
+	virtual bool Process(void) = 0; // calles the recently set handler to process this message
+
+	virtual bool ReadFromBuffer(uintptr_t &buffer) = 0; // returns true if parsing was OK
+	virtual bool WriteToBuffer(uintptr_t &buffer) = 0; // returns true if writing was OK
+
+	virtual bool IsReliable(void) const = 0; // true, if message needs reliable handling
+
+	virtual int GetType(void) const = 0;		 // returns module specific header tag eg svc_serverinfo
+	virtual int GetGroup(void) const = 0;		 // returns net message group of this message
+	virtual const char *GetName(void) const = 0; // returns network message name, eg "svc_serverinfo"
+	virtual INetChannel *GetNetChannel(void) const = 0;
+	virtual const char *ToString(void) const = 0; // returns a human readable string about message content
+};
+*/
 
 class IEngineTrace
 {
@@ -809,6 +1217,381 @@ public:
 	}
 };
 
+/*
+class IInputSystem : public IAppSystem
+{
+public:
+	// Attach, detach input system from a particular window
+	// This window should be the root window for the application
+	// Only 1 window should be attached at any given time.
+	virtual void AttachToWindow(void* hWnd) = 0;
+	virtual void DetachFromWindow() = 0;
+
+	// Enables/disables input. PollInputState will not update current 
+	// button/analog states when it is called if the system is disabled.
+	virtual void EnableInput(bool bEnable) = 0;
+
+	// Enables/disables the windows message pump. PollInputState will not
+	// Peek/Dispatch messages if this is disabled
+	virtual void EnableMessagePump(bool bEnable) = 0;
+
+	// Polls the current input state
+	virtual void PollInputState() = 0;
+
+	// Gets the time of the last polling in ms
+	virtual int GetPollTick() const = 0;
+
+	// Is a button down? "Buttons" are binary-state input devices (mouse buttons, keyboard keys)
+	virtual bool IsButtonDown(ButtonCode_t code) const = 0;
+
+	// Returns the tick at which the button was pressed and released
+	virtual int GetButtonPressedTick(ButtonCode_t code) const = 0;
+	virtual int GetButtonReleasedTick(ButtonCode_t code) const = 0;
+
+	// Gets the value of an analog input device this frame
+	// Includes joysticks, mousewheel, mouse
+	virtual int GetAnalogValue(AnalogCode_t code) const = 0;
+
+	// Gets the change in a particular analog input device this frame
+	// Includes joysticks, mousewheel, mouse
+	virtual int GetAnalogDelta(AnalogCode_t code) const = 0;
+
+	// Returns the input events since the last poll
+	virtual int GetEventCount() const = 0;
+	virtual const InputEvent_t* GetEventData() const = 0;
+
+	// Posts a user-defined event into the event queue; this is expected
+	// to be called in overridden wndprocs connected to the root panel.
+	virtual void PostUserEvent(const InputEvent_t &event) = 0;
+
+	// Returns the number of joysticks
+	virtual int GetJoystickCount() const = 0;
+
+	// Enable/disable joystick, it has perf costs
+	virtual void EnableJoystickInput(int nJoystick, bool bEnable) = 0;
+
+	// Enable/disable diagonal joystick POV (simultaneous POV buttons down)
+	virtual void EnableJoystickDiagonalPOV(int nJoystick, bool bEnable) = 0;
+
+	// Sample the joystick and append events to the input queue
+	virtual void SampleDevices(void) = 0;
+
+	// FIXME: Currently force-feedback is only supported on the Xbox 360
+	virtual void SetRumble(float fLeftMotor, float fRightMotor, int userId = -1) = 0;
+	virtual void StopRumble(void) = 0;
+
+	// Resets the input state
+	virtual void ResetInputState() = 0;
+
+	// Sets a player as the primary user - all other controllers will be ignored.
+	virtual void SetPrimaryUserId(int userId) = 0;
+
+	// Convert back + forth between ButtonCode/AnalogCode + strings
+	virtual const char *ButtonCodeToString(ButtonCode_t code) const = 0;
+	virtual const char *AnalogCodeToString(AnalogCode_t code) const = 0;
+	virtual ButtonCode_t StringToButtonCode(const char *pString) const = 0;
+	virtual AnalogCode_t StringToAnalogCode(const char *pString) const = 0;
+
+	// Sleeps until input happens. Pass a negative number to sleep infinitely
+	virtual void SleepUntilInput(int nMaxSleepTimeMS = -1) = 0;
+
+	// Convert back + forth between virtual codes + button codes
+	// FIXME: This is a temporary piece of code
+//	virtual ButtonCode_t VirtualKeyToButtonCode(int nVirtualKey) const = 0;
+	virtual int ButtonCodeToVirtualKey(ButtonCode_t code) const = 0;
+	virtual ButtonCode_t ScanCodeToButtonCode(int lParam) const = 0;
+
+	// How many times have we called PollInputState?
+	virtual int GetPollCount() const = 0;
+
+	// Sets the cursor position
+	virtual void SetCursorPosition(int x, int y) = 0;
+
+	// NVNT get address to haptics interface
+	virtual void *GetHapticsInterfaceAddress() const = 0;
+
+	virtual void SetNovintPure(bool bPure) = 0;
+
+	// read and clear accumulated raw input values
+	virtual bool GetRawMouseAccumulators(int& accumX, int& accumY) = 0;
+
+	// tell the input system that we're not a game, we're console text mode.
+	// this is used for dedicated servers to not initialize joystick system.
+	// this needs to be called before CInputSystem::Init (e.g. in PreInit of
+	// some system) if you want ot prevent the joystick system from ever
+	// being initialized.
+	virtual void SetConsoleTextMode(bool bConsoleTextMode) = 0;
+};
+*/
+//class INetMessage;
+
+
+
+
+enum ButtonCode_t
+{
+	BUTTON_CODE_INVALID = -1,
+	BUTTON_CODE_NONE = 0,
+
+	KEY_FIRST = 0,
+
+	KEY_NONE = KEY_FIRST,
+	KEY_0,
+	KEY_1,
+	KEY_2,
+	KEY_3,
+	KEY_4,
+	KEY_5,
+	KEY_6,
+	KEY_7,
+	KEY_8,
+	KEY_9,
+	KEY_A,
+	KEY_B,
+	KEY_C,
+	KEY_D,
+	KEY_E,
+	KEY_F,
+	KEY_G,
+	KEY_H,
+	KEY_I,
+	KEY_J,
+	KEY_K,
+	KEY_L,
+	KEY_M,
+	KEY_N,
+	KEY_O,
+	KEY_P,
+	KEY_Q,
+	KEY_R,
+	KEY_S,
+	KEY_T,
+	KEY_U,
+	KEY_V,
+	KEY_W,
+	KEY_X,
+	KEY_Y,
+	KEY_Z,
+	KEY_PAD_0,
+	KEY_PAD_1,
+	KEY_PAD_2,
+	KEY_PAD_3,
+	KEY_PAD_4,
+	KEY_PAD_5,
+	KEY_PAD_6,
+	KEY_PAD_7,
+	KEY_PAD_8,
+	KEY_PAD_9,
+	KEY_PAD_DIVIDE,
+	KEY_PAD_MULTIPLY,
+	KEY_PAD_MINUS,
+	KEY_PAD_PLUS,
+	KEY_PAD_ENTER,
+	KEY_PAD_DECIMAL,
+	KEY_LBRACKET,
+	KEY_RBRACKET,
+	KEY_SEMICOLON,
+	KEY_APOSTROPHE,
+	KEY_BACKQUOTE,
+	KEY_COMMA,
+	KEY_PERIOD,
+	KEY_SLASH,
+	KEY_BACKSLASH,
+	KEY_MINUS,
+	KEY_EQUAL,
+	KEY_ENTER,
+	KEY_SPACE,
+	KEY_BACKSPACE,
+	KEY_TAB,
+	KEY_CAPSLOCK,
+	KEY_NUMLOCK,
+	KEY_ESCAPE,
+	KEY_SCROLLLOCK,
+	KEY_INSERT,
+	KEY_DELETE,
+	KEY_HOME,
+	KEY_END,
+	KEY_PAGEUP,
+	KEY_PAGEDOWN,
+	KEY_BREAK,
+	KEY_LSHIFT,
+	KEY_RSHIFT,
+	KEY_LALT,
+	KEY_RALT,
+	KEY_LCONTROL,
+	KEY_RCONTROL,
+	KEY_LWIN,
+	KEY_RWIN,
+	KEY_APP,
+	KEY_UP,
+	KEY_LEFT,
+	KEY_DOWN,
+	KEY_RIGHT,
+	KEY_F1,
+	KEY_F2,
+	KEY_F3,
+	KEY_F4,
+	KEY_F5,
+	KEY_F6,
+	KEY_F7,
+	KEY_F8,
+	KEY_F9,
+	KEY_F10,
+	KEY_F11,
+	KEY_F12,
+	KEY_CAPSLOCKTOGGLE,
+	KEY_NUMLOCKTOGGLE,
+	KEY_SCROLLLOCKTOGGLE,
+
+	KEY_LAST = KEY_SCROLLLOCKTOGGLE,
+	KEY_COUNT = KEY_LAST - KEY_FIRST + 1,
+
+	// Mouse
+	MOUSE_FIRST = KEY_LAST + 1,
+
+	MOUSE_LEFT = MOUSE_FIRST,
+	MOUSE_RIGHT,
+	MOUSE_MIDDLE,
+	MOUSE_4,
+	MOUSE_5,
+	MOUSE_WHEEL_UP,		// A fake button which is 'pressed' and 'released' when the wheel is moved up 
+	MOUSE_WHEEL_DOWN,	// A fake button which is 'pressed' and 'released' when the wheel is moved down
+
+	MOUSE_LAST = MOUSE_WHEEL_DOWN,
+	MOUSE_COUNT = MOUSE_LAST - MOUSE_FIRST + 1,
+};
+
+class IAppSystem
+{
+public:
+	// Here's where the app systems get to learn about each other
+	virtual bool Connect(CreateInterfaceFn factory) = 0;
+	virtual void Disconnect() = 0;
+
+	// Here's where systems can access other interfaces implemented by this object
+	// Returns NULL if it doesn't implement the requested interface
+	virtual void *QueryInterface(const char *pInterfaceName) = 0;
+
+	// Init, shutdown
+	virtual int Init() = 0;
+	virtual void Shutdown(char* reason) = 0;
+
+};
+
+enum AnalogCode_t //needed but not rly
+{
+
+};
+
+class InputEvent_t;
+
+class IInputSystem : public IAppSystem
+{
+public:
+	// Attach, detach input system from a particular window
+	// This window should be the root window for the application
+	// Only 1 window should be attached at any given time.
+	virtual void AttachToWindow(void* hWnd) = 0;
+	virtual void DetachFromWindow() = 0;
+
+	// Enables/disables input. PollInputState will not update current 
+	// button/analog states when it is called if the system is disabled.
+	virtual void EnableInput(bool bEnable) = 0;
+
+	// Enables/disables the windows message pump. PollInputState will not
+	// Peek/Dispatch messages if this is disabled
+	virtual void EnableMessagePump(bool bEnable) = 0;
+
+	// Polls the current input state
+	virtual void PollInputState() = 0;
+
+	// Gets the time of the last polling in ms
+	virtual int GetPollTick() const = 0;
+
+	// Is a button down? "Buttons" are binary-state input devices (mouse buttons, keyboard keys)
+	virtual bool IsButtonDown(ButtonCode_t code) const = 0;
+
+	// Returns the tick at which the button was pressed and released
+	virtual int GetButtonPressedTick(ButtonCode_t code) const = 0;
+	virtual int GetButtonReleasedTick(ButtonCode_t code) const = 0;
+
+	// Gets the value of an analog input device this frame
+	// Includes joysticks, mousewheel, mouse
+	virtual int GetAnalogValue(AnalogCode_t code) const = 0;
+
+	// Gets the change in a particular analog input device this frame
+	// Includes joysticks, mousewheel, mouse
+	virtual int GetAnalogDelta(AnalogCode_t code) const = 0;
+
+	// Returns the input events since the last poll
+	virtual int GetEventCount() const = 0;
+	virtual const InputEvent_t* GetEventData() const = 0;
+
+	// Posts a user-defined event into the event queue; this is expected
+	// to be called in overridden wndprocs connected to the root panel.
+	virtual void PostUserEvent(const InputEvent_t &event) = 0;
+
+	// Returns the number of joysticks
+	virtual int GetJoystickCount() const = 0;
+
+	// Enable/disable joystick, it has perf costs
+	virtual void EnableJoystickInput(int nJoystick, bool bEnable) = 0;
+
+	// Enable/disable diagonal joystick POV (simultaneous POV buttons down)
+	virtual void EnableJoystickDiagonalPOV(int nJoystick, bool bEnable) = 0;
+
+	// Sample the joystick and append events to the input queue
+	virtual void SampleDevices(void) = 0;
+
+	// FIXME: Currently force-feedback is only supported on the Xbox 360
+	virtual void SetRumble(float fLeftMotor, float fRightMotor, int userId = -1) = 0;
+	virtual void StopRumble(void) = 0;
+
+	// Resets the input state
+	virtual void ResetInputState() = 0;
+
+	// Sets a player as the primary user - all other controllers will be ignored.
+	virtual void SetPrimaryUserId(int userId) = 0;
+
+	// Convert back + forth between ButtonCode/AnalogCode + strings
+	virtual const char *ButtonCodeToString(ButtonCode_t code) const = 0;
+	virtual const char *AnalogCodeToString(AnalogCode_t code) const = 0;
+	virtual ButtonCode_t StringToButtonCode(const char *pString) const = 0;
+	virtual AnalogCode_t StringToAnalogCode(const char *pString) const = 0;
+
+	// Sleeps until input happens. Pass a negative number to sleep infinitely
+	virtual void SleepUntilInput(int nMaxSleepTimeMS = -1) = 0;
+
+	// Convert back + forth between virtual codes + button codes
+	// FIXME: This is a temporary piece of code
+	virtual ButtonCode_t VirtualKeyToButtonCode(int nVirtualKey) const = 0;
+	virtual int ButtonCodeToVirtualKey(ButtonCode_t code) const = 0;
+	virtual ButtonCode_t ScanCodeToButtonCode(int lParam) const = 0;
+
+	// How many times have we called PollInputState?
+	virtual int GetPollCount() const = 0;
+
+	// Sets the cursor position
+	virtual void SetCursorPosition(int x, int y) = 0;
+
+	// NVNT get address to haptics interface
+	virtual void *GetHapticsInterfaceAddress() const = 0;
+
+	virtual void SetNovintPure(bool bPure) = 0;
+
+	// read and clear accumulated raw input values
+	virtual bool GetRawMouseAccumulators(int& accumX, int& accumY) = 0;
+
+	// tell the input system that we're not a game, we're console text mode.
+	// this is used for dedicated servers to not initialize joystick system.
+	// this needs to be called before CInputSystem::Init (e.g. in PreInit of
+	// some system) if you want ot prevent the joystick system from ever
+	// being initialized.
+	virtual void SetConsoleTextMode(bool bConsoleTextMode) = 0;
+};
+
+
+
 class CInterfaces
 {
 public:
@@ -818,6 +1601,7 @@ public:
 	CGlobals* globals;
 	ISurface* Surface;
 	ClientModeShared* ClientMode;
+	IInputSystem* InputSys;
 	CHLClient* Client;
 	IEngineTrace* EngineTrace;
 	IVModelInfo* ModelInfo;

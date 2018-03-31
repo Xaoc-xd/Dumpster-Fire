@@ -38,6 +38,14 @@ public:
 	float esp_bones;
 	float esp_face;
 
+	float removecond_switch;
+	float removecond_enabled;
+	float removecond_value;
+	float removecond_key;
+	float removecond_autoinstantcap;
+	float removecond_instantweaponswitch;
+	float removecond_automedkit;
+
 	float misc_switch;
 	float misc_bunnyhop;
 	float misc_autostrafe;

@@ -8,9 +8,13 @@ public:
 
 	float RandFloatRange(float min, float max);
 
+	float flGetDistance(Vector vOrigin, Vector vLocalOrigin);
+
 	bool IsVisible(void* pLocal, void* pEntity, Vector vStart, Vector vEnd);
 
 	bool IsKeyPressed(int i);
+
+	bool IsKeyDown(char * key);
 
 	bool IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
@@ -31,6 +35,8 @@ public:
 		format_internal(stream, args...);
 		return stream.str();
 	}
+
+
 
 };
 extern CUtil* Util;

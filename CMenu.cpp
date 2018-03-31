@@ -121,6 +121,17 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Menu Postion Y", &gCvars.iMenu_Pos_Y, 0, ScreenH, 25, false);
 	}
 
+	i = AddItem(i, "Remove Cond", &gCvars.removecond_switch, 0, 1, 1, true);
+	if (gCvars.removecond_switch) {
+		i = AddItem(i, " - Enabled", &gCvars.removecond_enabled, 0, 1, 1, false);
+		i = AddItem(i, " - Value", &gCvars.removecond_value, 0, 1000, 100, false);
+		i = AddItem(i, " - Key", &gCvars.removecond_key, 0, 8, 1, false);
+		i = AddItem(i, " - Auto Instant Cap", &gCvars.removecond_autoinstantcap, 0, 1, 1, false);
+		i = AddItem(i, " - Instant Weapon Switch", &gCvars.removecond_instantweaponswitch, 0, 1, 1, false);
+		i = AddItem(i, " - Auto Medkit", &gCvars.removecond_automedkit, 0, 1, 1, false);
+
+	}
+
 	i = AddItem(i, "Misc", &gCvars.misc_switch, 0, 1, 1, true);
 	if (gCvars.misc_switch)
 	{

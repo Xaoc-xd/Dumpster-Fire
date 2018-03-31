@@ -101,6 +101,7 @@
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Panels.cpp" />
     <ClCompile Include="CSignature.cpp" />
+    <ClCompile Include="RemoveConditions.cpp" />
     <ClCompile Include="Triggerbot.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="VMTHooks.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="Misc.h" />
     <ClInclude Include="Panels.h" />
+    <ClInclude Include="RemoveConditions.h" />
     <ClInclude Include="SDK.h" />
     <ClInclude Include="CSignature.h" />
     <ClInclude Include="studio.h" />

@@ -13,6 +13,18 @@ float CUtil::RandFloatRange(float min, float max)
 	return (min + 1) + (((float)rand()) / (float)RAND_MAX) * (max - (min + 1));
 }
 
+float CUtil::flGetDistance(Vector vOrigin, Vector vLocalOrigin)
+{
+	Vector vDelta = vOrigin - vLocalOrigin;
+
+	float m_fDistance = sqrt(vDelta.Length());
+
+	if (m_fDistance < 1.0f)
+		return 1.0f;
+
+	return m_fDistance;
+}
+
 bool CUtil::IsVisible(void* pLocal, void* pEntity, Vector vStart, Vector vEnd)
 {
 	trace_t Trace;
@@ -65,6 +77,14 @@ bool CUtil::IsKeyPressed(int i)
 
 	return false;
 }
+
+bool CUtil::IsKeyDown(char* key)
+{
+	if (strlen(key) < 1) return true;
+
+	return gInts.InputSys->IsButtonDown(gInts.InputSys->StringToButtonCode(key));
+}
+
 
 bool CUtil::IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep)
 {
