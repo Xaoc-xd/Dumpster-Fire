@@ -66,14 +66,14 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 
 	Vector flb, brt, blb, frt, frb, brb, blt, flt;
 
-	if (!gDrawManager.WorldToScreen(vTransformed[3], flb) ||
-		!gDrawManager.WorldToScreen(vTransformed[0], blb) ||
-		!gDrawManager.WorldToScreen(vTransformed[2], frb) ||
-		!gDrawManager.WorldToScreen(vTransformed[6], blt) ||
-		!gDrawManager.WorldToScreen(vTransformed[5], brt) ||
-		!gDrawManager.WorldToScreen(vTransformed[4], frt) ||
-		!gDrawManager.WorldToScreen(vTransformed[1], brb) ||
-		!gDrawManager.WorldToScreen(vTransformed[7], flt))
+	if (!gDraw.WorldToScreen(vTransformed[3], flb) ||
+		!gDraw.WorldToScreen(vTransformed[0], blb) ||
+		!gDraw.WorldToScreen(vTransformed[2], frb) ||
+		!gDraw.WorldToScreen(vTransformed[6], blt) ||
+		!gDraw.WorldToScreen(vTransformed[5], brt) ||
+		!gDraw.WorldToScreen(vTransformed[4], frt) ||
+		!gDraw.WorldToScreen(vTransformed[1], brb) ||
+		!gDraw.WorldToScreen(vTransformed[7], flt))
 		return; 
 
 	Vector arr[] = { flb, brt, blb, frt, frb, brb, blt, flt };
@@ -103,7 +103,7 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 	x += ((right - left) / 8); //pseudo fix for those THICC boxes
 	w -= ((right - left) / 8) * 2;
 
-	Color clrPlayerCol = gDrawManager.GetPlayerColor(pEntity);
+	Color clrPlayerCol = gDraw.GetPlayerColor(pEntity);
 	Color clrBoneCol = gCvars.esp_bones == 1 ? Color::White() : gCvars.esp_bones == 2 ? Color::Green() : clrPlayerCol;
 	int iY = 0;
 	//iHp is only for health bar
@@ -111,35 +111,35 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 	if (iHp > iMaxHp)
 		iHp = iMaxHp;
 
-	if (gCvars.esp_box)
-	{
-		gDrawManager.OutlineRect(x - 1, y - 1, w + 2, h + 2, Color::Black());
-		gDrawManager.OutlineRect(x, y, w, h, clrPlayerCol);
-		gDrawManager.OutlineRect(x + 1, y + 1, w - 2, h - 2, Color::Black());
+	if (gCvars.esp_box) {
+		for (int i = 0; i < gCvars.esp_box_thickness; i++)
+		{
+			gDraw.OutlineRect(x + i, y + i, w - i * 2, h - i * 2, clrPlayerCol);
+		}
 	}
 
 	if (gCvars.esp_health == 2 || gCvars.esp_health == 3)
 	{
-		gDrawManager.OutlineRect(x - 6, y - 1, 5, h, Color::Black());
-		gDrawManager.DrawRect(x - 5, y + (h - (h / iMaxHp * iHp)) - 1, 3, h / iMaxHp * iHp, Color::Green());
+		gDraw.OutlineRect(x - 6, y - 1, 5, h, Color::Black());
+		gDraw.DrawRect(x - 5, y + (h - (h / iMaxHp * iHp)) - 1, 3, h / iMaxHp * iHp, Color::Green());
 	}
 
 	if (gCvars.esp_name)
 	{
-		gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, pInfo.name);
-		iY += gDrawManager.GetESPHeight();
+		gDraw.DrawString(x + w + 2, y + iY, clrPlayerCol, pInfo.name);
+		iY += gDraw.GetESPHeight();
 	}
 
 	if (gCvars.esp_class)
 	{
-		gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, "%s", pEntity->szGetClass());
-		iY += gDrawManager.GetESPHeight();
+		gDraw.DrawString(x + w + 2, y + iY, clrPlayerCol, "%s", pEntity->szGetClass());
+		iY += gDraw.GetESPHeight();
 	}
 
 	if (gCvars.esp_health == 1 || gCvars.esp_health == 3)
 	{
-		gDrawManager.DrawString(x + w + 2, y + iY, Color::Green(), "%d HP", pEntity->GetHealth());
-		iY += gDrawManager.GetESPHeight();
+		gDraw.DrawString(x + w + 2, y + iY, Color::Green(), "%d HP", pEntity->GetHealth());
+		iY += gDraw.GetESPHeight();
 	}
 
 	if (gCvars.esp_bones) //bones
@@ -158,6 +158,24 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		DrawBone(pEntity, iLeftLegBones, 3, clrBoneCol);
 		DrawBone(pEntity, iRightLegBones, 3, clrBoneCol);
 	}
+
+	if (gCvars.esp_face)
+		DrawFace(pEntity, clrPlayerCol);
+}
+
+void CESP::DrawFace(CBaseEntity* pEntity, Color clr)
+{
+	Vector head = pEntity->GetHitboxPosition(0);
+	Vector screen;
+
+	if (!gDraw.WorldToScreen(head, screen))
+		return;
+
+	gDraw.DrawRect(screen.x, screen.y, 25, 25, clr);
+	gDraw.DrawRect(screen.x + 5, screen.y + 5, 2, 2, Color::Black()); // left eye
+	gDraw.DrawRect(screen.x + 5, screen.y + 10, 2, 2, Color::Black());
+	gDraw.DrawRect(screen.x + 15, screen.y + 3, 3, 15, Color::Black());
+
 }
 	 //My code, but creds to f1ssion for giving me the idea
 void CESP::DrawBone(CBaseEntity* pEntity, int* iBones, int count, Color clrCol)
@@ -172,9 +190,9 @@ void CESP::DrawBone(CBaseEntity* pEntity, int* iBones, int count, Color clrCol)
 
 		Vector vScr1, vScr2;
 
-		if (!gDrawManager.WorldToScreen(vBone1, vScr1) || !gDrawManager.WorldToScreen(vBone2, vScr2))
+		if (!gDraw.WorldToScreen(vBone1, vScr1) || !gDraw.WorldToScreen(vBone2, vScr2))
 			continue;
 
-		gDrawManager.DrawLine(vScr1.x, vScr1.y, vScr2.x, vScr2.y, clrCol);
+		gDraw.DrawLine(vScr1.x, vScr1.y, vScr2.x, vScr2.y, clrCol);
 	}
 }

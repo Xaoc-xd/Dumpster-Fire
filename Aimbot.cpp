@@ -41,7 +41,6 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	if (!gCvars.aimbot_silent)
 		gInts.Engine->SetViewAngles(pCommand->viewangles);
 
-
 	if (gCvars.aimbot_autoshoot)
 		pCommand->buttons |= IN_ATTACK;
 }

@@ -92,10 +92,15 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Enabled", &gCvars.esp_active, 0, 1, 1, false);
 		i = AddItem(i, " - Enemies Only", &gCvars.esp_enemyonly, 0, 1, 1, false);
 		i = AddItem(i, " - Box", &gCvars.esp_box, 0, 1, 1, false);
+		if (gCvars.esp_box)
+		{
+			i = AddItem(i, "--Thickness", &gCvars.esp_box_thickness, 0, 4, 1, false);
+		}
 		i = AddItem(i, " - Name", &gCvars.esp_name, 0, 1, 1, false);
 		i = AddItem(i, " - Class", &gCvars.esp_class, 0, 1, 1, false);
 		i = AddItem(i, " - Health", &gCvars.esp_health, 0, 3, 1, false);
 		i = AddItem(i, " - Bones", &gCvars.esp_bones, 0, 3, 1, false);
+		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
 	}
 
 	i = AddItem(i, "Settings", &gCvars.settings_switch, 0, 1, 1, true);
@@ -126,21 +131,21 @@ void CCheatMenu::DrawMenu(void)
 
 	CBaseEntity *pLocal = GetBaseEntity(me);
 
-	Color clrColor = gDrawManager.GetPlayerColor(pLocal);
+	Color clrColor = gDraw.GetPlayerColor(pLocal);
 
-	gDrawManager.DrawRect(x, y - (h + 4), w, iMenuItems * h + 21, Color(20, 20, 20, 128));
-	gDrawManager.OutlineRect(x, y - (h + 4), w, (h + 4), clrColor);
+	gDraw.DrawRect(x, y - (h + 4), w, iMenuItems * h + 21, Color(20, 20, 20, 128));
+	gDraw.OutlineRect(x, y - (h + 4), w, (h + 4), clrColor);
 
-	gDrawManager.DrawRect(x + 2, y - (h + 4), w - 4, (h + 4), clrColor);
-	gDrawManager.OutlineRect(x - 1, y - (h + 4) - 1, w + 2, (h + 4), Color(0, 0, 0, 255)); // test
-	gDrawManager.OutlineRect(x + 1, y - (h + 4) + 1, w - 2, (h + 4), Color(0, 0, 0, 255)); // test
+	gDraw.DrawRect(x + 2, y - (h + 4), w - 4, (h + 4), clrColor);
+	gDraw.OutlineRect(x - 1, y - (h + 4) - 1, w + 2, (h + 4), Color(0, 0, 0, 255)); // test
+	gDraw.OutlineRect(x + 1, y - (h + 4) + 1, w - 2, (h + 4), Color(0, 0, 0, 255)); // test
 
-	gDrawManager.OutlineRect(x, y - (h + 4), w, iMenuItems * h + 21, clrColor);
+	gDraw.OutlineRect(x, y - (h + 4), w, iMenuItems * h + 21, clrColor);
 
-	gDrawManager.OutlineRect(x - 1, (y - (h + 4)) - 1, w + 2, (iMenuItems * h + 21) + 2, Color(0, 0, 0, 255));
-	gDrawManager.OutlineRect(x + 1, (y - (h + 4)) + 1, w - 2, (iMenuItems * h + 21) - 2, Color(0, 0, 0, 255));
+	gDraw.OutlineRect(x - 1, (y - (h + 4)) - 1, w + 2, (iMenuItems * h + 21) + 2, Color(0, 0, 0, 255));
+	gDraw.OutlineRect(x + 1, (y - (h + 4)) + 1, w - 2, (iMenuItems * h + 21) - 2, Color(0, 0, 0, 255));
 
-	gDrawManager.DrawString(x + 4, y - 16, clrColor, "Dumpster Fire");
+	gDraw.DrawString(x + 4, y - 16, clrColor, "Dumpster Fire");
 
 	for (int i = 0; i < iMenuItems; i++)
 	{
@@ -150,105 +155,105 @@ void CCheatMenu::DrawMenu(void)
 			{
 				if (!(pMenu[i].value[0]))
 				{
-					gDrawManager.DrawString(x + 2, y + (h * i), clrColor, "[+] %s", pMenu[i].szTitle);
+					gDraw.DrawString(x + 2, y + (h * i), clrColor, "[+] %s", pMenu[i].szTitle);
 				}
 				else if (pMenu[i].value[0])
 				{
-					gDrawManager.DrawString(x + 2, y + (h * i), clrColor, "[-] %s", pMenu[i].szTitle);
+					gDraw.DrawString(x + 2, y + (h * i), clrColor, "[-] %s", pMenu[i].szTitle);
 				}
 			}
 			else
 			{
-				gDrawManager.DrawString(x + 4, y + (h * i), Color::White(), pMenu[i].szTitle);
+				gDraw.DrawString(x + 4, y + (h * i), Color::White(), pMenu[i].szTitle);
 
 				if (!strcmp(pMenu[i].szTitle, " - Health"))
 				{
-					gDrawManager.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", szHealthModes[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", szHealthModes[(int)pMenu[i].value[0]]);
 				}
 
 				else if (!strcmp(pMenu[i].szTitle, " - Bones"))
 				{
-					gDrawManager.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", szBoneModes[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", szBoneModes[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 18)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), Color::White(), "%s", szHitboxes[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szHitboxes[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 8)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 2)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), Color::White(), !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
+					gDraw.DrawString(xx, y + (h * i), Color::White(), !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
 				}
 
 				else if (pMenu[i].flMax == 1)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), pMenu[i].value[0] ? "ON" : "OFF");
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), pMenu[i].value[0] ? "ON" : "OFF");
 				}
 
 				else if (pMenu[i].value[0] >= 1 && pMenu[i].flMax > 1)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), pMenu[i].value[0] >= 1 ? Color::White() : Color(105, 105, 105, 255), "%0.0f", pMenu[i].value[0]);
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] >= 1 ? Color::White() : Color(105, 105, 105, 255), "%0.0f", pMenu[i].value[0]);
 				}
 			}
 		}
 		else
 		{
-			gDrawManager.DrawRect(x + 1, y + (h * i), w - 2, h, Color(255, 255, 255, 80));
+			gDraw.DrawRect(x + 1, y + (h * i), w - 2, h, Color(255, 255, 255, 80));
 
 			if (pMenu[i].isClassSwitch)
 			{
 				if (!(pMenu[i].value[0]))
 				{
-					gDrawManager.DrawString(x + 2, y + (h * i), clrColor, "[+] %s", pMenu[i].szTitle);
+					gDraw.DrawString(x + 2, y + (h * i), clrColor, "[+] %s", pMenu[i].szTitle);
 				}
 				else if (pMenu[i].value[0])
 				{
-					gDrawManager.DrawString(x + 2, y + (h * i), clrColor, "[-] %s", pMenu[i].szTitle);
+					gDraw.DrawString(x + 2, y + (h * i), clrColor, "[-] %s", pMenu[i].szTitle);
 				}
 			}
 			else
 			{
-				gDrawManager.DrawString(x + 4, y + (h * i), clrColor, pMenu[i].szTitle);
+				gDraw.DrawString(x + 4, y + (h * i), clrColor, pMenu[i].szTitle);
 
 				if (!strcmp(pMenu[i].szTitle, " - Health"))
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, "%s", szHealthModes[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szHealthModes[(int)pMenu[i].value[0]]);
 				}
 
 				else if (!strcmp(pMenu[i].szTitle, " - Bones"))
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, "%s", szBoneModes[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szBoneModes[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 18)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, "%s", szHitboxes[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szHitboxes[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 8)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 2)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
+					gDraw.DrawString(xx, y + (h * i), clrColor, !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
 				}
 
 				else if (pMenu[i].flMax == 1)
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, pMenu[i].value[0] ? "ON" : "OFF");
+					gDraw.DrawString(xx, y + (h * i), clrColor, pMenu[i].value[0] ? "ON" : "OFF");
 				}
 
 				else
 				{
-					gDrawManager.DrawString(xx, y + (h * i), clrColor, "%0.0f", pMenu[i].value[0]);
+					gDraw.DrawString(xx, y + (h * i), clrColor, "%0.0f", pMenu[i].value[0]);
 				}
 			}
 		}

@@ -27,10 +27,12 @@ public:
 	float esp_active;
 	float esp_enemyonly;
 	float esp_box;
+	float esp_box_thickness;
 	float esp_name;
 	float esp_class;
 	float esp_health;
 	float esp_bones;
+	float esp_face;
 
 	float misc_switch;
 	float misc_bunnyhop;
