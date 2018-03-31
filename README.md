@@ -40,6 +40,14 @@ Uses Stick's Potassium Cheat.
 * Smiley Face - Render a poorly created smiley face over the entity's head
 * Box Thickness - Modify the pixel width of a box
 
+## Remove Cond - Source Engine exploit
+* Master Switch - Toggle Remove Cond on/off
+* Value - Number for sequence
+* Key - Set a (somewhat) customizable key to use for "removing conditions"
+* Auto Instant Cap - Automatically remove conditions to instantly cap points when near a point.
+* Instant Weapon Switch - Instantly switch weapons.
+* Instant Health Pack - Automatically remove conditions to instantly use a medpack/ammopack and not deplete it when near one.
+
 ## Misc
 
 * Bunnyhop - Continue jumping by holding your jump key
