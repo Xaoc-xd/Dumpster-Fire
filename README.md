@@ -10,9 +10,13 @@ Uses Stick's Potassium Cheat.
 
 * Master Switch - Toggle Aimbot on/off
 * Silent Aim - No viewangle locking aimbot
+* Field Of View - How much of the screen the aimbot can aim to
 * Key - Set a (somewhat) custom key to use for aiming
 * Hitscan - Aim at best available hitbox
 * Hitbox - Choose a hitbox you would prefer to aim at
+* Autoshoot - Automatically fires for you
+* Smoothing - *or slow aim* smoothes and slows down the aimbot
+* Ignore Cloak - Ignores cloaked spies
 
 ### Triggerbot
 
