@@ -28,7 +28,7 @@ Uses Stick's Potassium Cheat.
 
 * Displays a list of players on the server
   * Can also set a player's priority over others for aimbot/triggerbot
-
+  
 ### ESP
 
 * Master Switch - Toggle ESP on/off
@@ -47,3 +47,4 @@ Uses Stick's Potassium Cheat.
 * Noisemaker Spam - Continuiously spam a Noisemaker
 * No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle
 * Chat Spam - Spams chat with lots of popular cheat's chat spam messages
+* Kill Say - Says a message after killing a user

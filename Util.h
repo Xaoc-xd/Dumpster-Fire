@@ -8,6 +8,8 @@ public:
 
 	float RandFloatRange(float min, float max);
 
+	void ReplaceString(std::string & input, const std::string & what, const std::string & with_what);
+
 	float flGetDistance(Vector vOrigin, Vector vLocalOrigin);
 
 	bool IsVisible(void* pLocal, void* pEntity, Vector vStart, Vector vEnd);

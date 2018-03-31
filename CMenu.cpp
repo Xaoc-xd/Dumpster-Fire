@@ -32,6 +32,8 @@ char* szHitboxes[] =
 
 char* ChatSpams[] = { "OFF", "NullCore", "LMAOBOX", "Lithium", "Cathook", "Empty Lines", "Speedhook", "Freebox" };
 
+char* KillSays[] = { "OFF", "NiggerHOOK", "NullCore", "File" };
+ 
 int CCheatMenu::AddItem(int nIndex, char szTitle[30], float* value, float flMin, float flMax, float flStep, bool isClassSwitch)
 {
 	strcpy(pMenu[nIndex].szTitle, szTitle);
@@ -129,7 +131,6 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Auto Instant Cap", &gCvars.removecond_autoinstantcap, 0, 1, 1, false);
 		i = AddItem(i, " - Instant Weapon Switch", &gCvars.removecond_instantweaponswitch, 0, 1, 1, false);
 		i = AddItem(i, " - Auto Medkit", &gCvars.removecond_automedkit, 0, 1, 1, false);
-
 	}
 
 	i = AddItem(i, "Misc", &gCvars.misc_switch, 0, 1, 1, true);
@@ -140,6 +141,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
 		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 7, 1, false);
+		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 	}
 
 	iMenuItems = i;
@@ -215,6 +217,11 @@ void CCheatMenu::DrawMenu(void)
 					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", ChatSpams[(int)pMenu[i].value[0]]);
 				}
 
+				else if (pMenu[i].flMax == 3)
+				{
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", KillSays[(int)pMenu[i].value[0]]);
+				}
+
 				else if (pMenu[i].flMax == 2)
 				{
 					gDraw.DrawString(xx, y + (h * i), Color::White(), !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
@@ -273,6 +280,11 @@ void CCheatMenu::DrawMenu(void)
 				else if (pMenu[i].flMax == 7)
 				{
 					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? clrColor : Color(105, 105, 105, 255), "%s", ChatSpams[(int)pMenu[i].value[0]]);
+				}
+
+				else if (pMenu[i].flMax == 3)
+				{
+					gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? clrColor : Color(105, 105, 105, 255), "%s", KillSays[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 2)

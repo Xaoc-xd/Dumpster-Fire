@@ -1,6 +1,7 @@
 #include "SDK.h"
 #include "Client.h"
 #include "Panels.h"
+#include "KillSay.h"
 
 COffsets gOffsets;
 CGlobalVariables gCvars;
@@ -18,6 +19,8 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
 	if (gInts.Client == NULL)
 	{
+
+
 		VMTBaseManager* clientHook = new VMTBaseManager();
 		VMTBaseManager* clientModeHook = new VMTBaseManager();
 		VMTBaseManager* panelHook = new VMTBaseManager();
@@ -32,6 +35,7 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 		gInts.Surface = ( ISurface* ) VGUIFactory( "VGUI_Surface030", NULL );
 		gInts.EngineTrace = ( IEngineTrace* ) EngineFactory( "EngineTraceClient003", NULL );
 		gInts.ModelInfo = ( IVModelInfo* ) EngineFactory( "VModelInfoClient006", NULL );
+		gInts.EventManager = (IGameEventManager2*)EngineFactory("GAMEEVENTSMANAGER002", NULL);
 
 		XASSERT(gInts.Client);
 		XASSERT(gInts.EntList);
@@ -70,6 +74,9 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 		clientModeHook->Init(gInts.ClientMode);
 		clientModeHook->HookMethod(&Hooked_CreateMove, gOffsets.iCreateMoveOffset); //ClientMode create move is called inside of CHLClient::CreateMove, and thus no need for hooking WriteUserCmdDelta.
 		clientModeHook->Rehook();
+
+		gKillSay.InitKillSay();
+
 	}
 	return 0; //The thread has been completed, and we do not need to call anything once we're done. The call to Hooked_PaintTraverse is now our main thread.
 }

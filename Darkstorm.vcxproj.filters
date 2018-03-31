@@ -50,6 +50,12 @@
     <ClCompile Include="RemoveConditions.cpp">
       <Filter>Hacks\RemoveConditions</Filter>
     </ClCompile>
+    <ClCompile Include="KillSay.cpp">
+      <Filter>Hacks\KillSay</Filter>
+    </ClCompile>
+    <ClCompile Include="TextFile.cpp">
+      <Filter>Tools\TextFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -121,6 +127,12 @@
     <ClInclude Include="RemoveConditions.h">
       <Filter>Hacks\RemoveConditions</Filter>
     </ClInclude>
+    <ClInclude Include="KillSay.h">
+      <Filter>Hacks\KillSay</Filter>
+    </ClInclude>
+    <ClInclude Include="TextFile.h">
+      <Filter>Tools\TextFile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -182,6 +194,12 @@
     </Filter>
     <Filter Include="Hacks\RemoveConditions">
       <UniqueIdentifier>{31f1fb93-5e97-41de-99b1-325b0fb44c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks\KillSay">
+      <UniqueIdentifier>{adcd8290-f430-4bc3-b301-81fc517025d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\TextFile">
+      <UniqueIdentifier>{37360098-8449-4262-bbfe-c533bc6eebf1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

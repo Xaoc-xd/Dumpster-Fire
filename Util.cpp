@@ -13,6 +13,17 @@ float CUtil::RandFloatRange(float min, float max)
 	return (min + 1) + (((float)rand()) / (float)RAND_MAX) * (max - (min + 1));
 }
 
+void CUtil::ReplaceString(std::string& input, const std::string& what, const std::string& with_what)
+{
+	size_t index;
+	index = input.find(what);
+	while (index != std::string::npos)
+	{
+		input.replace(index, what.size(), with_what);
+		index = input.find(what, index + with_what.size());
+	}
+}
+
 float CUtil::flGetDistance(Vector vOrigin, Vector vLocalOrigin)
 {
 	Vector vDelta = vOrigin - vLocalOrigin;
