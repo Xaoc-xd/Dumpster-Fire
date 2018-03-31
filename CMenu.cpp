@@ -50,7 +50,7 @@ void CCheatMenu::Render(void)
 	{
 		i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
 		i = AddItem(i, " - Silent", &gCvars.aimbot_silent, 0, 1, 1, false);
-		i = AddItem(i, " - Fov", &gCvars.aimbot_fov, 0, 180, 1, false);
+		//i = AddItem(i, " - FOV", &gCvars.aimbot_fov, 0, 180, 1, false);
 		i = AddItem(i, " - Key", &gCvars.aimbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Hitscan", &gCvars.aimbot_hitscan, 0, 1, 1, false);
 		i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
