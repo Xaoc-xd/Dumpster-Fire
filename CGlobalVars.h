@@ -43,6 +43,9 @@ public:
 	float esp_bones;
 	float esp_face;
 
+	float followbot_switch;
+	float followbot_enabled;
+
 	float removecond_switch;
 	float removecond_enabled;
 	float removecond_value;

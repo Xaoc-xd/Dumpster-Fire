@@ -97,6 +97,7 @@
     <ClCompile Include="CNetVars.cpp" />
     <ClCompile Include="DLLMain.cpp" />
     <ClCompile Include="ESP.cpp" />
+    <ClCompile Include="FollowBot.cpp" />
     <ClCompile Include="KillSay.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Misc.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="CNetVars.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="ESP.h" />
+    <ClInclude Include="FollowBot.h" />
     <ClInclude Include="getvfunc.h" />
     <ClInclude Include="KillSay.h" />
     <ClInclude Include="Log.h" />
