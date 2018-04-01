@@ -76,6 +76,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Enabled", &gCvars.triggerbot_active, 0, 1, 1, false);
 		i = AddItem(i, " - Key", &gCvars.triggerbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Head Only", &gCvars.triggerbot_headonly, 0, 1, 1, false);
+		i = AddItem(i, " - Ignore Cloak", &gCvars.triggerbot_ignore_cloak, 0, 1, 1, false);
 	}
 
 	i = AddItem(i, "Player List", &gCvars.playerlist_switch, 0, 1, 1, true);
@@ -180,8 +181,8 @@ void CCheatMenu::Render(void)
 			i = AddItem(i, " - Medic Spam", &gCvars.misc_voiceMedic, 0, 1, 1, false);
 			i = AddItem(i, " - Thanks Spam", &gCvars.misc_voiceThanks, 0, 1, 1, false);
 		}
+		i = AddItem(i, " - Clean SS", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
-		i = AddItem(i, " - CleanScreenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 	}
 
 	iMenuItems = i;

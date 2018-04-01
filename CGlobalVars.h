@@ -27,6 +27,7 @@ public:
 	float triggerbot_active;
 	float triggerbot_key;
 	float triggerbot_headonly;
+	float triggerbot_ignore_cloak;
 
 	float esp_switch;
 	float esp_active;

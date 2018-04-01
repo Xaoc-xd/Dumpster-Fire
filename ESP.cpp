@@ -180,97 +180,82 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 
 	if (gCvars.esp_face)
 		DrawFace(pEntity, clrPlayerCol);
-	int pBaseEntityCond = pEntity->GetCond();
+	int pEntityCond = pEntity->GetCond();
 	{
-		if (pBaseEntityCond& TFCond_Cloaked)
+		if (pEntityCond& TFCond_Cloaked)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Cloaked]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Disguised)
+		if (pEntityCond& TFCond_Disguised)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Disguised]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Bonked)
+		if (pEntityCond& TFCond_Bonked)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Bonked]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Slowed)
+		if (pEntityCond& TFCond_Slowed)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Slowed]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_OnFire)
+		if (pEntityCond& TFCond_OnFire)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Burning]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Zoomed)
+		if (pEntityCond& TFCond_Zoomed)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Zoomed]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Jarated)
+		if (pEntityCond& TFCond_Jarated)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Jarated]");
 			iY += gDraw.GetESPHeight();
 		}
-		if ((pBaseEntityCond& TFCond_Ubercharged) || (pBaseEntityCond& TFCond_MegaHeal))
+		if ((pEntityCond& TFCond_Ubercharged) || (pEntityCond& TFCond_MegaHeal))
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Ubered]");
 			iY += gDraw.GetESPHeight();
 		}
-		else if (pBaseEntityCond& TFCond_UberchargeFading)
+		else if (pEntityCond& TFCond_UberchargeFading)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Uber Fading]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Healing)
+		if (pEntityCond& TFCond_Healing)
 		{
 			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Over Healed]");
 			iY += gDraw.GetESPHeight();
 		}
-		if (pBaseEntityCond& TFCond_Disguised && gCvars.esp_playerCond)
+
+		if (gCvars.esp_playerCond)
 		{
-			pBaseEntityCond &= ~TFCond_Disguised;
-		}
-		if (pBaseEntityCond& TFCond_Cloaked && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Cloaked;
-		}
-		if (pBaseEntityCond& TFCond_Slowed && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Slowed;
-		}
-		if (pBaseEntityCond& TFCond_OnFire && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_OnFire;
-		}
-		if (pBaseEntityCond& TFCond_Bonked && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Bonked;
-		}
-		if (pBaseEntityCond& TFCond_Zoomed && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Zoomed;
-		}
-		if (pBaseEntityCond& TFCond_Jarated && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Jarated;
-		}
-		if (pBaseEntityCond& TFCond_Ubercharged && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Ubercharged;
-		}
-		if (pBaseEntityCond& TFCond_UberchargeFading && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_UberchargeFading;
-		}
-		if (pBaseEntityCond& TFCond_Healing && gCvars.esp_playerCond)
-		{
-			pBaseEntityCond &= ~TFCond_Healing;
+			//Not sure what the point of this is but alright
+			if (pEntityCond & TFCond_Disguised)
+				pEntityCond &= ~TFCond_Disguised;
+			if (pEntityCond & TFCond_Cloaked)
+				pEntityCond &= ~TFCond_Cloaked;
+			if (pEntityCond & TFCond_Slowed)
+				pEntityCond &= ~TFCond_Slowed;
+			if (pEntityCond & TFCond_OnFire)
+				pEntityCond &= ~TFCond_OnFire;
+			if (pEntityCond & TFCond_Bonked)
+				pEntityCond &= ~TFCond_Bonked;
+			if (pEntityCond & TFCond_Zoomed)
+				pEntityCond &= ~TFCond_Zoomed;
+			if (pEntityCond & TFCond_Jarated)
+				pEntityCond &= ~TFCond_Jarated;
+			if (pEntityCond & TFCond_Ubercharged)
+				pEntityCond &= ~TFCond_Ubercharged;
+			if (pEntityCond & TFCond_UberchargeFading)
+				pEntityCond &= ~TFCond_UberchargeFading;
+			if (pEntityCond & TFCond_Healing)
+				pEntityCond &= ~TFCond_Healing;
 		}
 	}
 }
