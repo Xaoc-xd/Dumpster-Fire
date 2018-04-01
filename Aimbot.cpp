@@ -16,6 +16,12 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	if (!pLocal->GetActiveWeapon())
 		return;
 
+	if (gCvars.aimbot_zoomedonly &&
+		pLocal->GetClassNum() == TF2_Sniper &&
+		Util->IsHeadshotWeapon(pLocal, pLocal->GetActiveWeapon()) &&
+		!(pLocal->GetCond() & TFCond_Zoomed))
+		return;
+
 	Vector finalAngles = gInts.Engine->GetViewAngles();
 	Vector clientAngles = finalAngles;
 	float lowestDist = 180;
@@ -92,8 +98,12 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			gInts.Engine->SetViewAngles(pCommand->viewangles);
 	}
 
-	if (gCvars.aimbot_autoshoot && gCvars.iAimbotIndex != -1)
+	if (gCvars.aimbot_autoshoot && gCvars.iAimbotIndex != -1) {
+		if (pLocal->GetCond() & TFCond_Zoomed && !Util->IsReadyToHeadshot(pLocal->GetActiveWeapon()))
+			return;
+
 		pCommand->buttons |= IN_ATTACK;
+	}
 }
 
 

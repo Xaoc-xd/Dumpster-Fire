@@ -6,8 +6,8 @@ public:
 	int iAimbotIndex = -1;
 	
 	float settings_switch;
-	float iMenu_Pos_X = 300;
-	float iMenu_Pos_Y = 75;
+	float iMenu_Pos_X = 16;
+	float iMenu_Pos_Y = 32;
 	float szsubstest;
 
 	float aimbot_switch;
@@ -18,6 +18,7 @@ public:
 	float aimbot_autoshoot;
 	float aimbot_fov = 180;
 	float aimbot_silent;
+	float aimbot_zoomedonly;
 	float aimbot_ignore_cloak;
 	float aimbot_smooth;
 	float aimbot_smooth_amt;
@@ -49,6 +50,7 @@ public:
 	float misc_switch;
 	float misc_bunnyhop;
 	float misc_autostrafe;
+	float misc_autobackstab;
 	float misc_noisemaker_spam;
 	float misc_noscope;
 	float misc_chatspam_selection;

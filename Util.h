@@ -20,6 +20,12 @@ public:
 
 	bool IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
+	bool IsReadyToHeadshot(CBaseCombatWeapon* pWep);
+
+	bool IsBackstabWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
+
+	bool IsReadyToBackstab(CBaseCombatWeapon* pWep);
+
 	void silentMovementFix(CUserCmd *pUserCmd, Vector angles);
 	
 	PVOID InitKeyValue();

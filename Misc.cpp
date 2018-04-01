@@ -17,6 +17,15 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			pCommand->buttons &= ~IN_JUMP;
 	}
 
+	if (gCvars.misc_autobackstab)
+	{
+		if (!pLocal->GetActiveWeapon()) {} //Pretty ghetto solution for crashes
+
+		else if (Util->IsBackstabWeapon(pLocal, pLocal->GetActiveWeapon()) &&
+			Util->IsReadyToBackstab(pLocal->GetActiveWeapon()))
+			pCommand->buttons |= IN_ATTACK;
+	}
+
 	if (gCvars.misc_noisemaker_spam)
 	{
 		PVOID kv = Util->InitKeyValue();

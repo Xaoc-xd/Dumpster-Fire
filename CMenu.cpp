@@ -67,6 +67,7 @@ void CCheatMenu::Render(void)
 			i = AddItem(i, "  - Amount", &gCvars.aimbot_smooth_amt, 0, 180, 1, false);
 		}
 		i = AddItem(i, " - Ignore Cloak", &gCvars.aimbot_ignore_cloak, 0, 1, 1, false);
+		i = AddItem(i, " - Zoomed Only", &gCvars.aimbot_zoomedonly, 0, 1, 1, false);
 	}
 
 	i = AddItem(i, "Triggerbot", &gCvars.triggerbot_switch, 0, 1, 1, true);
@@ -119,8 +120,8 @@ void CCheatMenu::Render(void)
 	i = AddItem(i, "Settings", &gCvars.settings_switch, 0, 1, 1, true);
 	if (gCvars.settings_switch)
 	{
-		i = AddItem(i, " - Menu Postion X", &gCvars.iMenu_Pos_X, 0, ScreenW, 25, false);
-		i = AddItem(i, " - Menu Postion Y", &gCvars.iMenu_Pos_Y, 0, ScreenH, 25, false);
+		i = AddItem(i, " - Position X", &gCvars.iMenu_Pos_X, 0, ScreenW, 8, false);
+		i = AddItem(i, " - Position Y", &gCvars.iMenu_Pos_Y, 0, ScreenH, 8, false);
 	}
 
 	i = AddItem(i, "Remove Cond", &gCvars.removecond_switch, 0, 1, 1, true);
@@ -138,6 +139,7 @@ void CCheatMenu::Render(void)
 	{
 		i = AddItem(i, " - Bunnyhop", &gCvars.misc_bunnyhop, 0, 1, 1, false);
 		i = AddItem(i, " - Autostrafe", &gCvars.misc_autostrafe, 0, 1, 1, false);
+		i = AddItem(i, " - Auto Backstab", &gCvars.misc_autobackstab, 0, 1, 1, false);
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
 		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 9, 1, false);
@@ -151,26 +153,18 @@ void CCheatMenu::Render(void)
 void CCheatMenu::DrawMenu(void)
 {
 	int x = gCvars.iMenu_Pos_X,
-		xx = x + 150,
+		xx = x + 200,
 		y = gCvars.iMenu_Pos_Y,
-		w = 200,
+		w = 272,
 		h = 14;
 
 	CBaseEntity *pLocal = GetBaseEntity(me);
 
 	Color clrColor = gDraw.GetPlayerColor(pLocal);
 
-	gDraw.DrawRect(x, y - (h + 4), w, iMenuItems * h + 21, Color(20, 20, 20, 128));
-	gDraw.OutlineRect(x, y - (h + 4), w, (h + 4), clrColor);
-
-	gDraw.DrawRect(x + 2, y - (h + 4), w - 4, (h + 4), clrColor);
-	gDraw.OutlineRect(x - 1, y - (h + 4) - 1, w + 2, (h + 4), Color(0, 0, 0, 255)); // test
-	gDraw.OutlineRect(x + 1, y - (h + 4) + 1, w - 2, (h + 4), Color(0, 0, 0, 255)); // test
-
-	gDraw.OutlineRect(x, y - (h + 4), w, iMenuItems * h + 21, clrColor);
-
-	gDraw.OutlineRect(x - 1, (y - (h + 4)) - 1, w + 2, (iMenuItems * h + 21) + 2, Color(0, 0, 0, 255));
-	gDraw.OutlineRect(x + 1, (y - (h + 4)) + 1, w - 2, (iMenuItems * h + 21) - 2, Color(0, 0, 0, 255));
+	gDraw.DrawRect(x, y - (h + 4), w, iMenuItems * h + 20, Color(32, 32, 32, 127));
+	gDraw.DrawRect(x, y - (h + 4), w, (h + 4), clrColor);
+	gDraw.DrawLineEx(x, y + 2 + (iMenuItems * h), w, 0, clrColor);
 
 	gDraw.DrawString(x + 4, y - 16, clrColor, "Dumpster Fire");
 

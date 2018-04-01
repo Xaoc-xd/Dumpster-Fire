@@ -109,6 +109,27 @@ bool CUtil::IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep)
 	return false;
 }
 
+bool CUtil::IsReadyToHeadshot(CBaseCombatWeapon* pWep)
+{
+	if (pWep->ChargedDamage() >= 15.f)
+		return true;
+
+	return false;
+}
+
+bool CUtil::IsBackstabWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep)
+{
+	if (pWep->GetSlot() == 2 && pLocal->GetClassNum() == TF2_Spy)
+		return true;
+
+	return false;
+}
+
+bool CUtil::IsReadyToBackstab(CBaseCombatWeapon* pWep)
+{
+	return pWep->ReadyToBackstab();
+}
+
 PVOID CUtil::InitKeyValue() //Credits f1ssion
 {
 	typedef PDWORD(__cdecl* Init_t)(int);

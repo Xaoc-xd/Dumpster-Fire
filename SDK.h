@@ -252,6 +252,15 @@ public:
 		DYNVAR_RETURN(int, this, "DT_EconEntity", "m_AttributeManager", "m_Item", "m_iItemDefinitionIndex");
 	}
 
+	float ChargedDamage()
+	{
+		DYNVAR_RETURN(float, this, "DT_TFSniperRifle", "SniperRifleLocalData", "m_flChargedDamage");
+	}
+
+	bool ReadyToBackstab()
+	{
+		DYNVAR_RETURN(bool, this, "DT_TFWeaponKnife", "m_bReadyToBackstab");
+	}
 };
 
 

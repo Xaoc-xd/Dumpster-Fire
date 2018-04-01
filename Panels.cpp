@@ -35,8 +35,7 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 
 			if( gInts.Engine->IsDrawingLoadingImage() || !gInts.Engine->IsInGame( ) || !gInts.Engine->IsConnected() || gInts.Engine->Con_IsVisible( ) )
 			{
-				gDraw.DrawString(5, 5, Color::Red(), "Dumpster Fire");
-				gDraw.DrawString(5, 25, Color::Green(), "Welcome to Paste Central");
+				gDraw.DrawString(8, iHeight / 16, Color::White(), "Dumpster Fire - Build %s @ %s", __DATE__, __TIME__);
 				return; //No need to draw the rest.
 			}
 
