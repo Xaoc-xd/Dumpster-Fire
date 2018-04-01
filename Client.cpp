@@ -1,7 +1,8 @@
 #include "SDK.h"
 #include "Client.h"
 #include "Util.h"
-#include "Aimbot.h"
+#include "
+.h"
 #include "Triggerbot.h"
 #include "Misc.h"
 #include "ChatSpam.h"
@@ -32,7 +33,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 	}
 	catch(...)
 	{
-		Log::Fatal("Failed Hooked_CreateMove");
+		Log::Fatal("You broke it. Great job!");
 	}
 	return false/*bReturn*/;
 }
