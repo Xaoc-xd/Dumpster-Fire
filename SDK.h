@@ -182,6 +182,11 @@ public:
 		typedef void(__thiscall* OriginalFn)(PVOID, Vector&, Vector&);
 		getvfunc<OriginalFn>(pRenderable, 20)(pRenderable, mins, maxs);
 	}
+	void ForceTauntCam(bool t)
+	{
+		DYNVAR(n, bool, "DT_TFPlayer", "m_nForceTauntCam");
+		return n.SetValue(this, t);
+	}
 
 	matrix3x4& GetRgflCoordinateFrame()
 	{

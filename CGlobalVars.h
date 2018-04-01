@@ -49,6 +49,7 @@ public:
 	float removecond_stickyspam;
 
 	float misc_switch;
+	float misc_thirdPerson;
 	float misc_bunnyhop;
 	float misc_autostrafe;
 	float misc_autobackstab;

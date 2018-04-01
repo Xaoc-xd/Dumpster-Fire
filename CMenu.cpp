@@ -139,6 +139,7 @@ void CCheatMenu::Render(void)
 	if (gCvars.misc_switch)
 	{
 		i = AddItem(i, " - Bunnyhop", &gCvars.misc_bunnyhop, 0, 1, 1, false);
+		i = AddItem(i, " - Thirdperson", &gCvars.misc_thirdPerson, 0, 1, 1, false);
 		i = AddItem(i, " - Autostrafe", &gCvars.misc_autostrafe, 0, 1, 1, false);
 		i = AddItem(i, " - Auto Backstab", &gCvars.misc_autobackstab, 0, 1, 1, false);
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);

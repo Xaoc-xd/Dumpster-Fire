@@ -32,6 +32,15 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			gInts.Engine->ServerCmdKeyValues(kv);
 		}
 	}
+
+	if (gCvars.misc_thirdPerson)
+	{
+		pLocal->ForceTauntCam(true);
+	}
+	else
+	{
+		pLocal->ForceTauntCam(false);
+	}
 	
 	if (gCvars.misc_roll_speedhack && !(pCommand->buttons&IN_ATTACK)) //aka fake crouch, not the best code but hey it works
 	{
