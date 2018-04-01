@@ -35,6 +35,8 @@ public:
 	float esp_box_thickness = 1;
 	float esp_name;
 	float esp_class;
+	float esp_removeDisguise;
+	float esp_removeCloak;
 	float esp_health;
 	float esp_bones;
 	float esp_face;
@@ -56,6 +58,7 @@ public:
 	float misc_noisemaker_spam;
 	float misc_noscope;
 	float misc_chatspam_selection;
+	float misc_cleanScreenshot;
 	float misc_chatspam_delay;
 	float misc_killsay_selection;
 	float misc_roll_speedhack;

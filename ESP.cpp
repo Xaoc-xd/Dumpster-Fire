@@ -10,6 +10,13 @@ CESP gESP;
 
 void CESP::Run(CBaseEntity* pLocal)
 {
+	if (gCvars.misc_cleanScreenshot)
+	{
+		if (gInts.Engine->IsTakingScreenshot() || GetAsyncKeyState(VK_F12) || GetAsyncKeyState(VK_SNAPSHOT))
+		{
+			return;
+		}
+	}
 	if (!gCvars.esp_active)
 		return;
 
@@ -116,6 +123,19 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		{
 			gDraw.OutlineRect(x + i, y + i, w - i * 2, h - i * 2, clrPlayerCol);
 		}
+	}
+
+	if (gCvars.esp_removeDisguise)
+	{
+		int curCond = pEntity->GetCond();
+		if (curCond & tf_cond::TFCond_Disguised)
+			pEntity->SetCond(curCond & ~tf_cond::TFCond_Disguised);
+	}
+	if (gCvars.esp_removeCloak)
+	{
+		int curCond = pEntity->GetCond();
+		if (curCond & tf_cond::TFCond_Cloaked)
+			pEntity->SetCond(curCond & ~tf_cond::TFCond_Cloaked);
 	}
 
 	if (gCvars.esp_health == 2 || gCvars.esp_health == 3)

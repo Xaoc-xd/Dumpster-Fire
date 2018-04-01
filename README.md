@@ -37,6 +37,8 @@ Uses Stick's Potassium Cheat.
 * Box - Render a 2D box over players
 * Name - Render a player's name
 * Class - Render a player's class
+* Remove Cloak - Removes Clock
+* Remove Disguise - Removes Disguise
 * Health - Render a player's health (can be either text or bar)
 * Smiley Face - Render a poorly created smiley face over the entity's head
 * Box Thickness - Modify the pixel width of a box
@@ -61,3 +63,5 @@ Uses Stick's Potassium Cheat.
 * Chat Spam - Spams chat with lots of popular cheat's chat spam messages
 * Kill Say - Says a message after killing a user
 * Roll Speedhack - Move at full speed (backwards) while crouching
+* Clear ScreenShot - Disables drawing while taking a screenshot
+* Clear ScreenShot - Removes Disguise

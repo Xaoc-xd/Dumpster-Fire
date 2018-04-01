@@ -112,6 +112,8 @@ void CCheatMenu::Render(void)
 		}
 		i = AddItem(i, " - Name", &gCvars.esp_name, 0, 1, 1, false);
 		i = AddItem(i, " - Class", &gCvars.esp_class, 0, 1, 1, false);
+		i = AddItem(i, " - Remove Cloak", &gCvars.esp_removeCloak, 0, 1, 1, false);
+		i = AddItem(i, " - Remove Disguise", &gCvars.esp_removeDisguise, 0, 1, 1, false);
 		i = AddItem(i, " - Health", &gCvars.esp_health, 0, 3, 1, false);
 		i = AddItem(i, " - Bones", &gCvars.esp_bones, 0, 3, 1, false);
 		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
@@ -149,6 +151,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
+		i = AddItem(i, " - CleanScreenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 	}
 
 	iMenuItems = i;
@@ -156,6 +159,14 @@ void CCheatMenu::Render(void)
 
 void CCheatMenu::DrawMenu(void)
 {
+	if (gCvars.misc_cleanScreenshot)
+	{
+		if (gInts.Engine->IsTakingScreenshot() || GetAsyncKeyState(VK_F12) || GetAsyncKeyState(VK_SNAPSHOT))
+		{
+			return;
+		}
+	}
+
 	int x = gCvars.iMenu_Pos_X,
 		xx = x + 200,
 		y = gCvars.iMenu_Pos_Y,

@@ -120,6 +120,11 @@ public:
 class CBaseEntity
 {
 public:
+	void SetCond(int c)
+	{
+		DYNVAR(n, int, "DT_TFPlayer", "m_Shared", "m_nPlayerCond");
+		return n.SetValue(this, c);
+	}
 	int GetOwner()
 	{
 		DYNVAR_RETURN(int, this, "DT_BaseEntity", "m_hOwnerEntity");
