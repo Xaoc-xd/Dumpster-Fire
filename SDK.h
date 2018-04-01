@@ -291,7 +291,6 @@ public:
 	}
 };
 
-
 class EngineClient
 {
 public:

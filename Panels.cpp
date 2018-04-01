@@ -43,7 +43,13 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 
 			if (!pLocal)
 				return;
-
+			if (gCvars.misc_cleanScreenshot)
+			{
+				if (gInts.Engine->IsTakingScreenshot() || GetAsyncKeyState(VK_F12) || GetAsyncKeyState(VK_SNAPSHOT))
+				{
+					return;
+				}
+			}
 			gESP.Run(pLocal);
 
 			if (gCheatMenu.bMenuActive)

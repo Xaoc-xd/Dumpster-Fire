@@ -10,13 +10,6 @@ CESP gESP;
 
 void CESP::Run(CBaseEntity* pLocal)
 {
-	if (gCvars.misc_cleanScreenshot)
-	{
-		if (gInts.Engine->IsTakingScreenshot() || GetAsyncKeyState(VK_F12) || GetAsyncKeyState(VK_SNAPSHOT))
-		{
-			return;
-		}
-	}
 	if (!gCvars.esp_active)
 		return;
 
