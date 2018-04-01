@@ -43,6 +43,10 @@ public:
 	float esp_bones;
 	float esp_face;
 
+	float aa_switch;
+	float aa_pitch_fakeup;
+	float aa_pitch_fakedown;
+
 	float removecond_switch;
 	float removecond_enabled;
 	float removecond_value;

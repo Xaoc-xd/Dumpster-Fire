@@ -5,6 +5,7 @@
 #include "Triggerbot.h"
 #include "Misc.h"
 #include "ChatSpam.h"
+#include "AntiAim.h"
 #include "RemoveConditions.h"
 
 //============================================================================================
@@ -23,6 +24,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 			return bReturn;
 
 		gMisc.Run(pLocal, pCommand);
+		gAA.Run(pLocal, pCommand);
 		gAim.Run(pLocal, pCommand);
 		gCond.Run(pLocal, pCommand);
 		gTrigger.Run(pLocal, pCommand);

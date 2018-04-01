@@ -56,6 +56,9 @@
     <ClCompile Include="TextFile.cpp">
       <Filter>Tools\TextFile</Filter>
     </ClCompile>
+    <ClCompile Include="AntiAim.cpp">
+      <Filter>Hacks\AntiAim</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -133,6 +136,9 @@
     <ClInclude Include="TextFile.h">
       <Filter>Tools\TextFile</Filter>
     </ClInclude>
+    <ClInclude Include="AntiAim.h">
+      <Filter>Hacks\AntiAim</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -200,6 +206,9 @@
     </Filter>
     <Filter Include="Tools\TextFile">
       <UniqueIdentifier>{37360098-8449-4262-bbfe-c533bc6eebf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks\AntiAim">
+      <UniqueIdentifier>{30e97167-73d8-4703-996f-89eaa8ca657e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

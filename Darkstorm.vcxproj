@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Aimbot.cpp" />
+    <ClCompile Include="AntiAim.cpp" />
     <ClCompile Include="CBaseEntity.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="ChatSpam.cpp" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h" />
+    <ClInclude Include="AntiAim.h" />
     <ClInclude Include="bspflags.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CGlobalVars.h" />

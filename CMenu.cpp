@@ -121,6 +121,13 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
 	}
 
+	i = AddItem(i, "AntiAim", &gCvars.aa_switch, 0, 1, 1, true);
+	if (gCvars.aa_switch)
+	{
+		i = AddItem(i, " - Fakeup", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
+		i = AddItem(i, " - Fakedown", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+	}
+
 	i = AddItem(i, "Settings", &gCvars.settings_switch, 0, 1, 1, true);
 	if (gCvars.settings_switch)
 	{

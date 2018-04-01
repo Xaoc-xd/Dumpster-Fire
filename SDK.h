@@ -273,7 +273,6 @@ public:
 	}
 };
 
-
 class EngineClient
 {
 public:
