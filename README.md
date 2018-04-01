@@ -15,6 +15,7 @@ Uses Stick's Potassium Cheat.
 * Hitscan - Aim at best available hitbox
 * Hitbox - Choose a hitbox you would prefer to aim at
 * Autoshoot - Automatically fires for you
+* Wait for Charges - Waits for a charge on the sniper rifle before shooting
 * Smoothing - *or slow aim* smoothes and slows down the aimbot
 * Ignore Cloak - Ignores cloaked spies
 
@@ -52,6 +53,7 @@ Uses Stick's Potassium Cheat.
 
 * Bunnyhop - Continue jumping by holding your jump key
 * Autostrafe - Automatically strafe while airborne to gain speed
+* Auto Backstab - Automatically backstabs a player when you're behind them
 * Noisemaker Spam - Continuiously spam a Noisemaker
 * No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle
 * Chat Spam - Spams chat with lots of popular cheat's chat spam messages
