@@ -168,14 +168,6 @@ void CCheatMenu::Render(void)
 
 void CCheatMenu::DrawMenu(void)
 {
-	if (gCvars.misc_cleanScreenshot)
-	{
-		if (gInts.Engine->IsTakingScreenshot() || GetAsyncKeyState(VK_F12) || GetAsyncKeyState(VK_SNAPSHOT))
-		{
-			return;
-		}
-	}
-
 	int x = gCvars.iMenu_Pos_X,
 		xx = x + 200,
 		y = gCvars.iMenu_Pos_Y,
