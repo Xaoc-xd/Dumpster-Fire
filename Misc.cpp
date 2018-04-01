@@ -32,6 +32,20 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			gInts.Engine->ServerCmdKeyValues(kv);
 		}
 	}
+	
+	if (gCvars.misc_roll_speedhack && !(pCommand->buttons&IN_ATTACK)) //aka fake crouch, not the best code but hey it works
+	{
+		Vector vLocalAngles = pCommand->viewangles;
+		float speed = pCommand->forwardmove;
+		if (fabs(speed) > 0.0f) {
+			pCommand->forwardmove = -speed;
+			pCommand->sidemove = 0.0f;
+			pCommand->viewangles.y = vLocalAngles.y;
+			pCommand->viewangles.y -= 180.0f;
+			if (pCommand->viewangles.y < -180.0f) pCommand->viewangles.y += 360.0f;
+			pCommand->viewangles.z = 90.0f;
+		}
+	}
 
 	if (gCvars.misc_wowsweet && fLastTime + 0.5f < gInts.globals->curtime) //yes
 	{

@@ -57,6 +57,7 @@ public:
 	float misc_chatspam_selection;
 	float misc_chatspam_delay;
 	float misc_killsay_selection;
+	float misc_roll_speedhack;
 	float misc_wowsweet;
 
 	float playerlist_switch;

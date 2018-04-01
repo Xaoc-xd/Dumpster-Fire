@@ -146,6 +146,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 9, 1, false);
 		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false);
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
+		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
 	}
 
