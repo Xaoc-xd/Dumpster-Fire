@@ -112,8 +112,10 @@ void CCheatMenu::Render(void)
 		}
 		i = AddItem(i, " - Name", &gCvars.esp_name, 0, 1, 1, false);
 		i = AddItem(i, " - Class", &gCvars.esp_class, 0, 1, 1, false);
+		i = AddItem(i, " - Cond", &gCvars.esp_playerCond, 0, 1, 1, false);
 		i = AddItem(i, " - Remove Cloak", &gCvars.esp_removeCloak, 0, 1, 1, false);
 		i = AddItem(i, " - Remove Disguise", &gCvars.esp_removeDisguise, 0, 1, 1, false);
+		i = AddItem(i, " - Remove Taunt", &gCvars.esp_removeTaunt, 0, 1, 1, false);
 		i = AddItem(i, " - Health", &gCvars.esp_health, 0, 3, 1, false);
 		i = AddItem(i, " - Bones", &gCvars.esp_bones, 0, 3, 1, false);
 		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
@@ -141,8 +143,8 @@ void CCheatMenu::Render(void)
 	if (gCvars.misc_switch)
 	{
 		i = AddItem(i, " - Bunnyhop", &gCvars.misc_bunnyhop, 0, 1, 1, false);
-		i = AddItem(i, " - Thirdperson", &gCvars.misc_thirdPerson, 0, 1, 1, false);
 		i = AddItem(i, " - Autostrafe", &gCvars.misc_autostrafe, 0, 1, 1, false);
+		i = AddItem(i, " - Thirdperson", &gCvars.misc_thirdPerson, 0, 1, 1, false);
 		i = AddItem(i, " - Auto Backstab", &gCvars.misc_autobackstab, 0, 1, 1, false);
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);

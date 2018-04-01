@@ -37,6 +37,8 @@ public:
 	float esp_class;
 	float esp_removeDisguise;
 	float esp_removeCloak;
+	float esp_removeTaunt;
+	float esp_playerCond;
 	float esp_health;
 	float esp_bones;
 	float esp_face;

@@ -36,9 +36,11 @@ Uses Stick's Potassium Cheat.
 * Enemies Only - Only render ESP over enemies
 * Box - Render a 2D box over players
 * Name - Render a player's name
+* Cond - Shows the player conditions
 * Class - Render a player's class
-* Remove Cloak - Removes Clock
-* Remove Disguise - Removes Disguise
+* Remove Cloak - Removes clock
+* Remove Disguise - Removes disguise
+* Remove Taunting - Removes the taunting animation
 * Health - Render a player's health (can be either text or bar)
 * Smiley Face - Render a poorly created smiley face over the entity's head
 * Box Thickness - Modify the pixel width of a box
@@ -55,8 +57,8 @@ Uses Stick's Potassium Cheat.
 ## Misc
 
 * Bunnyhop - Continue jumping by holding your jump key
-* Thirdperson - Allows you to use thirdperson in sv_cheats 0 servers
 * Autostrafe - Automatically strafe while airborne to gain speed
+* Thirdperson - Allows you to use thirdperson in sv_cheats 0 servers
 * Auto Backstab - Automatically backstabs a player when you're behind them
 * Noisemaker Spam - Continuiously spam a Noisemaker
 * No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle
