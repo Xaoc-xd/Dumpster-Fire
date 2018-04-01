@@ -4,7 +4,6 @@
 class CAA
 {
 	public:
-
 	void Run(CBaseEntity* pLocal, CUserCmd* pCommand);
 
 	private:

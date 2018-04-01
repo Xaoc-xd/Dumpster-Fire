@@ -67,6 +67,34 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			fLastTime = gInts.globals->curtime;
 		}
 	}
+	if (gCvars.misc_voiceCheers)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 2");
+	}
+	if (gCvars.misc_voiceJeers)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 3");
+	}
+	if (gCvars.misc_voiceNiceShot)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 6");
+	}
+	if (gCvars.misc_voiceDispenser)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 1 4");
+	}
+	if (gCvars.misc_voiceActivateCharge)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 1 6");
+	}
+	if (gCvars.misc_voiceMedic)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 0 0");
+	}
+	if (gCvars.misc_voiceThanks)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("voicemenu 0 1");
+	}
 }
 		  //Could be much simpler, but I don't want keyvals class
 void CMisc::NoisemakerSpam(PVOID kv) //Credits gir https://www.unknowncheats.me/forum/team-fortress-2-a/141108-infinite-noisemakers.html

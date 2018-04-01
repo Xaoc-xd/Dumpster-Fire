@@ -124,8 +124,18 @@ void CCheatMenu::Render(void)
 	i = AddItem(i, "AntiAim", &gCvars.aa_switch, 0, 1, 1, true);
 	if (gCvars.aa_switch)
 	{
-		i = AddItem(i, " - Fakeup", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
-		i = AddItem(i, " - Fakedown", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, false);
+		if (gCvars.aa_pitch)
+		{
+			i = AddItem(i, " - Fakeup", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
+			i = AddItem(i, " - Fakedown", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+		}
+		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, false);
+		if (gCvars.aa_yaw)
+		{
+			i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
+			i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
+		}
 	}
 
 	i = AddItem(i, "Settings", &gCvars.settings_switch, 0, 1, 1, true);
@@ -159,6 +169,17 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false);
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
+		i = AddItem(i, " - Voicespam", &gCvars.misc_voice, 0, 1, 1, false);
+		if (gCvars.misc_voice)
+		{
+			i = AddItem(i, " - Cheers Spam", &gCvars.misc_voiceCheers, 0, 1, 1, false);
+			i = AddItem(i, " - Jeers Spam", &gCvars.misc_voiceJeers, 0, 1, 1, false);
+			i = AddItem(i, " - Nice Shot Spam", &gCvars.misc_voiceNiceShot, 0, 1, 1, false);
+			i = AddItem(i, " - Dispenser Spam", &gCvars.misc_voiceDispenser, 0, 1, 1, false);
+			i = AddItem(i, " - Activate Charge Spam", &gCvars.misc_voiceActivateCharge, 0, 1, 1, false);
+			i = AddItem(i, " - Medic Spam", &gCvars.misc_voiceMedic, 0, 1, 1, false);
+			i = AddItem(i, " - Thanks Spam", &gCvars.misc_voiceThanks, 0, 1, 1, false);
+		}
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
 		i = AddItem(i, " - CleanScreenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 	}

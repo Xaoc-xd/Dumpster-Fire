@@ -44,8 +44,13 @@ public:
 	float esp_face;
 
 	float aa_switch;
+	float aa_pitch;
 	float aa_pitch_fakeup;
 	float aa_pitch_fakedown;
+	float aa_yaw;
+	float aa_yaw_staticjitter;
+	float aa_yaw_right;
+	float aa_yaw_left;
 
 	float removecond_switch;
 	float removecond_enabled;
@@ -69,6 +74,16 @@ public:
 	float misc_killsay_selection;
 	float misc_roll_speedhack;
 	float misc_wowsweet;
+	float misc_voice;
+	float misc_voiceCheers;
+	float misc_voiceJeers;
+	float misc_voiceNiceShot;
+	float misc_voiceDispenser;
+	float misc_voiceActivateCharge;
+	float misc_voiceMedic;
+	float misc_voiceThanks;
+
+
 
 	float playerlist_switch;
 	float PlayerMode[64] = {
