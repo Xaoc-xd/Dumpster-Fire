@@ -53,6 +53,7 @@ Uses Stick's Potassium Cheat.
 ## Misc
 
 * Bunnyhop - Continue jumping by holding your jump key
+* Thirdperson - Allows you to use thirdperson in sv_cheats 0 servers
 * Autostrafe - Automatically strafe while airborne to gain speed
 * Auto Backstab - Automatically backstabs a player when you're behind them
 * Noisemaker Spam - Continuiously spam a Noisemaker
