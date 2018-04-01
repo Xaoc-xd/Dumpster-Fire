@@ -48,6 +48,7 @@ Uses Stick's Potassium Cheat.
 * Auto Instant Cap - Automatically remove conditions to instantly cap points when near a point.
 * Instant Weapon Switch - Instantly switch weapons.
 * Instant Health Pack - Automatically remove conditions to instantly use a medpack/ammopack and not deplete it when near one.
+* Sticky Spam - Shoot all sticky bombs / Canonballs at the same time.
 
 ## Misc
 
@@ -58,3 +59,4 @@ Uses Stick's Potassium Cheat.
 * No Scope - Removes "HudScope" panel so there is no scope with a Sniper Rifle
 * Chat Spam - Spams chat with lots of popular cheat's chat spam messages
 * Kill Say - Says a message after killing a user
+* Roll Speedhack - Move at full speed (backwards) while crouching
