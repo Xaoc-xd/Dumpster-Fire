@@ -64,4 +64,3 @@ Uses Stick's Potassium Cheat.
 * Kill Say - Says a message after killing a user
 * Roll Speedhack - Move at full speed (backwards) while crouching
 * Clear ScreenShot - Disables drawing while taking a screenshot
-* Clear ScreenShot - Removes Disguise
