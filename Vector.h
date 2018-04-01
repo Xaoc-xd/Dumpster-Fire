@@ -21,7 +21,6 @@ public:
 	Vector(void); 
 	Vector(float X, float Y, float Z);
 	void Init(float ix=0.0f, float iy=0.0f, float iz=0.0f);
-	float DistTo(const Vector & v) const;
 	bool IsValid() const;
 	float operator[](int i) const;
 	float& operator[](int i);
@@ -67,11 +66,6 @@ inline void Vector::Init( float ix, float iy, float iz )
 { 
 	x = ix; y = iy; z = iz;
 	CHECK_VALID(*this);
-}
-//=================================================
-inline float Vector::DistTo(const Vector& v) const
-{
-	return (*this - v).Length();
 }
 //===============================================
 inline Vector::Vector(float X, float Y, float Z)

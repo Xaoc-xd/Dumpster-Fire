@@ -156,13 +156,6 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Sticky Spam", &gCvars.removecond_stickyspam, 0, 1, 1, false);
 	}
 
-	i = AddItem(i, "Follow Bot", &gCvars.followbot_switch, 0, 1, 1, true);
-		if (gCvars.followbot_switch)
-		{
-			i = AddItem(i, " - Enabled", &gCvars.followbot_enabled, 0, 1, 1, false);
-
-		}
-	
 	i = AddItem(i, "Misc", &gCvars.misc_switch, 0, 1, 1, true);
 	if (gCvars.misc_switch)
 	{

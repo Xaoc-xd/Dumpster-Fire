@@ -79,7 +79,6 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 
 		///TODO: Add the announcer here... soon:tm:
 		gKillSay.InitKillSay();
-	
 
 	}
 	return 0; //The thread has been completed, and we do not need to call anything once we're done. The call to Hooked_PaintTraverse is now our main thread. Read if gay.

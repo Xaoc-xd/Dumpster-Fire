@@ -116,15 +116,6 @@ public:
 	short mousedy; //3A
 	bool hasbeenpredicted; //3C;
 };
-enum source_lifestates
-{
-	LIFE_ALIVE,
-	LIFE_DYING,
-	LIFE_DEAD,
-	LIFE_RESPAWNABLE,
-	LIFE_DISCARDBODY,
-};
-
 
 class CBaseEntity
 {
@@ -156,15 +147,6 @@ public:
 		vWorldSpaceCenter = this->GetAbsOrigin();
 		vWorldSpaceCenter.z += (vMin.z + vMax.z) / 2;
 	}
-	bool IsAlive()
-	{
-		return (GetLifeState() == LIFE_ALIVE && GetHealth() > 0);
-	}
-	Vector GetVecOrigin()
-	{
-		DYNVAR_RETURN(Vector, this, "DT_BaseEntity", "m_vecOrigin");
-	}
-
 	DWORD* GetModel()
 	{
 		PVOID pRenderable = (PVOID)(this + 0x4);
@@ -390,13 +372,6 @@ public:
 		typedef void(__thiscall* OriginalFn)(PVOID, PVOID);
 		getvfunc<OriginalFn>(this, 127)(this, kv);
 	}
-	void PlaySound(const char *sound)
-	{
-		typedef void(__thiscall * OriginalFn)(PVOID, const char *);
-		return getvfunc<OriginalFn>(this, 78)(this, sound);
-	}
-
-
 };
 
 class IPanel
@@ -1281,7 +1256,14 @@ enum tf_classes
 	TF2_Spy = 8,
 };
 
-
+enum source_lifestates
+{
+	LIFE_ALIVE,
+	LIFE_DYING,
+	LIFE_DEAD,
+	LIFE_RESPAWNABLE,
+	LIFE_DISCARDBODY,
+};
 
 class ClientModeShared
 {

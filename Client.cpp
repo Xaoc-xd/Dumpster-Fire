@@ -1,14 +1,13 @@
 #include "SDK.h"
 #include "Client.h"
 #include "Util.h"
-#include "
-.h"
+#include "Aimbot.h"
 #include "Triggerbot.h"
 #include "Misc.h"
 #include "ChatSpam.h"
 #include "AntiAim.h"
 #include "RemoveConditions.h"
-#include "FollowBot.h"
+
 //============================================================================================
 bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_frametime, CUserCmd* pCommand)
 {
@@ -28,13 +27,12 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 		gAA.Run(pLocal, pCommand);
 		gAim.Run(pLocal, pCommand);
 		gCond.Run(pLocal, pCommand);
-		gFollow.Run(pLocal, pCommand);
 		gTrigger.Run(pLocal, pCommand);
 		gChatSpam.Run(pLocal, pCommand);
 	}
 	catch(...)
 	{
-		Log::Fatal("You broke it. Great job!");
+		Log::Fatal("Failed Hooked_CreateMove");
 	}
 	return false/*bReturn*/;
 }

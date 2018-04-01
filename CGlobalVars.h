@@ -43,10 +43,6 @@ public:
 	float esp_bones;
 	float esp_face;
 
-<<<<<<< HEAD
-	float followbot_switch;
-	float followbot_enabled;
-=======
 	float aa_switch;
 	float aa_pitch;
 	float aa_pitch_fakeup;
@@ -55,7 +51,6 @@ public:
 	float aa_yaw_staticjitter;
 	float aa_yaw_right;
 	float aa_yaw_left;
->>>>>>> f6c9faa3edb849de6c211f2a33ee9e25ae535d8a
 
 	float removecond_switch;
 	float removecond_enabled;
