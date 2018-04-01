@@ -40,7 +40,7 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	{
 		static int lastweapon = 0;
 		if (lastweapon != pCommand->weaponselect)
-			RemoveConds(pLocal, pCommand, gCvars.removecond_value, false);
+			RemoveConds(pLocal, pCommand, 100, false);
 		lastweapon = pCommand->weaponselect;
 	}
 
@@ -95,6 +95,44 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 					RemoveConds(pLocal, pCommand, gCvars.removecond_value);
 				}
 			}
+		}
+	}
+
+	if (gCvars.removecond_stickyspam)
+	{
+		/*
+		
+		Alright so this worked perfectly and beautifully in my cheat, but it's not working as intended here, dunno why
+		if anyone wants to try to fix this, go ahead, I didn't have enough time to do so :3333
+
+		- Castle, professional NASA coder hired in 1894
+
+		*/
+
+
+		if (pLocal->szGetClass() != "Demoman")
+			return;
+
+		CBaseCombatWeapon *wep = pLocal->GetActiveWeapon();
+		if (!wep)
+			return;
+
+		if (wep->GetItemDefinitionIndex() != WPN_StickyLauncher
+			&& wep->GetItemDefinitionIndex() != WPN_ScottishResistance
+			&& wep->GetItemDefinitionIndex() != WPN_StickyJumper
+			&& wep->GetItemDefinitionIndex() != WPN_LoooseCannon)
+			return;
+
+		static bool bSwitch = false;
+		if ((pCommand->buttons & IN_ATTACK) && !bSwitch)
+		{
+			bSwitch = true;
+		}
+		else if (bSwitch)
+		{
+			RemoveConds(pLocal, pCommand, 50);
+			pCommand->buttons &= ~IN_ATTACK;
+			bSwitch = false;
 		}
 	}
 }

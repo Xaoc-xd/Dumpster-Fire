@@ -125,9 +125,9 @@ bool CUtil::IsBackstabWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep)
 	return false;
 }
 
-bool CUtil::IsReadyToBackstab(CBaseCombatWeapon* pWep)
+bool CUtil::IsReadyToBackstab(CBaseEntity* pLocal, CBaseCombatWeapon* pWep)
 {
-	return pWep->ReadyToBackstab();
+	return Util->IsBackstabWeapon(pLocal, pLocal->GetActiveWeapon()) && pWep->ReadyToBackstab();
 }
 
 PVOID CUtil::InitKeyValue() //Credits f1ssion

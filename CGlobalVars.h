@@ -46,6 +46,7 @@ public:
 	float removecond_autoinstantcap;
 	float removecond_instantweaponswitch;
 	float removecond_automedkit;
+	float removecond_stickyspam;
 
 	float misc_switch;
 	float misc_bunnyhop;
@@ -56,6 +57,7 @@ public:
 	float misc_chatspam_selection;
 	float misc_chatspam_delay;
 	float misc_killsay_selection;
+	float misc_wowsweet;
 
 	float playerlist_switch;
 	float PlayerMode[64] = {

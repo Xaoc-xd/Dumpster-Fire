@@ -132,6 +132,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Auto Instant Cap", &gCvars.removecond_autoinstantcap, 0, 1, 1, false);
 		i = AddItem(i, " - Instant Weapon Switch", &gCvars.removecond_instantweaponswitch, 0, 1, 1, false);
 		i = AddItem(i, " - Auto Medkit", &gCvars.removecond_automedkit, 0, 1, 1, false);
+		i = AddItem(i, " - Sticky Spam", &gCvars.removecond_stickyspam, 0, 1, 1, false);
 	}
 
 	i = AddItem(i, "Misc", &gCvars.misc_switch, 0, 1, 1, true);
@@ -145,6 +146,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 9, 1, false);
 		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false);
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
+		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
 	}
 
 	iMenuItems = i;

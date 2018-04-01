@@ -24,7 +24,7 @@ public:
 
 	bool IsBackstabWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
-	bool IsReadyToBackstab(CBaseCombatWeapon* pWep);
+	bool IsReadyToBackstab(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
 	void silentMovementFix(CUserCmd *pUserCmd, Vector angles);
 	

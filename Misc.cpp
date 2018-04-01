@@ -19,10 +19,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 	if (gCvars.misc_autobackstab)
 	{
-		if (!pLocal->GetActiveWeapon()) {} //Pretty ghetto solution for crashes
-
-		else if (Util->IsBackstabWeapon(pLocal, pLocal->GetActiveWeapon()) &&
-			Util->IsReadyToBackstab(pLocal->GetActiveWeapon()))
+		if (pLocal->GetActiveWeapon() && Util->IsReadyToBackstab(pLocal, pLocal->GetActiveWeapon()))
 			pCommand->buttons |= IN_ATTACK;
 	}
 
@@ -33,6 +30,18 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		{
 			NoisemakerSpam(kv);
 			gInts.Engine->ServerCmdKeyValues(kv);
+		}
+	}
+
+	if (gCvars.misc_wowsweet && fLastTime + 0.5f < gInts.globals->curtime) //yes
+	{
+		if (pLocal->szGetClass() == "Heavy" && pLocal->GetActiveWeapon() && pLocal->GetActiveWeapon()->GetSlot() == 1 && pLocal->GetFlags() & FL_DUCKING) //oooo
+		{ //very nice
+			if (pCommand->tick_count % 2)
+				gInts.Engine->ClientCmd_Unrestricted("say wow sweet"); //eepaifjaeifeapfj
+			else
+				gInts.Engine->ClientCmd_Unrestricted("say wow sweet\x0D"); //mmmmmmmm
+			fLastTime = gInts.globals->curtime;
 		}
 	}
 }

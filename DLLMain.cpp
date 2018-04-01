@@ -15,6 +15,8 @@ CreateInterface_t VGUI2Factory = NULL;
 // being gay is very, very wrong
 // no homo zone
 // test 123456
+// 10.0.15063.0
+static int vacUndetected = 1; //the encryption method cheat devs don't want you to know
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
 	if (gInts.Client == NULL)
@@ -75,10 +77,11 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 		clientModeHook->HookMethod(&Hooked_CreateMove, gOffsets.iCreateMoveOffset); //ClientMode create move is called inside of CHLClient::CreateMove, and thus no need for hooking WriteUserCmdDelta.
 		clientModeHook->Rehook();
 
+		///TODO: Add the announcer here... soon:tm:
 		gKillSay.InitKillSay();
 
 	}
-	return 0; //The thread has been completed, and we do not need to call anything once we're done. The call to Hooked_PaintTraverse is now our main thread.
+	return 0; //The thread has been completed, and we do not need to call anything once we're done. The call to Hooked_PaintTraverse is now our main thread. Read if gay.
 }
 
 BOOL APIENTRY DllMain(HMODULE hInstance, DWORD dwReason, LPVOID lpReserved)
