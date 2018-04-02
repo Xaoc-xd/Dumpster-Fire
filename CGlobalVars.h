@@ -84,6 +84,7 @@ public:
 	float misc_voiceThanks;
 	float misc_fov = 70;
 	float misc_viewmodel_fov = 54;
+	float misc_no_push;
 
 
 

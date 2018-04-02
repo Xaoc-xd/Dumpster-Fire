@@ -8,6 +8,13 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	//if (gInts.cvar->FindVar("viewmodel_fov")->GetInt != gCvars.misc_viewmodel_fov)
 	gInts.cvar->FindVar("viewmodel_fov")->SetValue(gCvars.misc_viewmodel_fov);
 	pLocal->setfov(gCvars.misc_fov);
+	
+	if (gCvars.misc_no_push)
+	{
+		ConVar* tf_avoidteammates_pushaway = gInts.cvar->FindVar("tf_avoidteammates_pushaway");
+		if (tf_avoidteammates_pushaway->GetInt() == 1)
+			tf_avoidteammates_pushaway->SetValue(0);
+	}
 
 	if (!(pLocal->GetFlags() & FL_ONGROUND) && pCommand->buttons & IN_JUMP)
 	{

@@ -177,6 +177,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Clean Screenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 		i = AddItem(i, " - FOV", &gCvars.misc_fov, 70, 120, 1, false);
 		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false);
+		i = AddItem(i, " - No Push", &gCvars.misc_no_push, 0, 1, false);
 	}
 
 	iMenuItems = i;
