@@ -18,6 +18,8 @@ public:
 
 	bool IsKeyDown(char * key);
 
+	void SilentMovementFix(CUserCmd * pUserCmd, Vector angles);
+
 	bool IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
 	bool IsReadyToHeadshot(CBaseCombatWeapon* pWep);

@@ -114,7 +114,7 @@ void CCheatMenu::Render(void)
 		}
 		i = AddItem(i, " - Name", &gCvars.esp_name, 0, 1, 1, false);
 		i = AddItem(i, " - Class", &gCvars.esp_class, 0, 1, 1, false);
-		i = AddItem(i, " - Cond", &gCvars.esp_playerCond, 0, 2, 1, false);
+		i = AddItem(i, " - Cond", &gCvars.esp_playerCond, 0, 1, 1, false);
 		i = AddItem(i, " - Remove Cloak", &gCvars.esp_removeCloak, 0, 1, 1, false);
 		i = AddItem(i, " - Remove Disguise", &gCvars.esp_removeDisguise, 0, 1, 1, false);
 		i = AddItem(i, " - Remove Taunt", &gCvars.esp_removeTaunt, 0, 1, 1, false);
@@ -126,9 +126,21 @@ void CCheatMenu::Render(void)
 	i = AddItem(i, "Anti Aim", &gCvars.aa_switch, 0, 1, 1, true);
 	if (gCvars.aa_switch)
 	{
-		i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
-		i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
+		if (gCvars.aa_pitch)
+		{
+			i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
+			i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+		}
+		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
+		if (gCvars.aa_yaw)
+		{
+			i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
+			i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
+			i = AddItem(i, " - Staticjitter", &gCvars.aa_yaw_staticjitter, 0, 1, 1, false);
+		}
 	}
+
 
 	i = AddItem(i, "Settings", &gCvars.settings_switch, 0, 1, 1, true);
 	if (gCvars.settings_switch)
