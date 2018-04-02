@@ -18,6 +18,16 @@ void CESP::Run(CBaseEntity* pLocal)
 		if (i == me)
 			continue;
 
+		if (gCvars.esp_crosshair)
+		{
+			gDraw.DrawCrosshair(1);
+			gInts.cvar->FindVar("crosshair")->SetValue(0);
+		}
+		else
+		{
+			gInts.cvar->FindVar("crosshair")->SetValue(1);
+		}
+
 		CBaseEntity* pEntity = GetBaseEntity(i);
 
 		if (!pEntity)
@@ -160,6 +170,7 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		gDraw.DrawString(x + w + 2, y + iY, Color::Green(), "%d HP", pEntity->GetHealth());
 		iY += gDraw.GetESPHeight();
 	}
+	
 
 	if (gCvars.esp_bones) //bones
 	{

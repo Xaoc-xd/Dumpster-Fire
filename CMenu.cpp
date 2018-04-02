@@ -121,6 +121,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Health", &gCvars.esp_health, 0, 3, 1, false);
 		i = AddItem(i, " - Bones", &gCvars.esp_bones, 0, 3, 1, false);
 		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
+		i = AddItem(i, " - Crosshair", &gCvars.esp_crosshair, 0, 1, 1, false);
 	}
 
 	i = AddItem(i, "Anti Aim", &gCvars.aa_switch, 0, 1, 1, true);
@@ -177,7 +178,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Clean Screenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 		i = AddItem(i, " - FOV", &gCvars.misc_fov, 70, 120, 1, false);
 		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false);
-		i = AddItem(i, " - No Push", &gCvars.misc_no_push, 0, 1, false);
+		i = AddItem(i, " - No Push", &gCvars.misc_no_push, 0, 1, 1, false);
 	}
 
 	iMenuItems = i;

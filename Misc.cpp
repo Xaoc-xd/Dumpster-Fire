@@ -1,5 +1,6 @@
 #include "Misc.h"
 #include "Util.h"
+#include "CDrawManager.h"
 
 CMisc gMisc;
 
@@ -15,6 +16,8 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		if (tf_avoidteammates_pushaway->GetInt() == 1)
 			tf_avoidteammates_pushaway->SetValue(0);
 	}
+
+
 
 	if (!(pLocal->GetFlags() & FL_ONGROUND) && pCommand->buttons & IN_JUMP)
 	{

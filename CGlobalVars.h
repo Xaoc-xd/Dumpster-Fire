@@ -42,6 +42,7 @@ public:
 	float esp_health;
 	float esp_bones;
 	float esp_face;
+	float esp_crosshair;
 
 	float aa_switch;
 	float aa_pitch;
