@@ -105,7 +105,8 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		Alright so this worked perfectly and beautifully in my cheat, but it's not working as intended here, dunno why
 		if anyone wants to try to fix this, go ahead, I didn't have enough time to do so :3333
 
-		- Castle, professional NASA coder hired in 1894
+		- Castle, professional NASA coder hired in 1894 
+		also credits bencat retard - plasma 
 
 		*/
 

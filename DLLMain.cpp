@@ -17,6 +17,22 @@ CreateInterface_t CvarFactory = NULL;
 // no homo zone
 // test 123456
 // 10.0.15063.0
+typedef void(__thiscall *OverrideViewFn) (void*, CViewSetup*);
+
+void __fastcall Hooked_OverrideView(void* _this, void* _edx, CViewSetup* pSetup) // credits, ActualCheats and outi - plasma
+{
+
+	// epic code
+	VMTManager& hook = VMTManager::GetHook(_this); //Get a pointer to the instance of your VMTManager with the function GetHook.
+	hook.GetMethod<OverrideViewFn>(16)(_this, pSetup); //Call the original.
+	if (!gInts.Engine->IsInGame() && !gInts.Engine->IsConnected())
+		return;
+
+	if (pSetup->m_fov != 20.0f && pSetup->m_fov != gCvars.misc_fov) // no delet this, important for when zoomed- plasma
+	{
+		pSetup->m_fov = gCvars.misc_fov;
+	}
+}
 static int vacUndetected = 1; //the encryption method cheat devs don't want you to know
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
@@ -78,6 +94,7 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 
 		clientModeHook->Init(gInts.ClientMode);
 		clientModeHook->HookMethod(&Hooked_CreateMove, gOffsets.iCreateMoveOffset); //ClientMode create move is called inside of CHLClient::CreateMove, and thus no need for hooking WriteUserCmdDelta.
+		clientModeHook->HookMethod(&Hooked_OverrideView, 16);
 		clientModeHook->Rehook();
 
 		///TODO: Add the announcer here... soon:tm:
