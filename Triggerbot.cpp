@@ -48,8 +48,5 @@ void CTriggerbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	if (gCvars.triggerbot_headonly && trace.hitbox != 0)
 		return;
 
-	if (gCvars.triggerbot_ignore_cloak && trace.m_pEnt->GetCond() & TFCond_Cloaked)
-		return;
-
 	pCommand->buttons |= IN_ATTACK;
 }

@@ -2,6 +2,8 @@
 
 CUtil* Util;
 
+
+
 void CUtil::VectorTransform(const Vector& vSome, const matrix3x4& vMatrix, Vector& vOut)
 {
 	for (auto i = 0; i < 3; i++)
@@ -96,6 +98,17 @@ bool CUtil::IsKeyDown(char* key)
 	return gInts.InputSys->IsButtonDown(gInts.InputSys->StringToButtonCode(key));
 }
 
+void CUtil::SilentMovementFix(CUserCmd *pUserCmd, Vector angles)
+{
+	Vector vecSilent(pUserCmd->forwardmove, pUserCmd->sidemove, pUserCmd->upmove);
+	float flSpeed = sqrt(vecSilent.x * vecSilent.x + vecSilent.y * vecSilent.y);
+	Vector angMove;
+	VectorAngles(vecSilent, angMove);
+	float flYaw = DEG2RAD(angles.y - pUserCmd->viewangles.y + angMove.y);
+	pUserCmd->forwardmove = cos(flYaw) * flSpeed;
+	pUserCmd->sidemove = sin(flYaw) * flSpeed;
+	pUserCmd->viewangles = angles;
+}
 
 bool CUtil::IsHeadshotWeapon(CBaseEntity* pLocal, CBaseCombatWeapon* pWep)
 {

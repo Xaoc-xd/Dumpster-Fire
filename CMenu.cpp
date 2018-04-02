@@ -33,7 +33,9 @@ char* szHitboxes[] =
 char* ChatSpams[] = { "OFF", "NullCore", "LMAOBOX", "Lithium", "Cathook", "Empty Lines", "Speedhook", "Freebox", "Catbot", "Dumpster Fire" };
 
 char* KillSays[] = { "OFF", "NiggerHOOK", "NullCore", "File" };
- 
+
+char* condESP[] = { "OFF", "Dumpster Fire", "NullCore" };
+
 int CCheatMenu::AddItem(int nIndex, char szTitle[30], float* value, float flMin, float flMax, float flStep, bool isClassSwitch)
 {
 	strcpy(pMenu[nIndex].szTitle, szTitle);
@@ -56,7 +58,7 @@ void CCheatMenu::Render(void)
 	{
 		i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
 		i = AddItem(i, " - Silent", &gCvars.aimbot_silent, 0, 1, 1, false);
-		i = AddItem(i, " - FOV", &gCvars.aimbot_fov, 0, 180, 1, false);
+		//i = AddItem(i, " - FOV", &gCvars.aimbot_fov, 0, 180, 1, false);
 		i = AddItem(i, " - Key", &gCvars.aimbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Hitscan", &gCvars.aimbot_hitscan, 0, 1, 1, false);
 		i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
@@ -76,7 +78,6 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Enabled", &gCvars.triggerbot_active, 0, 1, 1, false);
 		i = AddItem(i, " - Key", &gCvars.triggerbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Head Only", &gCvars.triggerbot_headonly, 0, 1, 1, false);
-		i = AddItem(i, " - Ignore Cloak", &gCvars.triggerbot_ignore_cloak, 0, 1, 1, false);
 	}
 
 	i = AddItem(i, "Player List", &gCvars.playerlist_switch, 0, 1, 1, true);
@@ -120,24 +121,27 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Health", &gCvars.esp_health, 0, 3, 1, false);
 		i = AddItem(i, " - Bones", &gCvars.esp_bones, 0, 3, 1, false);
 		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
+		i = AddItem(i, " - Crosshair", &gCvars.esp_crosshair, 0, 1, 1, false);
 	}
 
-	i = AddItem(i, "AntiAim", &gCvars.aa_switch, 0, 1, 1, true);
+	i = AddItem(i, "Anti Aim", &gCvars.aa_switch, 0, 1, 1, true);
 	if (gCvars.aa_switch)
 	{
-		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, false);
+		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
 		if (gCvars.aa_pitch)
 		{
-			i = AddItem(i, " - Fakeup", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
-			i = AddItem(i, " - Fakedown", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+			i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
+			i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
 		}
-		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, false);
+		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
 		if (gCvars.aa_yaw)
 		{
-			i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
 			i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
+			i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
+			i = AddItem(i, " - Staticjitter", &gCvars.aa_yaw_staticjitter, 0, 1, 1, false);
 		}
 	}
+
 
 	i = AddItem(i, "Settings", &gCvars.settings_switch, 0, 1, 1, true);
 	if (gCvars.settings_switch)
@@ -170,19 +174,11 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false);
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
-		i = AddItem(i, " - Voicespam", &gCvars.misc_voice, 0, 1, 1, false);
-		if (gCvars.misc_voice)
-		{
-			i = AddItem(i, " - Cheers Spam", &gCvars.misc_voiceCheers, 0, 1, 1, false);
-			i = AddItem(i, " - Jeers Spam", &gCvars.misc_voiceJeers, 0, 1, 1, false);
-			i = AddItem(i, " - Nice Shot Spam", &gCvars.misc_voiceNiceShot, 0, 1, 1, false);
-			i = AddItem(i, " - Dispenser Spam", &gCvars.misc_voiceDispenser, 0, 1, 1, false);
-			i = AddItem(i, " - Activate Charge Spam", &gCvars.misc_voiceActivateCharge, 0, 1, 1, false);
-			i = AddItem(i, " - Medic Spam", &gCvars.misc_voiceMedic, 0, 1, 1, false);
-			i = AddItem(i, " - Thanks Spam", &gCvars.misc_voiceThanks, 0, 1, 1, false);
-		}
-		i = AddItem(i, " - Clean SS", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
+		i = AddItem(i, " - Clean Screenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
+		i = AddItem(i, " - FOV", &gCvars.misc_fov, 70, 120, 1, false);
+		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false);
+		i = AddItem(i, " - No Push", &gCvars.misc_no_push, 0, 1, 1, false);
 	}
 
 	iMenuItems = i;
@@ -242,7 +238,7 @@ void CCheatMenu::DrawMenu(void)
 
 				else if (pMenu[i].flMax == 8)
 				{
-						gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), Color::White(), "%s", szKeyNames[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 9)
@@ -257,7 +253,10 @@ void CCheatMenu::DrawMenu(void)
 
 				else if (pMenu[i].flMax == 2)
 				{
-					gDraw.DrawString(xx, y + (h * i), Color::White(), !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
+					if (!strcmp(pMenu[i].szTitle, " - Cond"))
+						gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? Color::White() : Color(105, 105, 105, 255), "%s", condESP[(int)pMenu[i].value[0]]);
+					else
+						gDraw.DrawString(xx, y + (h * i), Color::White(), !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
 				}
 
 				else if (pMenu[i].flMax == 1)
@@ -307,7 +306,7 @@ void CCheatMenu::DrawMenu(void)
 
 				else if (pMenu[i].flMax == 8)
 				{
-						gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
+					gDraw.DrawString(xx, y + (h * i), clrColor, "%s", szKeyNames[(int)pMenu[i].value[0]]);
 				}
 
 				else if (pMenu[i].flMax == 9)
@@ -322,7 +321,10 @@ void CCheatMenu::DrawMenu(void)
 
 				else if (pMenu[i].flMax == 2)
 				{
-					gDraw.DrawString(xx, y + (h * i), clrColor, !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
+					if (!strcmp(pMenu[i].szTitle, " - Cond"))
+						gDraw.DrawString(xx, y + (h * i), pMenu[i].value[0] ? clrColor : Color(105, 105, 105, 255), "%s", condESP[(int)pMenu[i].value[0]]);
+					else
+						gDraw.DrawString(xx, y + (h * i), clrColor, !pMenu[i].value[0] ? "Ignore" : pMenu[i].value[0] == 1 ? "Normal" : "Rage");
 				}
 
 				else if (pMenu[i].flMax == 1)

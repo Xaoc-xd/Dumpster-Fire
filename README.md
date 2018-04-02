@@ -44,6 +44,7 @@ Uses Stick's Potassium Cheat.
 * Health - Render a player's health (can be either text or bar)
 * Smiley Face - Render a poorly created smiley face over the entity's head
 * Box Thickness - Modify the pixel width of a box
+* Crosshair - Draws a crosshair on your screen
 
 ## Remove Cond - Source Engine exploit
 * Master Switch - Toggle Remove Cond on/off

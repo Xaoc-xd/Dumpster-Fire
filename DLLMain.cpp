@@ -11,11 +11,13 @@ CreateInterface_t EngineFactory = NULL;
 CreateInterface_t ClientFactory = NULL;
 CreateInterface_t VGUIFactory = NULL;
 CreateInterface_t VGUI2Factory = NULL;
+CreateInterface_t CvarFactory = NULL;
 // being gay isnt wrong
 // being gay is very, very wrong
 // no homo zone
 // test 123456
 // 10.0.15063.0
+//test to see if I can push things now
 static int vacUndetected = 1; //the encryption method cheat devs don't want you to know
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
@@ -29,12 +31,14 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 
 		ClientFactory = ( CreateInterfaceFn ) GetProcAddress( gSignatures.GetModuleHandleSafe( "client.dll" ), "CreateInterface" );
 		EngineFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("engine.dll"), "CreateInterface");
+		CvarFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("vstdlib.dll"), "CreateInterface");
 		VGUIFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("vguimatsurface.dll"), "CreateInterface");
 
 		gInts.Client = ( CHLClient* )ClientFactory( "VClient017", NULL);
 		gInts.EntList = ( CEntList* ) ClientFactory( "VClientEntityList003", NULL );
 		gInts.Engine = ( EngineClient* ) EngineFactory( "VEngineClient013", NULL );
 		gInts.Surface = ( ISurface* ) VGUIFactory( "VGUI_Surface030", NULL );
+		gInts.cvar = (ICvar*)CvarFactory("VEngineCvar004", NULL);
 		gInts.EngineTrace = ( IEngineTrace* ) EngineFactory( "EngineTraceClient003", NULL );
 		gInts.ModelInfo = ( IVModelInfo* ) EngineFactory( "VModelInfoClient006", NULL );
 		gInts.EventManager = (IGameEventManager2*)EngineFactory("GAMEEVENTSMANAGER002", NULL);

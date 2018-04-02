@@ -134,3 +134,23 @@ bool CDrawManager::WorldToScreen( Vector &vOrigin, Vector &vScreen )
 
 	return false;
 }
+
+void CDrawManager::DrawCrosshair(int iValue)
+{
+	int m_iScreenWidth = gScreenSize.iScreenWidth;
+	int     m_iScreenHeight = gScreenSize.iScreenHeight;
+
+	int x = m_iScreenWidth / 2;
+	int y = m_iScreenHeight / 2;
+	switch (iValue)
+	{
+	case 1:
+		DrawRect(x - 14, y, 9, 1, Color(255, 255, 255, 255));
+		DrawRect(x + 5, y, 9, 1, Color(255, 255, 255, 255));
+		DrawRect(x, y - 14, 1, 9, Color(255, 255, 255, 255));
+		DrawRect(x, y + 5, 1, 9, Color(255, 255, 255, 255));
+		DrawRect(x, y, 1, 1, Color(255, 255, 255, 255));
+	break;
+	}
+
+}

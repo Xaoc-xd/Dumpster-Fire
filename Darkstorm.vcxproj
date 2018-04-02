@@ -96,6 +96,7 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CMenu.cpp" />
     <ClCompile Include="CNetVars.cpp" />
+    <ClCompile Include="ConVar.cpp" />
     <ClCompile Include="DLLMain.cpp" />
     <ClCompile Include="ESP.cpp" />
     <ClCompile Include="KillSay.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="CMenu.h" />
     <ClInclude Include="CNetVars.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="ConVar.h" />
     <ClInclude Include="ESP.h" />
     <ClInclude Include="getvfunc.h" />
     <ClInclude Include="KillSay.h" />

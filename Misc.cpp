@@ -1,18 +1,30 @@
 #include "Misc.h"
 #include "Util.h"
+#include "CDrawManager.h"
 
 CMisc gMisc;
 
 void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 {
+	//if (gInts.cvar->FindVar("viewmodel_fov")->GetInt != gCvars.misc_viewmodel_fov)
+	gInts.cvar->FindVar("viewmodel_fov")->SetValue(gCvars.misc_viewmodel_fov);
+	pLocal->setfov(gCvars.misc_fov);
+	
+	if (gCvars.misc_no_push)
+	{
+		ConVar* tf_avoidteammates_pushaway = gInts.cvar->FindVar("tf_avoidteammates_pushaway");
+		if (tf_avoidteammates_pushaway->GetInt() == 1)
+			tf_avoidteammates_pushaway->SetValue(0);
+	}
+
+
+
 	if (!(pLocal->GetFlags() & FL_ONGROUND) && pCommand->buttons & IN_JUMP)
 	{
-		//Autostrafe	
 		if (gCvars.misc_autostrafe)
 			if (pCommand->mousedx > 1 || pCommand->mousedx < -1)  //> 1 < -1 so we have some wiggle room
 				pCommand->sidemove = pCommand->mousedx > 1 ? 450.f : -450.f;
 
-		//Bunnyhop
 		if (gCvars.misc_bunnyhop)
 			pCommand->buttons &= ~IN_JUMP;
 	}
@@ -42,7 +54,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		pLocal->ForceTauntCam(false);
 	}
 	
-	if (gCvars.misc_roll_speedhack && !(pCommand->buttons&IN_ATTACK)) //aka fake crouch, not the best code but hey it works
+	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK)) // I have to improve this later on.
 	{
 		Vector vLocalAngles = pCommand->viewangles;
 		float speed = pCommand->forwardmove;
@@ -56,17 +68,18 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		}
 	}
 
-	if (gCvars.misc_wowsweet && fLastTime + 0.5f < gInts.globals->curtime) //yes
+	if (gCvars.misc_wowsweet && fLastTime + 0.5f < gInts.globals->curtime)
 	{
-		if (pLocal->szGetClass() == "Heavy" && pLocal->GetActiveWeapon() && pLocal->GetActiveWeapon()->GetSlot() == 1 && pLocal->GetFlags() & FL_DUCKING) //oooo
-		{ //very nice
+		if (pLocal->szGetClass() == "Heavy" && pLocal->GetActiveWeapon() && pLocal->GetActiveWeapon()->GetSlot() == 1 && pLocal->GetFlags() & FL_DUCKING)
+		{
 			if (pCommand->tick_count % 2)
-				gInts.Engine->ClientCmd_Unrestricted("say wow sweet"); //eepaifjaeifeapfj
+				gInts.Engine->ClientCmd_Unrestricted("say wow sweet");
 			else
-				gInts.Engine->ClientCmd_Unrestricted("say wow sweet\x0D"); //mmmmmmmm
+				gInts.Engine->ClientCmd_Unrestricted("say wow sweet\x0D");
 			fLastTime = gInts.globals->curtime;
 		}
 	}
+
 	if (gCvars.misc_voiceCheers)
 	{
 		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 2");
@@ -96,7 +109,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		gInts.Engine->ClientCmd_Unrestricted("voicemenu 0 1");
 	}
 }
-		  //Could be much simpler, but I don't want keyvals class
+
 void CMisc::NoisemakerSpam(PVOID kv) //Credits gir https://www.unknowncheats.me/forum/team-fortress-2-a/141108-infinite-noisemakers.html
 {
 	char chCommand[30] = "use_action_slot_item_server";
@@ -106,9 +119,9 @@ void CMisc::NoisemakerSpam(PVOID kv) //Credits gir https://www.unknowncheats.me/
 	*(PDWORD)((DWORD)kv + 0x4) = 0;
 	*(PDWORD)((DWORD)kv + 0x8) = 0;
 	*(PDWORD)((DWORD)kv + 0xC) = 0;
-	*(PDWORD)((DWORD)kv + 0x10) = /*0x10000*/0xDEADBEEF;
+	*(PDWORD)((DWORD)kv + 0x10) = 0xDEADBEEF;
 	*(PDWORD)((DWORD)kv + 0x14) = 0;
-	*(PDWORD)((DWORD)kv + 0x18) = 0; //Extra one the game isn't doing, but if you don't zero this out, the game crashes.
+	*(PDWORD)((DWORD)kv + 0x18) = 0;
 	*(PDWORD)((DWORD)kv + 0x1C) = 0;
 	*(PDWORD)((DWORD)kv + 0) = s_pfGetSymbolForString(chCommand, 1);
 }

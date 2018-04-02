@@ -27,7 +27,6 @@ public:
 	float triggerbot_active;
 	float triggerbot_key;
 	float triggerbot_headonly;
-	float triggerbot_ignore_cloak;
 
 	float esp_switch;
 	float esp_active;
@@ -43,6 +42,7 @@ public:
 	float esp_health;
 	float esp_bones;
 	float esp_face;
+	float esp_crosshair;
 
 	float aa_switch;
 	float aa_pitch;
@@ -83,6 +83,9 @@ public:
 	float misc_voiceActivateCharge;
 	float misc_voiceMedic;
 	float misc_voiceThanks;
+	float misc_fov = 70;
+	float misc_viewmodel_fov = 54;
+	float misc_no_push;
 
 
 
