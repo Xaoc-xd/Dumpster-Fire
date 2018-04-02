@@ -76,13 +76,6 @@ public:
 	float misc_roll_speedhack;
 	float misc_wowsweet;
 	float misc_voice;
-	float misc_voiceCheers;
-	float misc_voiceJeers;
-	float misc_voiceNiceShot;
-	float misc_voiceDispenser;
-	float misc_voiceActivateCharge;
-	float misc_voiceMedic;
-	float misc_voiceThanks;
 	float misc_fov = 90; // why the fuck would u start at 70 - plasma
 	float misc_viewmodel_fov = 54;
 	float misc_no_push;

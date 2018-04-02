@@ -171,14 +171,15 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
 		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 9, 1, false);
-		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false);
+		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false); //autism
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
 		i = AddItem(i, " - Clean Screenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 		i = AddItem(i, " - FOV", &gCvars.misc_fov, 70, 120, 1, false);
-		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false);
+		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false); //this can be done via in-game commands retards
 		i = AddItem(i, " - No Push", &gCvars.misc_no_push, 0, 1, 1, false);
+		i = AddItem(i, " - Voice Menu Spam", &gCvars.misc_voice, 0, 6, 1, false); //too lazy to make the actual labels for the options
 	}
 
 	iMenuItems = i;

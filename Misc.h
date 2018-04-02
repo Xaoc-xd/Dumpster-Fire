@@ -8,7 +8,7 @@ public:
 	void Run(CBaseEntity* pLocal, CUserCmd* pCommand);
 
 private:
-	float fLastTime;
+	float fLastTime, fLastSpam;
 	//Other funcs
 
 	void NoisemakerSpam(PVOID kv);

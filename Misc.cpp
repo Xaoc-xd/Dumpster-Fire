@@ -80,34 +80,24 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		}
 	}
 
-	if (gCvars.misc_voiceCheers)
+	if (gCvars.misc_voice && fLastSpam + 3.f < gInts.globals->curtime) //add an option for the spam delay later
 	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 2");
+		char* voicemenu = NULL;
+		switch ((int)gCvars.misc_voice)
+		{
+		case 0: voicemenu = "voicemenu 2 2"; break;
+		case 1: voicemenu = "voicemenu 2 3"; break;
+		case 2: voicemenu = "voicemenu 2 6"; break;
+		case 3: voicemenu = "voicemenu 1 4"; break;
+		case 4: voicemenu = "voicemenu 1 6"; break;
+		case 5: voicemenu = "voicemenu 0 0"; break;
+		case 6: voicemenu = "voicemenu 0 1"; break;
+			break;
+		}
+		gInts.Engine->ClientCmd_Unrestricted(voicemenu);
+		fLastSpam = gInts.globals->curtime;
 	}
-	if (gCvars.misc_voiceJeers)
-	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 3");
-	}
-	if (gCvars.misc_voiceNiceShot)
-	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 2 6");
-	}
-	if (gCvars.misc_voiceDispenser)
-	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 1 4");
-	}
-	if (gCvars.misc_voiceActivateCharge)
-	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 1 6");
-	}
-	if (gCvars.misc_voiceMedic)
-	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 0 0");
-	}
-	if (gCvars.misc_voiceThanks)
-	{
-		gInts.Engine->ClientCmd_Unrestricted("voicemenu 0 1");
-	}
+
 }
 
 void CMisc::NoisemakerSpam(PVOID kv) //Credits gir https://www.unknowncheats.me/forum/team-fortress-2-a/141108-infinite-noisemakers.html
