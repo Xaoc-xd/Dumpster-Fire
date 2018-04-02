@@ -125,6 +125,13 @@ public:
 class CBaseEntity
 {
 public:
+	void setfov(int fov)
+	{
+		DYNVAR(n, int, "DT_BasePlayer", "m_iFOV");
+		DYNVAR(n2, int, "DT_BasePlayer", "m_iDefaultFOV");
+		n.SetValue(this, fov);
+		n2.SetValue(this, fov);
+	}
 	void SetCond(int c)
 	{
 		DYNVAR(n, int, "DT_TFPlayer", "m_Shared", "m_nPlayerCond");

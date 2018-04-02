@@ -7,6 +7,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 {
 	//if (gInts.cvar->FindVar("viewmodel_fov")->GetInt != gCvars.misc_viewmodel_fov)
 	gInts.cvar->FindVar("viewmodel_fov")->SetValue(gCvars.misc_viewmodel_fov);
+	pLocal->setfov(gCvars.misc_fov);
 
 	if (!(pLocal->GetFlags() & FL_ONGROUND) && pCommand->buttons & IN_JUMP)
 	{

@@ -175,6 +175,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
 		i = AddItem(i, " - Clean Screenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
+		i = AddItem(i, " - FOV", &gCvars.misc_fov, 70, 120, 1, false);
 		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false);
 	}
 
