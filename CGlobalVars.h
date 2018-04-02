@@ -83,7 +83,7 @@ public:
 	float misc_voiceActivateCharge;
 	float misc_voiceMedic;
 	float misc_voiceThanks;
-	float misc_fov = 70;
+	float misc_fov = 90; // why the fuck would u start at 70 - plasma
 	float misc_viewmodel_fov = 54;
 	float misc_no_push;
 
