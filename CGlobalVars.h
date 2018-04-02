@@ -82,6 +82,7 @@ public:
 	float misc_voiceActivateCharge;
 	float misc_voiceMedic;
 	float misc_voiceThanks;
+	float misc_viewmodel_fov = 54;
 
 
 
