@@ -74,7 +74,7 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		!gDraw.WorldToScreen(vTransformed[4], frt) ||
 		!gDraw.WorldToScreen(vTransformed[1], brb) ||
 		!gDraw.WorldToScreen(vTransformed[7], flt))
-		return; 
+		return;
 
 	Vector arr[] = { flb, brt, blb, frt, frb, brb, blt, flt };
 
@@ -184,52 +184,82 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 	{
 		if (pBaseEntityCond& TFCond_Cloaked)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Cloaked]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Cloaked]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*CLOAKED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Disguised)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Disguised]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Disguised]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*DISGUISED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Bonked)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Bonked]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Bonked]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*BONKED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Slowed)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Slowed]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Slowed]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*SLOWED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_OnFire)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Burning]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Burning]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*BURNING*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Zoomed)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Zoomed]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Zoomed]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*ZOOMED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Jarated)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Jarated]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Jarated]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*JARATED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if ((pBaseEntityCond& TFCond_Ubercharged) || (pBaseEntityCond& TFCond_MegaHeal))
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Ubered]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Ubered]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*UBERED*");
 			iY += gDraw.GetESPHeight();
 		}
 		else if (pBaseEntityCond& TFCond_UberchargeFading)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Uber Fading]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Uber Fading]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*UBER FADING*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Healing)
 		{
-			gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Over Healed]");
+			if (gCvars.esp_playerCond == 1)
+				gDraw.DrawString(x + w + 2, y + iY, Color::White(), "[Over Healed]");
+			if (gCvars.esp_playerCond == 2)
+				gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*OVER HEALED*");
 			iY += gDraw.GetESPHeight();
 		}
 		if (pBaseEntityCond& TFCond_Disguised && gCvars.esp_playerCond)
@@ -289,7 +319,7 @@ void CESP::DrawFace(CBaseEntity* pEntity, Color clr)
 	gDraw.DrawRect(screen.x + 15, screen.y + 3, 3, 15, Color::Black());
 
 }
-	 //My code, but creds to f1ssion for giving me the idea
+//My code, but creds to f1ssion for giving me the idea
 void CESP::DrawBone(CBaseEntity* pEntity, int* iBones, int count, Color clrCol)
 {
 	for (int i = 0; i < count; i++)

@@ -38,7 +38,7 @@ public:
 	// g - green component (0-255)
 	// b - blue component (0-255)
 	// a - alpha component, controls transparency (0 - transparent, 255 - opaque);
-	void SetColor(int _r, int _g, int _b, int _a = 0)
+	void SetColor(int _r, int _g, int _b, int _a = 255)
 	{
 		_color[0] = (unsigned char)_r;
 		_color[1] = (unsigned char)_g;
