@@ -1,6 +1,6 @@
 # Dumpster Fire
 
-![alt text](https://i.imgur.com/dz15v0K.png)
+![alt text](https://i.imgur.com/tBcrmkP.png)
 
 Paste central with a ton of random people.
 
