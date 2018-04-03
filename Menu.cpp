@@ -27,7 +27,7 @@ void Menu::Init()
 {
 	m_isVisible = false;
 
-	CWindow Main(100, 100, 703, 438);
+	CWindow Main(100, 100, 703, 448);
 
 	// checkbox: 12 pixels
 
@@ -36,6 +36,7 @@ void Menu::Init()
 
 	AimbotTab->AddControl(new CCheckBox(L"Enabled", &gCvars.aimbot_active));
 	AimbotTab->AddControl(new CCheckBox(L"Silent", &gCvars.aimbot_silent));
+	AimbotTab->AddControl(new CSlider<int>(L"Field of View", 0, 180, &gCvars.aimbot_fov));
 	AimbotTab->AddControl(new CCheckBox(L"Autoshoot", &gCvars.aimbot_autoshoot));
 	AimbotTab->AddControl(new CCheckBox(L"Hitscan", &gCvars.aimbot_hitscan));
 	AimbotTab->AddControl(new CCombo(&gCvars.aimbot_hitbox, {
@@ -61,7 +62,7 @@ void Menu::Init()
 	Main.AddControl(TriggerbotTab);
 #pragma endregion
 #pragma region ESP
-	auto ESPTab = new CChild(0, 155, 220, L"ESP");
+	auto ESPTab = new CChild(0, 165, 220, L"ESP");
 
 	ESPTab->AddControl(new CCheckBox(L"Enabled", &gCvars.esp_active));
 	ESPTab->AddControl(new CCheckBox(L"Enemies Only", &gCvars.esp_enemyonly));

@@ -44,7 +44,7 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 	if (gCvars.aimbot_smooth) // Thanks to gir489 for coding and Castle for sharing
 	{
-		unsigned int smoothValue = 10;
+		unsigned int smoothValue = gCvars.aimbot_smooth_amt;
 		Vector lAngs = gInts.Engine->GetViewAngles();
 
 		dAngs = vAngs - lAngs;
@@ -79,6 +79,14 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 
 		pCommand->buttons |= IN_ATTACK;
 	}
+}
+
+float CAimbot::AngleDifference(Vector ViewAngles, Vector TargetAngles, float Distance)
+{
+	float pitch = sin(DEG2RAD(ViewAngles.x - TargetAngles.x)) * Distance;
+	float yaw = sin(DEG2RAD(ViewAngles.y - TargetAngles.y)) * Distance;
+
+	return sqrt(powf(pitch, 2.0) + powf(yaw, 2.0));
 }
 
 int CAimbot::GetBestTarget(CBaseEntity* pLocal)
@@ -124,7 +132,15 @@ int CAimbot::GetBestTarget(CBaseEntity* pLocal)
 		if (gCvars.aimbot_ignore_cloak && pEntity->GetCond() & TFCond_Cloaked)
 			continue;
 
-		float flDistToTarget = (vLocal - vEntity).Length();
+		Vector vAngs;
+		VectorAngles((vEntity - vLocal), vAngs);
+
+		ClampAngle(vAngs);
+
+		float flDistToTarget = AngleDifference(gInts.Engine->GetViewAngles(), vAngs, 180);
+
+		if (flDistToTarget > gCvars.aimbot_fov)
+			continue;
 
 		if (flDistToTarget < flDistToBest)
 		{

@@ -16,7 +16,7 @@ public:
 	bool aimbot_hitscan;
 	int aimbot_hitbox;
 	bool aimbot_autoshoot;
-	float aimbot_fov = 180;
+	int aimbot_fov = 180;
 	bool aimbot_silent;
 	bool aimbot_zoomedonly;
 	bool aimbot_ignore_cloak;
@@ -102,5 +102,5 @@ public:
 class COffsets
 {
 public:
-	int iKeyEventOffset = 20, iCreateMoveOffset = 21, iPaintTraverseOffset = 41;
+	int iKeyEventOffset = 20, iCreateMoveOffset = 21, iPaintTraverseOffset = 41, iFrameStageNotifyOffset = 35;
 };

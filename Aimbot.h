@@ -7,6 +7,8 @@ public:
 
 	void Run(CBaseEntity* pLocal, CUserCmd* pCommand);
 
+	float AngleDifference(Vector ViewAngles, Vector TargetAngles, float Distance);
+
 	void MovementFix(CUserCmd *cmd, Vector angles);
 
 private:

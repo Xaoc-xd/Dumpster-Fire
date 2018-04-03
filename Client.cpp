@@ -9,6 +9,12 @@
 #include "RemoveConditions.h"
 
 //============================================================================================
+void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStage_t stage)
+{
+	auto &hook = VMTManager::GetHook(gInts.Client);
+	hook.GetMethod<void(__thiscall *)(PVOID, ClientFrameStage_t)>(35)(gInts.Client, stage);
+}
+//============================================================================================
 bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_frametime, CUserCmd* pCommand)
 {
 	VMTManager& hook = VMTManager::GetHook(ClientMode); //Get a pointer to the instance of your VMTManager with the function GetHook.
