@@ -2,6 +2,7 @@
 //===================================================================================
 #include "SDK.h"
 #include "Panels.h"
+#include "Font.h"
 
 #define RED(COLORCODE)	((int) ( COLORCODE >> 24) )
 #define BLUE(COLORCODE)	((int) ( COLORCODE >> 8 ) & 0xFF )
@@ -9,11 +10,12 @@
 #define ALPHA(COLORCODE)	((int) COLORCODE & 0xFF )
 #define COLORCODE(r,g,b,a)((DWORD)((((r)&0xff)<<24)|(((g)&0xff)<<16)|(((b)&0xff)<<8)|((a)&0xff)))
 //===================================================================================
+static HFont g_DefaultFont;
 class CDrawManager
 {
 public:
 	void Initialize( );
-	void DrawString( int x, int y, Color clrColor, const wchar_t *pszText);
+	void DrawString( int x, int y, Color clrColor, const wchar_t *pszText, HFont font = g_DefaultFont, bool CenterX = false, bool CenterY = false);
 	void DrawString( int x, int y, Color clrColor, const char *pszText, ... );
 	byte GetESPHeight( );
 	void DrawLine(int x0, int y0, int x1, int y1, Color clrColor);
@@ -24,8 +26,6 @@ public:
 	void DrawCrosshair(int iValue);
 	bool WorldToScreen( Vector &vOrigin, Vector &vScreen );
 	Color GetPlayerColor(CBaseEntity* pPlayer);
-private:
-	unsigned long m_Font;
 };
 //===================================================================================
 extern CDrawManager gDraw;

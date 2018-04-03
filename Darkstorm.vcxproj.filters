@@ -62,6 +62,21 @@
     <ClCompile Include="ConVar.cpp">
       <Filter>SDK\ConVars</Filter>
     </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>FakeWare\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>FakeWare\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>FakeWare\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSys.cpp">
+      <Filter>FakeWare\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="NccUtilities.cpp">
+      <Filter>FakeWare\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -145,6 +160,33 @@
     <ClInclude Include="ConVar.h">
       <Filter>SDK\ConVars</Filter>
     </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>FakeWare\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>FakeWare\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>FakeWare\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>FakeWare\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>SDK\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSys.h">
+      <Filter>FakeWare\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="NccMath.h">
+      <Filter>FakeWare\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="NccDraw.h">
+      <Filter>FakeWare\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="NccUtilities.h">
+      <Filter>FakeWare\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -218,6 +260,15 @@
     </Filter>
     <Filter Include="SDK\ConVars">
       <UniqueIdentifier>{563f3f0d-4ad2-4309-aebf-cbeff6002f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FakeWare">
+      <UniqueIdentifier>{1c4673ae-9025-42a7-a96a-91eeb8881d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FakeWare\Menu">
+      <UniqueIdentifier>{33d968e1-5a9c-425e-bbe6-580042e2a3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FakeWare\Core">
+      <UniqueIdentifier>{ce24c8bb-cb67-4a82-b59a-8e9613ccbdec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

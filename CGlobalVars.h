@@ -11,11 +11,11 @@ public:
 	float szsubstest;
 
 	float aimbot_switch;
-	float aimbot_active;
+	bool aimbot_active;
 	float aimbot_key;
 	float aimbot_hitscan;
-	float aimbot_hitbox;
-	float aimbot_autoshoot;
+	int aimbot_hitbox;
+	bool aimbot_autoshoot;
 	float aimbot_fov = 180;
 	float aimbot_silent;
 	float aimbot_zoomedonly;

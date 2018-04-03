@@ -10,8 +10,8 @@ void CDrawManager::Initialize( )
 		return;
 
 	gInts.Engine->GetScreenSize( gScreenSize.iScreenWidth, gScreenSize.iScreenHeight );
-	m_Font = gInts.Surface->CreateFont( );	//This is better than Arial
-	gInts.Surface->SetFontGlyphSet( m_Font, "Tahoma", ESP_HEIGHT, 500, 0, 0, 0x200 );
+	g_DefaultFont = gInts.Surface->CreateFont( );	//This is better than Arial
+	gInts.Surface->SetFontGlyphSet( g_DefaultFont, "Tahoma", ESP_HEIGHT, 500, 0, 0, 0x200 );
 }
 //===================================================================================
 Color CDrawManager::GetPlayerColor(CBaseEntity* pPlayer)
@@ -39,13 +39,23 @@ Color CDrawManager::GetPlayerColor(CBaseEntity* pPlayer)
 	return Color(0, 0, 0, 0); //no reason for this to be here, i just wanna look smart
 }
 //===================================================================================
-void CDrawManager::DrawString( int x, int y, Color clrColor, const wchar_t *pszText)
+void CDrawManager::DrawString( int x, int y, Color clrColor, const wchar_t *pszText, HFont font, bool CenterX, bool CenterY)
 {
 	if( pszText == NULL )
 		return;
 
+	if (CenterX || CenterY)
+	{
+		int wide, tall;
+		gInts.Surface->GetTextSize(font, pszText, wide, tall);
+		if (CenterX)
+			x -= wide / 2;
+		if (CenterY)
+			y -= tall / 2;
+	}
+
 	gInts.Surface->DrawSetTextPos( x, y );
-	gInts.Surface->DrawSetTextFont( m_Font );
+	gInts.Surface->DrawSetTextFont( font );
 	gInts.Surface->DrawSetTextColor( clrColor.r(), clrColor.g(), clrColor.b(), clrColor.a() );
 	gInts.Surface->DrawPrintText( pszText, wcslen( pszText ) );
 }
@@ -66,7 +76,7 @@ void CDrawManager::DrawString( int x, int y, Color clrColor, const char *pszText
 	wsprintfW( szString, L"%S", szBuffer );
 
 	gInts.Surface->DrawSetTextPos( x, y );
-	gInts.Surface->DrawSetTextFont( m_Font );
+	gInts.Surface->DrawSetTextFont( g_DefaultFont );
 	gInts.Surface->DrawSetTextColor( clrColor.r(), clrColor.g(), clrColor.b(), clrColor.a() );
 	gInts.Surface->DrawPrintText( szString, wcslen( szString ) );
 }

@@ -394,6 +394,10 @@ public:
 		typedef const char* ( __thiscall* OriginalFn )( PVOID, unsigned int );
 		return getvfunc<OriginalFn>( this, 36 )( this, vguiPanel );
 	}
+	void SetMouseInputEnabled(unsigned int panel, bool state)
+	{
+		getvfunc<void(__thiscall *)(void*, int, bool)>(this, 32)(this, panel, state);
+	}
 };
 
 class ISurface
@@ -453,6 +457,16 @@ public:
 	{
 		typedef void(__thiscall* OriginalFn)(PVOID, unsigned long, const wchar_t *, int&, int&);
 		getvfunc<OriginalFn>(this, 75)(this, font, text, wide, tall);
+	}
+	void GetCursorPosition(int &x, int &y)
+	{
+		return getvfunc<void(__thiscall *)(void*, int &, int &)>(this, 96)(this, x, y);
+	}
+	// 118	CMatSystemSurface::DrawFilledRectFade(int,int,int,int,unsigned int,unsigned int,bool)
+	void DrawFilledRectFade(int x0, int y0, int x1, int y1, unsigned int alpha0, unsigned int alpha1, bool bHorizontal)
+	{
+		typedef void(__thiscall* OriginalFn)(PVOID, int, int, int, int, unsigned, unsigned, bool);
+		getvfunc<OriginalFn>(this, 118)(this, x0, y0, x1, y1, alpha0, alpha1, bHorizontal);
 	}
 };
 

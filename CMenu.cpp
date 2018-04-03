@@ -56,13 +56,13 @@ void CCheatMenu::Render(void)
 	i = AddItem(i, "Aimbot", &gCvars.aimbot_switch, 0, 1, 1, true);
 	if (gCvars.aimbot_switch)
 	{
-		i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
+		//i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
 		i = AddItem(i, " - Silent", &gCvars.aimbot_silent, 0, 1, 1, false);
 		//i = AddItem(i, " - FOV", &gCvars.aimbot_fov, 0, 180, 1, false);
 		i = AddItem(i, " - Key", &gCvars.aimbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Hitscan", &gCvars.aimbot_hitscan, 0, 1, 1, false);
-		i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
-		i = AddItem(i, " - Autoshoot", &gCvars.aimbot_autoshoot, 0, 1, 1, false);
+		//i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
+		//i = AddItem(i, " - Autoshoot", &gCvars.aimbot_autoshoot, 0, 1, 1, false);
 		i = AddItem(i, " - Smooth", &gCvars.aimbot_smooth, 0, 1, 1, false);
 		if (gCvars.aimbot_smooth)
 		{

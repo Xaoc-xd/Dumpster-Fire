@@ -21,6 +21,12 @@ public:
 	Vector(void); 
 	Vector(float X, float Y, float Z);
 	void Init(float ix=0.0f, float iy=0.0f, float iz=0.0f);
+	Vector(const float* clr) // Gay casting stuff from Fakeware GUI
+	{
+		x = clr[0];
+		y = clr[1];
+		z = clr[2];
+	}
 	bool IsValid() const;
 	float operator[](int i) const;
 	float& operator[](int i);

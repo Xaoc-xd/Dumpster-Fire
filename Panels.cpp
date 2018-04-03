@@ -3,6 +3,7 @@
 #include "CDrawManager.h"
 #include "Util.h"
 #include "ESP.h"
+#include "Menu.h"
 
 CScreenSize gScreenSize;
 //===================================================================================
@@ -52,11 +53,14 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 			}
 			gESP.Run(pLocal);
 
-			if (gCheatMenu.bMenuActive)
+			/*if (gCheatMenu.bMenuActive)
 			{
 				gCheatMenu.DrawMenu();
 				gCheatMenu.Render();
-			}
+			}*/
+
+			gInts.Panels->SetMouseInputEnabled(vguiPanel, Menu::Get().IsVisible());
+			Menu::Get().PaintTraverse();
 		}
 	}
 	catch(...)

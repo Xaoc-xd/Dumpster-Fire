@@ -24,13 +24,13 @@ public:
 	{
 		*((int *)this) = 0;
 	}
-	Color(int _r, int _g, int _b)
-	{
-		SetColor(_r, _g, _b, 0);
-	}
-	Color(int _r, int _g, int _b, int _a)
+	Color(int _r, int _g, int _b, int _a = 255)
 	{
 		SetColor(_r, _g, _b, _a);
+	}
+	Color(int value, int _a = 255)
+	{
+		SetColor(value, value, value, _a);
 	}
 
 	// set the color
