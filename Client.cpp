@@ -39,7 +39,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 //============================================================================================
 int __fastcall Hooked_KeyEvent(PVOID CHLClient, int edx, int eventcode, int keynum, const char *currentBinding)
 {
-	if (eventcode == 1)
+	/*if (eventcode == 1)
 	{
 		if (keynum == 72) //insert
 		{
@@ -88,7 +88,7 @@ int __fastcall Hooked_KeyEvent(PVOID CHLClient, int edx, int eventcode, int keyn
 
 		}
 	}
-
+	*/
 	VMTManager &hook = VMTManager::GetHook(CHLClient); // Get a pointer to the instance of your VMTManager with the function GetHook.
 	return hook.GetMethod<int(__thiscall *)(PVOID, int, int, const char *)>(gOffsets.iKeyEventOffset)(CHLClient, eventcode, keynum, currentBinding); // Call the original.
 }

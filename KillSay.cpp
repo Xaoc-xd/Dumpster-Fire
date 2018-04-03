@@ -12,7 +12,7 @@ void CKillSay::InitKillSay()
 void CKillSay::FireGameEvent(IGameEvent *event)
 {
 
-	if (!strcmp(event->GetName(), "player_death") && gCvars.misc_killsay_selection > 0)
+	if (!strcmp(event->GetName(), "player_death") && gCvars.misc_killsay_selection > 0 && gCvars.misc_killsay_enabled)
 	{
 		int vid = event->GetInt("userid");
 		int kid = event->GetInt("attacker");

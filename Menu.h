@@ -6,7 +6,7 @@
 
 class Menu : public Singleton<Menu>
 {
-	bool m_isVisible;
+	bool m_isVisible = false;
 	CForm MenuForm;
 public:
 	void Init();

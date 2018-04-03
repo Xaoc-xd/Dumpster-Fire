@@ -91,6 +91,30 @@ bool CUtil::IsKeyPressed(int i)
 	return false;
 }
 
+bool CUtil::IsKeyPressedString(const char* i)
+{
+	if (i == "Always")
+		return true;
+	if (i == "Mouse 1")
+		return GetAsyncKeyState(VK_LBUTTON);
+	if (i == "Mouse 2")
+		return GetAsyncKeyState(VK_RBUTTON);
+	if (i == "Mouse 3")
+		return GetAsyncKeyState(VK_MBUTTON);
+	if (i == "Mouse 4")
+		return GetAsyncKeyState(VK_XBUTTON1);
+	if (i == "Mouse 5")
+		return GetAsyncKeyState(VK_XBUTTON2);
+	if (i == "Shift")
+		return GetAsyncKeyState(VK_SHIFT);
+	if (i == "Alt")
+		return GetAsyncKeyState(VK_MENU);
+	if (i == "F")
+		return GetAsyncKeyState(0x46);
+
+		return false;
+}
+
 bool CUtil::IsKeyDown(char* key)
 {
 	if (strlen(key) < 1) return true;

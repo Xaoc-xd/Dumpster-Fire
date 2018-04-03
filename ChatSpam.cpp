@@ -5,7 +5,7 @@ CChatSpam gChatSpam;
 
 void CChatSpam::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 {
-	if (!gCvars.misc_chatspam_selection)
+	if (!gCvars.misc_chatspam_enabled)
 		return;
 
 	int spam_source = gCvars.misc_chatspam_selection;

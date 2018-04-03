@@ -16,6 +16,8 @@ public:
 
 	bool IsKeyPressed(int i);
 
+	bool IsKeyPressedString(const char * i);
+
 	bool IsKeyDown(char * key);
 
 	void SilentMovementFix(CUserCmd * pUserCmd, Vector angles);

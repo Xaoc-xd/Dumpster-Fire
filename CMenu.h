@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include <Windows.h>
 
 // credits: gir and kalvin for this and source file
@@ -27,4 +27,4 @@ public:
 	CMenuItems_t pMenu[120];
 };
 
-extern CCheatMenu gCheatMenu;
+extern CCheatMenu gCheatMenu;*/

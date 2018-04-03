@@ -34,49 +34,53 @@ void CAA::Run(CBaseEntity * pLocal, CUserCmd * pCommand)
 {
 	Vector angles = pCommand->viewangles;
 
-	if (!gCvars.aa_switch)
+	if (!gCvars.aa_enabled)
 		return;
 
 	if ((pCommand->buttons & IN_ATTACK) || (pCommand->buttons & IN_ATTACK2))
 		return;
 
-	switch ((int)gCvars.aa_pitch)
-	{
-	case 1: angles.x = -271; //Fake Up
-		break;
-	case 2: angles.x = 271; //Fake Down
-		break;
-	default:
-		break;
-	}
-
-	switch ((int)gCvars.aa_yaw)
-	{
-	case 1: angles.y = 90; //Right
-		break;
-	case 2: angles.y = -90; //left
-		break;
-	case 3: // ??? ¯\_(ツ)_/¯
-	{
-		int random = rand() % 100;
-
-		if (random < 98)
-			angles.y -= 180;
-
-		if (random < 15)
+	if (gCvars.aa_pitch_enabled) {
+		switch ((int)gCvars.aa_pitch)
 		{
-			float change = -70 + (rand() % (int)(140 + 1));
-			angles.y += change;
-		}
-		if (random == 69)
-		{
-			float change = -90 + (rand() % (int)(180 + 1));
-			angles.y += change;
+		case 1: angles.x = -271; //Fake Up
+			break;
+		case 2: angles.x = 271; //Fake Down
+			break;
+		default:
+			break;
 		}
 	}
+
+	if (gCvars.aa_yaw_enabled) {
+		switch ((int)gCvars.aa_yaw)
+		{
+		case 1: angles.y = 90; //Right
+			break;
+		case 2: angles.y = -90; //left
+			break;
+		case 3: // ??? ¯\_(ツ)_/¯
+		{
+			int random = rand() % 100;
+
+			if (random < 98)
+				angles.y -= 180;
+
+			if (random < 15)
+			{
+				float change = -70 + (rand() % (int)(140 + 1));
+				angles.y += change;
+			}
+			if (random == 69)
+			{
+				float change = -90 + (rand() % (int)(180 + 1));
+				angles.y += change;
+			}
+		}
 		break;
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 
 	/// https://youtu.be/eyK7T-7vCro

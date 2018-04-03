@@ -1,4 +1,4 @@
-#include "CMenu.h"
+/*#include "CMenu.h"
 #include "SDK.h"
 #include "CDrawManager.h"
 #include "Util.h"
@@ -52,17 +52,20 @@ void CCheatMenu::Render(void)
 	gInts.Engine->GetScreenSize(ScreenW, ScreenH);
 
 	int i = 0;
-
+	
 	i = AddItem(i, "Aimbot", &gCvars.aimbot_switch, 0, 1, 1, true);
 	if (gCvars.aimbot_switch)
 	{
-		//i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
+
+		/TODO: TRANSITION EVERYTHING FROM POTASSIUM TO FAKEWARE MENU
+
+		i = AddItem(i, " - Enabled", &gCvars.aimbot_active, 0, 1, 1, false);
 		i = AddItem(i, " - Silent", &gCvars.aimbot_silent, 0, 1, 1, false);
-		//i = AddItem(i, " - FOV", &gCvars.aimbot_fov, 0, 180, 1, false);
+		i = AddItem(i, " - FOV", &gCvars.aimbot_fov, 0, 180, 1, false);  NOT IN CHEAT ANYMORE
 		i = AddItem(i, " - Key", &gCvars.aimbot_key, 0, 8, 1, false);
 		i = AddItem(i, " - Hitscan", &gCvars.aimbot_hitscan, 0, 1, 1, false);
-		//i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
-		//i = AddItem(i, " - Autoshoot", &gCvars.aimbot_autoshoot, 0, 1, 1, false);
+		i = AddItem(i, " - Hitbox", &gCvars.aimbot_hitbox, 0, 18, 1, false);
+		i = AddItem(i, " - Autoshoot", &gCvars.aimbot_autoshoot, 0, 1, 1, false);
 		i = AddItem(i, " - Smooth", &gCvars.aimbot_smooth, 0, 1, 1, false);
 		if (gCvars.aimbot_smooth)
 		{
@@ -123,27 +126,27 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Happy Face", &gCvars.esp_face, 0, 1, 1, false);
 		i = AddItem(i, " - Crosshair", &gCvars.esp_crosshair, 0, 1, 1, false);
 	}
-
+	
 	i = AddItem(i, "Anti Aim", &gCvars.aa_switch, 0, 1, 1, true);
 	if (gCvars.aa_switch)
 	{
 		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
 		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
 
-		/// JUST WHY?!?!?!?
-		//i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
-		//if (gCvars.aa_pitch)
-		//{
-		//	i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
-		//	i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
-		//}
-		//i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
-		//if (gCvars.aa_yaw)
-		//{
-		//	i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
-		//	i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
-		//	i = AddItem(i, " - Staticjitter", &gCvars.aa_yaw_staticjitter, 0, 1, 1, false);
-		//}
+		/ JUST WHY?!?!?!?
+		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
+		if (gCvars.aa_pitch)
+		{
+			i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
+			i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+		}
+		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
+		if (gCvars.aa_yaw)
+		{
+			i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
+			i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
+			i = AddItem(i, " - Staticjitter", &gCvars.aa_yaw_staticjitter, 0, 1, 1, false);
+		}
 	}
 
 
@@ -175,15 +178,15 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		i = AddItem(i, " - No Scope", &gCvars.misc_noscope, 0, 1, 1, false);
 		i = AddItem(i, " - Chat Spam", &gCvars.misc_chatspam_selection, 0, 9, 1, false);
-		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false); //autism
+		i = AddItem(i, " - Chat Spam Delay", &gCvars.misc_chatspam_delay, 0, 3000, 100, false); autism
 		i = AddItem(i, " - Kill Say", &gCvars.misc_killsay_selection, 0, 3, 1, false);
 		i = AddItem(i, " - Roll Speedhack", &gCvars.misc_roll_speedhack, 0, 1, 1, false);
 		i = AddItem(i, " - wow sweet", &gCvars.misc_wowsweet, 0, 1, 1, false);
 		i = AddItem(i, " - Clean Screenshot", &gCvars.misc_cleanScreenshot, 0, 1, 1, false);
 		i = AddItem(i, " - FOV", &gCvars.misc_fov, 70, 120, 1, false);
-		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false); //this can be done via in-game commands retards
+		i = AddItem(i, " - Viewmodel FOV", &gCvars.misc_viewmodel_fov, 50, 120, 1, false); this can be done via in-game commands retards
 		i = AddItem(i, " - No Push", &gCvars.misc_no_push, 0, 1, 1, false);
-		i = AddItem(i, " - Voice Menu Spam", &gCvars.misc_voice, 0, 6, 1, false); //too lazy to make the actual labels for the options
+		i = AddItem(i, " - Voice Menu Spam", &gCvars.misc_voice, 0, 6, 1, false); too lazy to make the actual labels for the options
 	}
 
 	iMenuItems = i;
@@ -344,4 +347,4 @@ void CCheatMenu::DrawMenu(void)
 			}
 		}
 	}
-}
+}*/
