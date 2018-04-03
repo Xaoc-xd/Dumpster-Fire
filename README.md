@@ -1,5 +1,7 @@
 # Dumpster Fire
 
+![alt text](https://i.imgur.com/tBcrmkP.png)
+
 Paste central with a ton of random people.
 
 Uses Stick's Potassium Cheat.
