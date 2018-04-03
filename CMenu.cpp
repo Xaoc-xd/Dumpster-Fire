@@ -128,18 +128,22 @@ void CCheatMenu::Render(void)
 	if (gCvars.aa_switch)
 	{
 		i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
-		if (gCvars.aa_pitch)
-		{
-			i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
-			i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
-		}
 		i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
-		if (gCvars.aa_yaw)
-		{
-			i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
-			i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
-			i = AddItem(i, " - Staticjitter", &gCvars.aa_yaw_staticjitter, 0, 1, 1, false);
-		}
+
+		/// JUST WHY?!?!?!?
+		//i = AddItem(i, " - Pitch", &gCvars.aa_pitch, 0, 1, 1, true);
+		//if (gCvars.aa_pitch)
+		//{
+		//	i = AddItem(i, " - Fake Up", &gCvars.aa_pitch_fakeup, 0, 1, 1, false);
+		//	i = AddItem(i, " - Fake Down", &gCvars.aa_pitch_fakedown, 0, 1, 1, false);
+		//}
+		//i = AddItem(i, " - Yaw", &gCvars.aa_yaw, 0, 1, 1, true);
+		//if (gCvars.aa_yaw)
+		//{
+		//	i = AddItem(i, " - Left", &gCvars.aa_yaw_left, 0, 1, 1, false);
+		//	i = AddItem(i, " - Right", &gCvars.aa_yaw_right, 0, 1, 1, false);
+		//	i = AddItem(i, " - Staticjitter", &gCvars.aa_yaw_staticjitter, 0, 1, 1, false);
+		//}
 	}
 
 

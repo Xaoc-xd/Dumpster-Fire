@@ -1,9 +1,9 @@
-#include "AntiAim.h"
+﻿#include "AntiAim.h"
 #include "Util.h"
 
 CAA gAA;
 
-void CorrectMovement(Vector vOldAngles, CUserCmd* pCmd, float fOldForward, float fOldSidemove)
+void CorrectMovement(Vector vOldAngles, CUserCmd* pCmd, float fOldForward, float fOldSidemove) //you guys know that the aa movement fix is the same as silent movement fix, right? :thinking:
 {
 	float deltaView;
 	float f1;
@@ -33,31 +33,31 @@ void CorrectMovement(Vector vOldAngles, CUserCmd* pCmd, float fOldForward, float
 void CAA::Run(CBaseEntity * pLocal, CUserCmd * pCommand)
 {
 	Vector angles = pCommand->viewangles;
+
 	if (!gCvars.aa_switch)
 		return;
 
 	if ((pCommand->buttons & IN_ATTACK) || (pCommand->buttons & IN_ATTACK2))
 		return;
-	if (gCvars.aa_pitch_fakeup)
+
+	switch ((int)gCvars.aa_pitch)
 	{
-		angles.x = -271;
-	}
-	if (gCvars.aa_pitch_fakedown)
-	{
-		angles.x = 271;
-	}
-	if (gCvars.aa_yaw_right)
-	{
-		angles.y = 90;
-	}
-	if (gCvars.aa_yaw_left)
-	{
-		angles.y = -90;
+	case 1: angles.x = -271; //Fake Up
+		break;
+	case 2: angles.x = 271; //Fake Down
+		break;
+	default:
+		break;
 	}
 
-	if (gCvars.aa_yaw_staticjitter)
+	switch ((int)gCvars.aa_yaw)
 	{
-
+	case 1: angles.y = 90; //Right
+		break;
+	case 2: angles.y = -90; //left
+		break;
+	case 3: // ??? ¯\_(ツ)_/¯
+	{
 		int random = rand() % 100;
 
 		if (random < 98)
@@ -74,6 +74,48 @@ void CAA::Run(CBaseEntity * pLocal, CUserCmd * pCommand)
 			angles.y += change;
 		}
 	}
+		break;
+	default:
+		break;
+	}
+
+	/// https://youtu.be/eyK7T-7vCro
+	//if (gCvars.aa_pitch_fakeup)
+	//{
+	//	angles.x = -271;
+	//}
+	//if (gCvars.aa_pitch_fakedown)
+	//{
+	//	angles.x = 271;
+	//}
+	//if (gCvars.aa_yaw_right)
+	//{
+	//	angles.y = 90;
+	//}
+	//if (gCvars.aa_yaw_left)
+	//{
+	//	angles.y = -90;
+	//}
+
+	//if (gCvars.aa_yaw_staticjitter)
+	//{
+
+	//	int random = rand() % 100;
+
+	//	if (random < 98)
+	//		angles.y -= 180;
+
+	//	if (random < 15)
+	//	{
+	//		float change = -70 + (rand() % (int)(140 + 1));
+	//		angles.y += change;
+	//	}
+	//	if (random == 69)
+	//	{
+	//		float change = -90 + (rand() % (int)(180 + 1));
+	//		angles.y += change;
+	//	}
+	//}
 	Util->SilentMovementFix(pCommand, angles);
 	pCommand->viewangles = angles;
 }

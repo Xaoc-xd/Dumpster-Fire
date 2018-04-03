@@ -84,7 +84,7 @@ void CWindow::Paint(int t_x, int t_y, float* controlheight)
 	Draw::Rectangle(tl, br, Color(50, 5, 5));
 	Draw::Rectangle(tl.x - 1, tl.y - 1, br.x + 1, br.y + 1, Color(200, 10, 10));
 
-	Draw::Text(tl.x + 3, tl.y - 17, L"FAKEWARE for Counter-Strike: Global Offensive", Font::Get().MenuText, Color::White());
+	Draw::Text(tl.x + 3, tl.y - 17, L"Dumpster Fire for Team Fortress 2", Font::Get().MenuText, Color::White());
 
 	m_controlheight = 0;
 	for (auto o : Objects)

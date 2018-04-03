@@ -29,11 +29,8 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			pCommand->buttons &= ~IN_JUMP;
 	}
 
-	if (gCvars.misc_autobackstab)
-	{
-		if (pLocal->GetActiveWeapon() && Util->IsReadyToBackstab(pLocal, pLocal->GetActiveWeapon()))
-			pCommand->buttons |= IN_ATTACK;
-	}
+	if (gCvars.misc_autobackstab && pLocal->GetActiveWeapon() && Util->IsReadyToBackstab(pLocal, pLocal->GetActiveWeapon()))
+		pCommand->buttons |= IN_ATTACK;
 
 	if (gCvars.misc_noisemaker_spam)
 	{
@@ -54,7 +51,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		pLocal->ForceTauntCam(false);
 	}
 	
-	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK)) // I have to improve this later on.
+	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK)) // who changed my comment >:(
 	{
 		Vector vLocalAngles = pCommand->viewangles;
 		float speed = pCommand->forwardmove;
@@ -73,9 +70,9 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		if (pLocal->szGetClass() == "Heavy" && pLocal->GetActiveWeapon() && pLocal->GetActiveWeapon()->GetSlot() == 1 && pLocal->GetFlags() & FL_DUCKING)
 		{
 			if (pCommand->tick_count % 2)
-				gInts.Engine->ClientCmd_Unrestricted("say wow sweet");
+				gInts.Engine->ClientCmd_Unrestricted("say wow sweet.");
 			else
-				gInts.Engine->ClientCmd_Unrestricted("say wow sweet\x0D");
+				gInts.Engine->ClientCmd_Unrestricted("say wow sweet!");
 			fLastTime = gInts.globals->curtime;
 		}
 	}
