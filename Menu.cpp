@@ -39,6 +39,7 @@ void Menu::Init()
 	AimbotTab->AddControl(new CSlider<int>(L"Field of View", 0, 180, &gCvars.aimbot_fov));
 	AimbotTab->AddControl(new CCheckBox(L"Autoshoot", &gCvars.aimbot_autoshoot));
 	AimbotTab->AddControl(new CCheckBox(L"Hitscan", &gCvars.aimbot_hitscan));
+	AimbotTab->AddControl(new CCombo(&gCvars.aimbot_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" }));
 	AimbotTab->AddControl(new CCombo(&gCvars.aimbot_hitbox, {
 		L"Auto", L"Head", L"Pelvis", L"Lower Torse", L"Lower Mid. Torse", L"Upper Mid. Torse", L"Upper Torse",
 		L"Left Upper Arm", L"Left Lower Arm", L"Left Hand", L"Right Upper Arm",
@@ -62,7 +63,7 @@ void Menu::Init()
 	Main.AddControl(TriggerbotTab);
 #pragma endregion
 #pragma region ESP
-	auto ESPTab = new CChild(0, 165, 220, L"ESP");
+	auto ESPTab = new CChild(0, 170, 220, L"ESP");
 
 	ESPTab->AddControl(new CCheckBox(L"Enabled", &gCvars.esp_active));
 	ESPTab->AddControl(new CCheckBox(L"Enemies Only", &gCvars.esp_enemyonly));
@@ -71,8 +72,8 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Name", &gCvars.esp_name));
 	ESPTab->AddControl(new CCheckBox(L"Class", &gCvars.esp_class));
 	ESPTab->AddControl(new CCheckBox(L"Cond", &gCvars.esp_playerCond_enabled));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"OFF", L"Dumpster Fire", L"NullCore" })); // NEEDS LIST
-	ESPTab->AddControl(new CCheckBox(L"Remove Cloak", &gCvars.aimbot_ignore_cloak));
+	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"OFF", L"Dumpster Fire", L"NullCo	re" })); // NEEDS LIST
+	ESPTab->AddControl(new CCheckBox(L"Remove Cloak", &gCvars.esp_removeCloak));
 	ESPTab->AddControl(new CCheckBox(L"Remove Disguise", &gCvars.esp_removeDisguise));
 	ESPTab->AddControl(new CCheckBox(L"Remove Taunt", &gCvars.esp_removeTaunt));
 	ESPTab->AddControl(new CCheckBox(L"Health", &gCvars.esp_health_enabled));

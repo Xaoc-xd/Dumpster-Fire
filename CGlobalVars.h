@@ -12,7 +12,7 @@ public:
 
 	float aimbot_switch;
 	bool aimbot_active;
-	float aimbot_key;
+	int aimbot_key;
 	bool aimbot_hitscan;
 	int aimbot_hitbox;
 	bool aimbot_autoshoot;
