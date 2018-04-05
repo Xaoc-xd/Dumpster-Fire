@@ -7,11 +7,10 @@ Paste central with a ton of random people.
 
 Uses Stick's Potassium Cheat.
 ## Dumb pasters
-People already renaming the menu and claiming it as thier own
-This cheat is moving to a private bitbucket repo so u fur fags wont have any more fresh paste
-LIST OF DUMB NIGGER PASTERS
-*furfag12031230821312: Steam:http://steamcommunity.com/id/fursuiter 
-*furfag12031230821312 trying to claim credit https://media.discordapp.net/attachments/426920110733656064/431488020089143306/unknown.png?width=1202&height=299
+
+furfag12031230821312 trying to claim credit
+ https://cdn.discordapp.com/attachments/376582409396944896/431331127903518720/unknown.png
+ https://media.discordapp.net/attachments/426920110733656064/431488020089143306/unknown.png?width=1202&height=299
 ## Features:
 
 ### Aimbot
