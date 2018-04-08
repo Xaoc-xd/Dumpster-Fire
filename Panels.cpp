@@ -67,6 +67,7 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 	{
 		Log::Fatal("Failed PaintTraverse");
 	}
+
 }
 //===================================================================================
 void Intro( void )

@@ -38,6 +38,8 @@ static int vacUndetected = 1; //the encryption method cheat devs don't want you 
 
 #include "InputSys.h"
 #include "Menu.h"
+
+CreateInterfaceFn SteamFactory = NULL;
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
 	if (gInts.Client != NULL)
@@ -51,6 +53,8 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	EngineFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("engine.dll"), "CreateInterface");
 	CvarFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("vstdlib.dll"), "CreateInterface");
 	VGUIFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("vguimatsurface.dll"), "CreateInterface");
+	SteamFactory = (CreateInterfaceFn)GetProcAddress(GetModuleHandleA("SteamClient.dll"), "CreateInterface");
+
 
 	gInts.Client = ( CHLClient* )ClientFactory( "VClient017", NULL);
 	gInts.EntList = ( CEntList* ) ClientFactory( "VClientEntityList003", NULL );
@@ -60,6 +64,13 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	gInts.EngineTrace = ( IEngineTrace* ) EngineFactory( "EngineTraceClient003", NULL );
 	gInts.ModelInfo = ( IVModelInfo* ) EngineFactory( "VModelInfoClient006", NULL );
 	gInts.EventManager = (IGameEventManager2*)EngineFactory("GAMEEVENTSMANAGER002", NULL);
+	gInts.steamclient = (ISteamClient017*)SteamFactory("SteamClient017", NULL);
+
+	HSteamPipe hNewPipe = gInts.steamclient->CreateSteamPipe();
+	HSteamUser hNewUser = gInts.steamclient->ConnectToGlobalUser(hNewPipe);
+
+	gInts.steamfriends = reinterpret_cast<ISteamFriends002 *>(gInts.steamclient->GetISteamFriends(hNewUser, hNewPipe, STEAMFRIENDS_INTERFACE_VERSION_002));
+	gInts.steamuser = reinterpret_cast<ISteamUser017 *>(gInts.steamclient->GetISteamUser(hNewUser, hNewPipe, STEAMUSER_INTERFACE_VERSION_017));
 
 	XASSERT(gInts.Client);
 	XASSERT(gInts.EntList);
@@ -67,6 +78,9 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	XASSERT(gInts.Surface);
 	XASSERT(gInts.EngineTrace);
 	XASSERT(gInts.ModelInfo);
+	XASSERT(gInts.steamclient);
+	XASSERT(gInts.steamfriends);
+	XASSERT(gInts.steamuser);
 
 	InputSys::Get().Initialize();
 
@@ -82,6 +96,7 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 
 	Font::Get().Create();
 	Menu::Get().Init();
+
 
 	//Setup the Panel hook so we can draw.
 	if( !gInts.Panels )
@@ -115,6 +130,29 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	clientModeHook->HookMethod(&Hooked_CreateMove, gOffsets.iCreateMoveOffset); //ClientMode create move is called inside of CHLClient::CreateMove, and thus no need for hooking WriteUserCmdDelta.
 	clientModeHook->HookMethod(&Hooked_OverrideView, 16);
 	clientModeHook->Rehook();
+
+	gInts.cvar->ConsolePrintf ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Dumpster Fire Successfully Injected!\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Credits\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Hold On\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "channel32\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "AVexxed\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Wolfie\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Apple\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Lemon\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Castle\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "czcv333\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "plasmafart\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Tohfu\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Chris\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
+	CSteamID localID = gInts.steamuser->GetSteamID();
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "PersonalName: %s!\n", gInts.steamfriends->GetPersonaName());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "SteamID: %s!\n", localID.Render());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "newSteamID:  %s\n", localID.SteamRender());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
+
 
 	///TODO: Add the announcer here... soon:tm:
 	gKillSay.InitKillSay();

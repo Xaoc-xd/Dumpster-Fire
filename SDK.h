@@ -1851,7 +1851,9 @@ protected:
 	friend class Iterator;
 };
 
-
+#include "steam\ISteamClient017.h"
+#include "steam\ISteamFriends002.h"
+#include "steam\ISteamUser017.h"
 class CInterfaces
 {
 public:
@@ -1867,6 +1869,9 @@ public:
 	IEngineTrace* EngineTrace;
 	IVModelInfo* ModelInfo;
 	ICvar* cvar;
+	ISteamClient017* steamclient;
+	ISteamFriends002* steamfriends;
+	ISteamUser017* steamuser;
 };
 
 extern CInterfaces gInts;
