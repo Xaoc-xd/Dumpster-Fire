@@ -52,6 +52,7 @@ public:
 	float aa_pitch_fakeup;
 	float aa_pitch_fakedown;
 	int aa_yaw;
+	int aa_spinspeed;
 	float aa_yaw_staticjitter;
 	float aa_yaw_right;
 	float aa_yaw_left;
