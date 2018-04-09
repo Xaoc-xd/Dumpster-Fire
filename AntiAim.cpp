@@ -4,6 +4,82 @@
 CAA gAA;
 float c_yaw = 0.0f;
 
+float edgeDistance(float edgeRayYaw)
+{
+	trace_t trace;
+	Ray_t ray;
+	Vector forward;
+	float sp, sy, cp, cy;
+	sy = sinf(DEG2RAD(edgeRayYaw)); // yaw
+	cy = cosf(DEG2RAD(edgeRayYaw));
+	sp = sinf(DEG2RAD(0)); // pitch
+	cp = cosf(DEG2RAD(0));
+	forward.x = cp * cy;
+	forward.y = cp * sy;
+	forward.z = -sp;
+	forward = forward * 300.0f + GetBaseEntity(me)->GetEyePosition();
+	ray.Init(GetBaseEntity(me)->GetEyePosition(), forward);
+	gInts.EngineTrace->TraceRay(ray, 0x4200400B, NULL, &trace);
+	float edgeDistance = (sqrt(pow(trace.startpos.x - trace.endpos.x, 2) + pow(trace.startpos.y - trace.endpos.y, 2)));
+	return edgeDistance;
+}
+float edgeYaw = 0;
+float edgeToEdgeOn = 0;
+bool findEdge(float edgeOrigYaw, int pitch_mode)
+{
+	float edgeLeftDist = edgeDistance(edgeOrigYaw - 21);
+	edgeLeftDist = edgeLeftDist + edgeDistance(edgeOrigYaw - 27);
+	float edgeRightDist = edgeDistance(edgeOrigYaw + 21);
+	edgeRightDist = edgeRightDist + edgeDistance(edgeOrigYaw + 27);
+
+	if (edgeLeftDist >= 260) edgeLeftDist = 999999999;
+	if (edgeRightDist >= 260) edgeRightDist = 999999999;
+
+	if (edgeLeftDist == edgeRightDist) return false;
+
+	if (edgeRightDist < edgeLeftDist)
+	{
+		edgeToEdgeOn = 1;
+		if (((int)pitch_mode == 1) || ((int)pitch_mode == 3)) edgeToEdgeOn = 2;
+		return true;
+	}
+	else
+	{
+		edgeToEdgeOn = 2;
+		if (((int)pitch_mode == 1) | ((int)pitch_mode == 3)) edgeToEdgeOn = 1;
+		return true;
+	}
+}
+float useEdge(float edgeViewAngle)
+{
+	bool edgeTest = true;
+	if (((edgeViewAngle < -135) || (edgeViewAngle > 135)) && edgeTest == true)
+	{
+		if (edgeToEdgeOn == 1) edgeYaw = (float)-90;
+		if (edgeToEdgeOn == 2) edgeYaw = (float)90;
+		edgeTest = false;
+	}
+	if ((edgeViewAngle >= -135) && (edgeViewAngle < -45) && edgeTest == true)
+	{
+		if (edgeToEdgeOn == 1) edgeYaw = (float)0;
+		if (edgeToEdgeOn == 2) edgeYaw = (float)179;
+		edgeTest = false;
+	}
+	if ((edgeViewAngle >= -45) && (edgeViewAngle < 45) && edgeTest == true)
+	{
+		if (edgeToEdgeOn == 1) edgeYaw = (float)90;
+		if (edgeToEdgeOn == 2) edgeYaw = (float)-90;
+		edgeTest = false;
+	}
+	if ((edgeViewAngle <= 135) && (edgeViewAngle >= 45) && edgeTest == true)
+	{
+		if (edgeToEdgeOn == 1) edgeYaw = (float)179;
+		if (edgeToEdgeOn == 2) edgeYaw = (float)0;
+		edgeTest = false;
+	}
+	return edgeYaw;
+}
+
 void CorrectMovement(Vector vOldAngles, CUserCmd* pCmd, float fOldForward, float fOldSidemove) //you guys know that the aa movement fix is the same as silent movement fix, right? :thinking:
 {
 	float deltaView;
@@ -81,6 +157,9 @@ void CAA::Run(CBaseEntity * pLocal, CUserCmd * pCommand)
 			if (c_yaw > 180) c_yaw = -180;
 			if (c_yaw < -180) c_yaw = 180;
 			angles.y = c_yaw;
+			break;
+		case 6://Edge
+			if (findEdge(angles.y, gCvars.aa_pitch_enabled)) angles.y = useEdge(angles.y);
 			break;
 		default:
 			break;

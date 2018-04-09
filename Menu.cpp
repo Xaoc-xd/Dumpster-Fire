@@ -92,7 +92,7 @@ void Menu::Init()
 	AntiAimTab->AddControl(new CCheckBox(L"Pitch", &gCvars.aa_pitch_enabled));
 	AntiAimTab->AddControl(new CCombo(&gCvars.aa_pitch, { L"None", L"Fake Up", L"Up", L"Fake Down", L"Down" })); // NEEDS LIST
 	AntiAimTab->AddControl(new CCheckBox(L"Yaw", &gCvars.aa_yaw_enabled));
-	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin" })); // NEEDS LIST // Finally, a string that actually uses a unicode character!
+	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge" })); // NEEDS LIST // Finally, a string that actually uses a unicode character!
 	AntiAimTab->AddControl(new CSlider<int>(L"Spinspeed", 0, 360, &gCvars.aa_spinspeed));
 
 	Main.AddControl(AntiAimTab);
