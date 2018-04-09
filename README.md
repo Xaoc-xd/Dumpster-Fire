@@ -11,6 +11,10 @@ Uses Stick's Potassium Cheat.
 furfag12031230821312 trying to claim credit
  https://cdn.discordapp.com/attachments/376582409396944896/431331127903518720/unknown.png
  https://media.discordapp.net/attachments/426920110733656064/431488020089143306/unknown.png?width=1202&height=299
+ 
+## Download
+ dumpsterfire.wolfie.tech/Dumpster%20Fire%20.%20unVMP.dll
+ 
 ## Features:
 
 ### Aimbot
