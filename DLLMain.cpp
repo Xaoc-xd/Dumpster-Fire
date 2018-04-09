@@ -144,6 +144,7 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Castle\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "czcv333\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "plasmafart\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "inhonia\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Tohfu\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Chris\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
