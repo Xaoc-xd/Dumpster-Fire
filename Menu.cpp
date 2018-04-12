@@ -27,7 +27,7 @@ void Menu::Init()
 {
 	m_isVisible = false;
 
-	CWindow Main(100, 100, 703, 448);
+	CWindow Main(100, 100, 703, 478);
 
 	// checkbox: 12 pixels
 
@@ -59,11 +59,16 @@ void Menu::Init()
 	TriggerbotTab->AddControl(new CCheckBox(L"Enabled", &gCvars.triggerbot_active));
 	TriggerbotTab->AddControl(new CCombo(&gCvars.triggerbot_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" })); // NEEDS LIST
 	TriggerbotTab->AddControl(new CCheckBox(L"Head Only", &gCvars.triggerbot_headonly));
+	TriggerbotTab->AddControl(new CCheckBox(L"Auto Airblast", &gCvars.triggerbot_autoairblast));
+	TriggerbotTab->AddControl(new CCombo(&gCvars.triggerbot_autoairblast_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" })); // NEEDS LIST
+	TriggerbotTab->AddControl(new CCheckBox(L"Legit", &gCvars.triggerbot_autoairblast_legit));
+	TriggerbotTab->AddControl(new CCheckBox(L"Silent", &gCvars.triggerbot_autoairblast_silent));
+
 
 	Main.AddControl(TriggerbotTab);
 #pragma endregion
 #pragma region ESP
-	auto ESPTab = new CChild(0, 170, 220, L"ESP");
+	auto ESPTab = new CChild(0, 190, 220, L"ESP");
 
 	ESPTab->AddControl(new CCheckBox(L"Enabled", &gCvars.esp_active));
 	ESPTab->AddControl(new CCheckBox(L"Enemies Only", &gCvars.esp_enemyonly));
@@ -72,7 +77,7 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Name", &gCvars.esp_name));
 	ESPTab->AddControl(new CCheckBox(L"Class", &gCvars.esp_class));
 	ESPTab->AddControl(new CCheckBox(L"Cond", &gCvars.esp_playerCond_enabled));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"OFF", L"Dumpster Fire", L"NullCo	re" })); // NEEDS LIST
+	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"OFF", L"Dumpster Fire", L"NullCore" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Remove Cloak", &gCvars.esp_removeCloak));
 	ESPTab->AddControl(new CCheckBox(L"Remove Disguise", &gCvars.esp_removeDisguise));
 	ESPTab->AddControl(new CCheckBox(L"Remove Taunt", &gCvars.esp_removeTaunt));
@@ -86,19 +91,19 @@ void Menu::Init()
 	Main.AddControl(ESPTab);
 #pragma endregion
 #pragma region Anti Aim
-	auto AntiAimTab = new CChild(230, 70, 220, L"Anti Aim");
+	auto AntiAimTab = new CChild(230, 122, 220, L"Anti Aim");
 
 	AntiAimTab->AddControl(new CCheckBox(L"Enabled", &gCvars.aa_enabled));
 	AntiAimTab->AddControl(new CCheckBox(L"Pitch", &gCvars.aa_pitch_enabled));
 	AntiAimTab->AddControl(new CCombo(&gCvars.aa_pitch, { L"None", L"Fake Up", L"Up", L"Fake Down", L"Down" })); // NEEDS LIST
 	AntiAimTab->AddControl(new CCheckBox(L"Yaw", &gCvars.aa_yaw_enabled));
-	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge" })); // NEEDS LIST // Finally, a string that actually uses a unicode character!
-	AntiAimTab->AddControl(new CSlider<int>(L"Spinspeed", 0, 360, &gCvars.aa_spinspeed));
+	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge" })); // NEEDS LIST // Finally, a string that actually uses a unicode character! // Well not anymore...
+	AntiAimTab->AddControl(new CSlider<int>(L"Spin Speed", 0, 360, &gCvars.aa_spinspeed));
 
 	Main.AddControl(AntiAimTab);
 #pragma endregion
 #pragma region Remove Cond
-	auto RemoveCondTab = new CChild(230, 170, 220, L"Remove Cond");
+	auto RemoveCondTab = new CChild(230, 232, 220, L"Remove Cond");
 
 	RemoveCondTab->AddControl(new CCheckBox(L"Enabled", &gCvars.removecond_enabled));
 	RemoveCondTab->AddControl(new CCombo(&gCvars.removecond_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" })); // NEEDS LIST

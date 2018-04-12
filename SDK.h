@@ -250,6 +250,7 @@ public:
 	Vector GetCollideableMins();
 	Vector GetCollideableMaxs();
 	Vector GetEyePosition(); //yeah i know its actually view offset, but nobody will notice since you guys are just here to paste
+	//CBaseEntity* GetOwner();
 	Vector GetAbsEyePosition(); //Without origin added, although you could just subtract origin, tbh idk why i have this
 	Vector GetHitboxPosition(int iHitbox);
 };

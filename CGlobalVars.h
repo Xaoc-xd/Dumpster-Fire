@@ -27,6 +27,10 @@ public:
 	bool triggerbot_active;
 	int triggerbot_key;
 	bool triggerbot_headonly;
+	bool triggerbot_autoairblast;
+	int triggerbot_autoairblast_key;
+	bool triggerbot_autoairblast_legit;
+	bool triggerbot_autoairblast_silent;
 
 	float esp_switch;
 	bool esp_active;

@@ -7,6 +7,7 @@
 #include "ChatSpam.h"
 #include "AntiAim.h"
 #include "RemoveConditions.h"
+#include "AutoAirblast.h"
 
 //============================================================================================
 void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStage_t stage)
@@ -35,6 +36,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 		gCond.Run(pLocal, pCommand);
 		gTrigger.Run(pLocal, pCommand);
 		gChatSpam.Run(pLocal, pCommand);
+		gBlast.Run(pLocal, pCommand);
 	}
 	catch(...)
 	{

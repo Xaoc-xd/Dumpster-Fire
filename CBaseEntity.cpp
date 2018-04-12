@@ -88,6 +88,12 @@ Vector CBaseEntity::GetEyePosition()
 	DYNVAR_RETURN(Vector, this, "DT_BasePlayer", "localdata", "m_vecViewOffset[0]") + this->GetAbsOrigin();
 }
 
+//CBaseEntity* CBaseEntity::GetOwner()
+//{
+//	DYNVAR(Handle, DWORD, "DT_TEClientProjectile", "m_hOwner");
+//	return (CBaseEntity*)gInts.EntList->GetClientEntityFromHandle(Handle.GetValue(this));
+//}
+
 Vector CBaseEntity::GetAbsEyePosition()
 {
 	DYNVAR_RETURN(Vector, this, "DT_BasePlayer", "localdata", "m_vecViewOffset[0]");

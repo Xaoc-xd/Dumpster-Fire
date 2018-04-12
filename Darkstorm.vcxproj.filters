@@ -77,6 +77,9 @@
     <ClCompile Include="NccUtilities.cpp">
       <Filter>FakeWare\Core</Filter>
     </ClCompile>
+    <ClCompile Include="AutoAirblast.cpp">
+      <Filter>Hacks\AutoAirblast</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -187,6 +190,9 @@
     <ClInclude Include="NccUtilities.h">
       <Filter>FakeWare\Core</Filter>
     </ClInclude>
+    <ClInclude Include="AutoAirblast.h">
+      <Filter>Hacks\AutoAirblast</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -269,6 +275,9 @@
     </Filter>
     <Filter Include="FakeWare\Core">
       <UniqueIdentifier>{ce24c8bb-cb67-4a82-b59a-8e9613ccbdec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks\AutoAirblast">
+      <UniqueIdentifier>{32483575-ae4a-47a7-bf4b-a27d556b8a48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
