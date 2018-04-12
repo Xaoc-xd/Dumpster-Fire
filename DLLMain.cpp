@@ -149,8 +149,8 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Chris\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
 	CSteamID localID = gInts.steamuser->GetSteamID();
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "PersonalName: %s!\n", gInts.steamfriends->GetPersonaName());
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "SteamID: %s!\n", localID.Render());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "PersonalName: %s\n", gInts.steamfriends->GetPersonaName());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "SteamID: %s\n", localID.Render());
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "newSteamID:  %s\n", localID.SteamRender());
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
 
