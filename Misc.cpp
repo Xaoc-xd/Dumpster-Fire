@@ -42,16 +42,17 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		}
 	}
 
-	if (gCvars.misc_thirdPerson)
+	/*if (gCvars.misc_thirdPerson)
 	{
 		pLocal->ForceTauntCam(true);
 	}
 	else
 	{
 		pLocal->ForceTauntCam(false);
-	}
+	}*/ // Swapping this out for new code that supports AA in thirdperson
+
 	
-	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK)) // who changed my comment >:(
+	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK)) // who changed my comment >:( // lemon lol
 	{
 		Vector vLocalAngles = pCommand->viewangles;
 		float speed = pCommand->forwardmove;

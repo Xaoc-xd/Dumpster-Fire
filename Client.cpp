@@ -9,12 +9,8 @@
 #include "RemoveConditions.h"
 #include "AutoAirblast.h"
 
-//============================================================================================
-void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStage_t stage)
-{
-	auto &hook = VMTManager::GetHook(gInts.Client);
-	hook.GetMethod<void(__thiscall *)(PVOID, ClientFrameStage_t)>(35)(gInts.Client, stage);
-}
+Vector qLASTTICK;
+
 //============================================================================================
 bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_frametime, CUserCmd* pCommand)
 {
@@ -25,7 +21,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 		if (!pCommand->command_number)
 			return false;
 
-		CBaseEntity* pLocal = GetBaseEntity(me); 
+		CBaseEntity* pLocal = GetBaseEntity(me);
 
 		if (!pLocal)
 			return bReturn;
@@ -38,11 +34,41 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 		gChatSpam.Run(pLocal, pCommand);
 		gBlast.Run(pLocal, pCommand);
 	}
-	catch(...)
+	catch (...)
 	{
 		Log::Fatal("Failed Hooked_CreateMove");
 	}
+	qLASTTICK = pCommand->viewangles;
 	return false/*bReturn*/;
+}
+//============================================================================================
+void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStage_t stage)
+{
+	if (gInts.Engine->IsInGame() && stage == FRAME_RENDER_START && gCvars.misc_thirdPerson) //shows antiaims just fine
+	{
+		CBaseEntity *oEntity = gInts.EntList->GetClientEntity(gInts.Engine->GetLocalPlayer());
+
+		auto *m_angEyeAngles = reinterpret_cast<float*>(reinterpret_cast<DWORD>(oEntity) + gNetVars.get_offset("DT_BasePlayer", "pl", "deadflag") + 8);
+
+		auto *HTC = reinterpret_cast<float*>(reinterpret_cast<DWORD>(oEntity) + gNetVars.get_offset("DT_BasePlayer", "pl", "deadflag") + 4);
+
+		*HTC = qLASTTICK.x;
+		*m_angEyeAngles = qLASTTICK.y;
+
+		ConVar* sv_cheats = gInts.cvar->FindVar("sv_cheats");
+		if (sv_cheats->GetInt() == 0) sv_cheats->SetValue(1);
+		ConVar* pThirdCamYaw = gInts.cvar->FindVar("cam_idealyaw");
+		gInts.Engine->ClientCmd_Unrestricted("thirdperson");
+
+		pThirdCamYaw->SetValue(0);
+	}
+	else if (!gCvars.misc_thirdPerson)
+	{
+		gInts.Engine->ClientCmd_Unrestricted("firstperson");
+	}
+	
+	auto &hook = VMTManager::GetHook(gInts.Client);
+	hook.GetMethod<void(__thiscall *)(PVOID, ClientFrameStage_t)>(35)(gInts.Client, stage);
 }
 //============================================================================================
 int __fastcall Hooked_KeyEvent(PVOID CHLClient, int edx, int eventcode, int keynum, const char *currentBinding)

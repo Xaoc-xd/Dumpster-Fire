@@ -29,9 +29,21 @@ void __fastcall Hooked_OverrideView(void* _this, void* _edx, CViewSetup* pSetup)
 	if (!gInts.Engine->IsInGame() && !gInts.Engine->IsConnected())
 		return;
 
+	CBaseEntity* pLocal = GetBaseEntity(me);
+
 	if (pSetup->m_fov != 20.0f && pSetup->m_fov != gCvars.misc_fov) // no delet this, important for when zoomed- plasma
 	{
 		pSetup->m_fov = gCvars.misc_fov;
+	}
+
+
+	int m_flFOVRate = 0xE5C;// Broken: nv.get_offset("DT_BasePlayer", "localdata", "m_flFOVRate");
+	int &fovPtr = gCvars.storedFOV;//*(int*)(pLocal + gNetVars.get_offset("DT_BasePlayer", "m_iFOV")), defaultFov = *(int*)(pLocal + gNetVars.get_offset("DT_BasePlayer", "m_iDefaultFOV"));
+								   //int defaultFOV;
+	if (gCvars.misc_nozoom)
+	{
+		pSetup->m_fov = gCvars.misc_fov;
+		*(float*)(pLocal + m_flFOVRate) = 0;
 	}
 }
 static int vacUndetected = 1; //the encryption method cheat devs don't want you to know

@@ -124,18 +124,19 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"Auto Backstab", &gCvars.misc_autobackstab));
 	MiscTab->AddControl(new CCheckBox(L"Noisemaker Spam", &gCvars.misc_noisemaker_spam));
 	MiscTab->AddControl(new CCheckBox(L"No Scope", &gCvars.misc_noscope));
+	MiscTab->AddControl(new CCheckBox(L"No Zoom", &gCvars.misc_nozoom));
+	MiscTab->AddControl(new CCheckBox(L"No Push", &gCvars.misc_no_push));
 	MiscTab->AddControl(new CCheckBox(L"Chat Spam", &gCvars.misc_chatspam_enabled));
 	MiscTab->AddControl(new CCombo(&gCvars.misc_chatspam_selection, { L"None", L"NullCore", L"LMAOBOX", L"Lithium", L"Cathook", L"Empty Lines", L"Speedhook", L"Freebox", L"Catbot", L"Dumpster Fire" })); // NEEDS LIST
 	MiscTab->AddControl(new CSlider<int>(L"Delay", 100, 3000, &gCvars.misc_chatspam_delay));
 	MiscTab->AddControl(new CCheckBox(L"Kill Say", &gCvars.misc_killsay_enabled));
 	MiscTab->AddControl(new CCombo(&gCvars.misc_killsay_selection, { L"None", L"NiggerHOOK", L"NullCore", L"File" })); // NEEDS LIST
+	MiscTab->AddControl(new CCheckBox(L"Voice Menu Spam", &gCvars.misc_voice)); // NEEDS LIST (?) // Apple, when you add the options to this feature please add to menu. Thanks. - Wolfie
 	MiscTab->AddControl(new CCheckBox(L"Roll Speedhack", &gCvars.misc_roll_speedhack));
 	MiscTab->AddControl(new CCheckBox(L"wow sweet", &gCvars.misc_wowsweet));
 	MiscTab->AddControl(new CCheckBox(L"Clean Screenshot", &gCvars.misc_cleanScreenshot));
 	MiscTab->AddControl(new CSlider<int>(L"Field of View", 0, 120, &gCvars.misc_fov));
 	MiscTab->AddControl(new CSlider<int>(L"Viewmodel FOV", 0, 120, &gCvars.misc_viewmodel_fov));
-	MiscTab->AddControl(new CCheckBox(L"No Push", &gCvars.misc_no_push));
-	MiscTab->AddControl(new CCheckBox(L"Voice Menu Spam", &gCvars.misc_voice)); // NEEDS LIST (?) // Apple, when you add the options to this feature please add to menu. Thanks. - Wolfie
 
 	Main.AddControl(MiscTab);
 #pragma endregion

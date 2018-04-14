@@ -92,8 +92,9 @@ public:
 	int misc_fov = 90;// = 90; // why the fuck would u start at 70 - plasma // someone on steamcommunity said default was 70 - wolfie
 	int misc_viewmodel_fov = 70;// = 70;
 	bool misc_no_push;
+	bool misc_nozoom;
 
-
+	int storedFOV;
 
 	float playerlist_switch;
 	float PlayerMode[64] = {
