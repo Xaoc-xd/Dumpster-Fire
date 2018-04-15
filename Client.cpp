@@ -89,6 +89,15 @@ void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStag
 				case 4:
 					LoadSkys("sky_halloween");
 					break;
+				case 5:
+					LoadSkys("sky_halloween_night_01");
+					break;
+				case 6:
+					LoadSkys("sky_island_01");
+					break;
+				case 7:
+					LoadSkys("sky_day01_01");
+					break;
 				default:
 					break;
 				}

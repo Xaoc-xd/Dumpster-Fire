@@ -87,7 +87,7 @@ void Menu::Init()
 	ESPTab->AddControl(new CCombo(&gCvars.esp_bones, { L"OFF", L"White", L"Health", L"Team" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Happy Face", &gCvars.esp_face));
 	ESPTab->AddControl(new CCheckBox(L"SkyChanger", &gCvars.sky_changer));
-	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween" }));
+	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween", L"Halloween Night", L"Island", L"Day" }));
 	ESPTab->AddControl(new CCheckBox(L"Crosshair", &gCvars.esp_crosshair));
 
 	Main.AddControl(ESPTab);
