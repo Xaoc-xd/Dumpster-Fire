@@ -66,6 +66,60 @@ void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStag
 	{
 		gInts.Engine->ClientCmd_Unrestricted("firstperson");
 	}
+
+	if (gCvars.sky_changer && gInts.Engine->IsInGame())
+		if (gInts.cvar->FindVar("sv_skyname")->GetString() != "sky_night_01")
+		{
+			typedef bool(_cdecl* LoadNamedSkysFn)(const char*);
+			static LoadNamedSkysFn LoadSkys = (LoadNamedSkysFn)gSignatures.GetEngineSignature("55 8B EC 81 EC ? ? ? ? 8B 0D ? ? ? ? 53 56 57 8B 01 C7 45");
+
+
+			if (gCvars.sky_changer) {
+				switch ((int)gCvars.sky_changer_value)
+				{
+				case 1:
+					LoadSkys("sky_night_01");
+					break;
+				case 2:
+					LoadSkys("sky_nightfall_01");
+					break;
+				case 3:
+					LoadSkys("sky_harvest_night_01");
+					break;
+				case 4:
+					LoadSkys("sky_halloween");
+					break;
+				default:
+					break;
+				}
+		}
+	}
+	for (auto i = 1; i <= gInts.Engine->GetMaxClients(); i++)
+	{
+		CBaseEntity* pEntity = gInts.EntList->GetClientEntity(i);
+		CBaseEntity *entity = nullptr;
+		player_info_t pInfo;
+
+		if (!(entity = gInts.EntList->GetClientEntity(i)))
+			continue;
+		if (entity->IsDormant())
+			continue;
+		if (!gInts.Engine->GetPlayerInfo(i, &pInfo))
+			continue;
+		if (!entity->GetLifeState() == LIFE_ALIVE)
+			continue;
+
+		if (gCvars.misc_bighead)
+		{
+			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHeadScale"));
+			*size = 7.0f;
+		}
+		else if (!gCvars.misc_bighead)
+		{
+			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHeadScale"));
+			*size = 1.0f;
+		}
+	}
 	
 	auto &hook = VMTManager::GetHook(gInts.Client);
 	hook.GetMethod<void(__thiscall *)(PVOID, ClientFrameStage_t)>(35)(gInts.Client, stage);

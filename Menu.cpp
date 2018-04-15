@@ -27,7 +27,7 @@ void Menu::Init()
 {
 	m_isVisible = false;
 
-	CWindow Main(100, 100, 703, 478);
+	CWindow Main(100, 100, 703, 500);
 
 	// checkbox: 12 pixels
 
@@ -86,6 +86,8 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Bones", &gCvars.esp_bones_enabled));
 	ESPTab->AddControl(new CCombo(&gCvars.esp_bones, { L"OFF", L"White", L"Health", L"Team" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Happy Face", &gCvars.esp_face));
+	ESPTab->AddControl(new CCheckBox(L"SkyChanger", &gCvars.sky_changer));
+	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween" }));
 	ESPTab->AddControl(new CCheckBox(L"Crosshair", &gCvars.esp_crosshair));
 
 	Main.AddControl(ESPTab);
@@ -134,6 +136,7 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"Voice Menu Spam", &gCvars.misc_voice)); // NEEDS LIST (?) // Apple, when you add the options to this feature please add to menu. Thanks. - Wolfie
 	MiscTab->AddControl(new CCheckBox(L"Roll Speedhack", &gCvars.misc_roll_speedhack));
 	MiscTab->AddControl(new CCheckBox(L"wow sweet", &gCvars.misc_wowsweet));
+	MiscTab->AddControl(new CCheckBox(L"Big head", &gCvars.misc_bighead));
 	MiscTab->AddControl(new CCheckBox(L"Clean Screenshot", &gCvars.misc_cleanScreenshot));
 	MiscTab->AddControl(new CSlider<int>(L"Field of View", 0, 120, &gCvars.misc_fov));
 	MiscTab->AddControl(new CSlider<int>(L"Viewmodel FOV", 0, 120, &gCvars.misc_viewmodel_fov));

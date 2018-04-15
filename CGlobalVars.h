@@ -51,6 +51,9 @@ public:
 	bool esp_face;
 	bool esp_crosshair;
 
+	bool sky_changer;
+	int sky_changer_value;
+
 	float aa_switch;
 	int aa_pitch;
 	float aa_pitch_fakeup;
@@ -93,6 +96,7 @@ public:
 	int misc_viewmodel_fov = 70;// = 70;
 	bool misc_no_push;
 	bool misc_nozoom;
+	bool misc_bighead;
 
 	int storedFOV;
 
