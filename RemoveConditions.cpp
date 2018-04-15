@@ -6,6 +6,8 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 {
 	if (!gCvars.removecond_enabled)
 		return;
+	if (pLocal->GetLifeState() != LIFE_ALIVE)
+		return;
 
 	if (Util->IsKeyPressed(gCvars.removecond_key) 
 												  
@@ -24,6 +26,8 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		}
 	}
 
+	auto pWep = pLocal->GetActiveWeapon();
+	auto pClass = pWep->GetItemDefinitionIndex();
 	if (gCvars.removecond_stickyspam)
 	{
 		if (pLocal->szGetClass() != "Demoman")
@@ -33,11 +37,10 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		if (!wep)
 			return;
 
-
-		if (!wep->GetSlot() == 1)
+		if (wep->GetSlot() == 0 && pClass == !demomanweapons::WPN_LoooseCannon)
 			return;
 
-		if (wep->GetSlot() == 2 || wep->GetSlot() == 0)
+		if (wep->GetSlot() == 2)
 			return;
 
 		static bool bSwitch = false;

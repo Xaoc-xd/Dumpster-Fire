@@ -52,7 +52,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	}*/ // Swapping this out for new code that supports AA in thirdperson
 
 	
-	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK)) // who changed my comment >:( // lemon lol
+	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK) && (pCommand->buttons & IN_DUCK)) // who changed my comment >:(
 	{
 		Vector vLocalAngles = pCommand->viewangles;
 		float speed = pCommand->forwardmove;
