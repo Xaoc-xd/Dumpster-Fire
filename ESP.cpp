@@ -147,7 +147,7 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 			pEntity->SetCond(curCond & ~tf_cond::TFCond_Taunting);
 	}
 
-	if (gCvars.esp_health == 2 && gCvars.esp_health_enabled || gCvars.esp_health == 3 && gCvars.esp_health_enabled);
+	if (gCvars.esp_health == 2 && gCvars.esp_health_enabled || gCvars.esp_health == 3 && gCvars.esp_health_enabled)
 	{
 		gDraw.OutlineRect(x - 6, y - 1, 5, h, Color::Black());
 		gDraw.DrawRect(x - 5, y + (h - (h / iMaxHp * iHp)) - 1, 3, h / iMaxHp * iHp, Color::Green());

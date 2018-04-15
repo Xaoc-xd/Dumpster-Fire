@@ -94,6 +94,29 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	XASSERT(gInts.steamfriends);
 	XASSERT(gInts.steamuser);
 
+	gInts.Engine->ClientCmd_Unrestricted("toggleconsole");
+	gInts.cvar->ConsolePrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Dumpster Fire Successfully Injected!\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Credits\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Hold On\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "channel32\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "AVexxed\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Wolfie\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Apple\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Lemon\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Castle\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "czcv333\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "inhonia\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Tohfu\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Chris\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
+	CSteamID localID = gInts.steamuser->GetSteamID();
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "PersonalName: %s\n", gInts.steamfriends->GetPersonaName());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "SteamID: %s\n", localID.Render());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "newSteamID:  %s\n", localID.SteamRender());
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
+
 	InputSys::Get().Initialize();
 
 	InputSys::Get().RegisterHotkey(VK_INSERT, [lpArguments]()
@@ -142,29 +165,6 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	clientModeHook->HookMethod(&Hooked_CreateMove, gOffsets.iCreateMoveOffset); //ClientMode create move is called inside of CHLClient::CreateMove, and thus no need for hooking WriteUserCmdDelta.
 	clientModeHook->HookMethod(&Hooked_OverrideView, 16);
 	clientModeHook->Rehook();
-
-	gInts.cvar->ConsolePrintf ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Dumpster Fire Successfully Injected!\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Credits\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Hold On\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "channel32\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "AVexxed\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Wolfie\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Apple\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Lemon\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Castle\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "czcv333\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "inhonia\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Tohfu\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Chris\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
-	CSteamID localID = gInts.steamuser->GetSteamID();
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "PersonalName: %s\n", gInts.steamfriends->GetPersonaName());
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "SteamID: %s\n", localID.Render());
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "newSteamID:  %s\n", localID.SteamRender());
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
-
 
 	///TODO: Add the announcer here... soon:tm:
 	gKillSay.InitKillSay();
