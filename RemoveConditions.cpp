@@ -7,12 +7,58 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	if (!gCvars.removecond_enabled)
 		return;
 
-	if (Util->IsKeyPressed(gCvars.removecond_key) //G
-											   //  && pLocal->GetLifeState() == LIFE_ALIVE
+	if (Util->IsKeyPressed(gCvars.removecond_key) 
+												  
 		&& !gInts.Engine->Con_IsVisible()
 		&& gInts.Engine->IsConnected())
-		RemoveConds(pLocal, pCommand, gCvars.removecond_value);
+		RemoveConds(pLocal, pCommand, (int)gCvars.removecond_value);
 
+	static int lastwep = 0;
+	auto isCloaked = pLocal->GetCond() & tf_cond::TFCond_Cloaked;
+	if (gCvars.removecond_instantweaponswitch && !isCloaked)
+	{
+		if (lastwep != pLocal->GetClientClass()->iClassID)
+		{
+			RemoveConds(pLocal, pCommand, 2 * 90);
+			lastwep = pLocal->GetClientClass()->iClassID;
+		}
+	}
+
+	if (gCvars.removecond_stickyspam)
+	{
+		if (pLocal->szGetClass() != "Demoman")
+			return;
+
+		CBaseCombatWeapon *wep = pLocal->GetActiveWeapon();
+		if (!wep)
+			return;
+
+
+		if (!wep->GetSlot() == 1)
+			return;
+
+		if (wep->GetSlot() == 2 || wep->GetSlot() == 0)
+			return;
+
+		static bool bSwitch = false;
+		if ((pCommand->buttons & IN_ATTACK) && !bSwitch)
+		{
+			bSwitch = true;
+		}
+		else if (bSwitch)
+		{
+			RemoveConds(pLocal, pCommand, 50);
+			pCommand->buttons &= ~IN_ATTACK;
+			bSwitch = false;
+		}
+	}
+	if (gCvars.removecond_instantweaponswitch)
+	{
+		static int lastweapon = 0;
+		if (lastweapon != pCommand->weaponselect)
+			RemoveConds(pLocal, pCommand, 100, false);
+		lastweapon = pCommand->weaponselect;
+	}
 	if (gCvars.removecond_autoinstantcap)
 	{
 		for (int i = 1; i < gInts.EntList->GetHighestEntityIndex(); i++)
@@ -35,15 +81,6 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			}
 		}
 	}
-
-	if (gCvars.removecond_instantweaponswitch)
-	{
-		static int lastweapon = 0;
-		if (lastweapon != pCommand->weaponselect)
-			RemoveConds(pLocal, pCommand, 100, false);
-		lastweapon = pCommand->weaponselect;
-	}
-
 	if (gCvars.removecond_automedkit)
 	{
 		for (int i = 1; i <= gInts.EntList->GetHighestEntityIndex(); i++)
@@ -97,58 +134,13 @@ void RemoveCondExploits::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			}
 		}
 	}
-
-	if (gCvars.removecond_stickyspam)
-	{
-		/*
-		
-		Alright so this worked perfectly and beautifully in my cheat, but it's not working as intended here, dunno why
-		if anyone wants to try to fix this, go ahead, I didn't have enough time to do so :3333
-
-		- Castle, professional NASA coder hired in 1894 
-		also credits bencat retard - plasma 
-
-		*/
-
-
-		if (pLocal->szGetClass() != "Demoman")
-			return;
-
-		CBaseCombatWeapon *wep = pLocal->GetActiveWeapon();
-		if (!wep)
-			return;
-
-		if (wep->GetItemDefinitionIndex() != WPN_StickyLauncher
-			&& wep->GetItemDefinitionIndex() != WPN_ScottishResistance
-			&& wep->GetItemDefinitionIndex() != WPN_StickyJumper
-			&& wep->GetItemDefinitionIndex() != WPN_LoooseCannon)
-			return;
-
-		static bool bSwitch = false;
-		if ((pCommand->buttons & IN_ATTACK) && !bSwitch)
-		{
-			bSwitch = true;
-		}
-		else if (bSwitch)
-		{
-			RemoveConds(pLocal, pCommand, 50);
-			pCommand->buttons &= ~IN_ATTACK;
-			bSwitch = false;
-		}
-	}
 }
 void RemoveCondExploits::RemoveConds(CBaseEntity * local, CUserCmd * cmd, int value, bool disableattack)
 {
 	if (local == NULL) return;
 
-	/*if(!cmd) return;
-	if(!cmd->command_number) return;*/
-	//if(!var.value) return;
-
 	if (local->GetLifeState() != LIFE_ALIVE) return;
 
-	if (disableattack)
-		if (cmd->buttons & IN_ATTACK || cmd->buttons & IN_ATTACK2) return;
 
 	INetChannel* ch = (INetChannel*)gInts.Engine->GetNetChannelInfo();
 	int& m_nOutSequenceNr = *(int*)((unsigned)ch + 8);

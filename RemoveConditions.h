@@ -1,7 +1,7 @@
 #pragma once
 #include "SDK.h"
 #include "Util.h"
-
+//a
 class RemoveCondExploits
 {
 public:
