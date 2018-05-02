@@ -87,8 +87,9 @@ namespace ChatSpams
 	};
 	const std::vector<std::string> builtin_dumpsterfire = {
 		"Dumpster Fire, it's hot garbage!",
-		"Dumpster Fire: By AVexxed, channel32, Wolfie, Hold On!, and other developers.",
+		"Dumpster Fire: By Apple, AVexxed, channel32, Wolfie, Hold On!, and other developers.",
 		"These aren't binds.",
+		"Get it at discord.gg/rY7vB5C",
 		"UwU",
 		"OwO",
 		"uwu",

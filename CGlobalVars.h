@@ -86,6 +86,7 @@ public:
 	bool misc_noscope;
 	bool misc_chatspam_enabled;
 	int misc_chatspam_selection;
+	int misc_chatspam_newline;
 	bool misc_cleanScreenshot;
 	int misc_chatspam_delay;
 	bool misc_killsay_enabled;

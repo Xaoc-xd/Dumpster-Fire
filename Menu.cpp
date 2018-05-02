@@ -130,7 +130,8 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"No Push", &gCvars.misc_no_push));
 	MiscTab->AddControl(new CCheckBox(L"Chat Spam", &gCvars.misc_chatspam_enabled));
 	MiscTab->AddControl(new CCombo(&gCvars.misc_chatspam_selection, { L"None", L"NullCore", L"LMAOBOX", L"Lithium", L"Cathook", L"Empty Lines", L"Speedhook", L"Freebox", L"Catbot", L"Dumpster Fire" })); // NEEDS LIST
-	MiscTab->AddControl(new CSlider<int>(L"Delay", 100, 3000, &gCvars.misc_chatspam_delay));
+	MiscTab->AddControl(new CSlider<int>(L"Delay", 1000, 3000, &gCvars.misc_chatspam_delay));
+	MiscTab->AddControl(new CSlider<int>(L"Newlines", 0, 32, &gCvars.misc_chatspam_newline));
 	MiscTab->AddControl(new CCheckBox(L"Kill Say", &gCvars.misc_killsay_enabled));
 	MiscTab->AddControl(new CCombo(&gCvars.misc_killsay_selection, { L"None", L"NiggerHOOK", L"NullCore", L"File" })); // NEEDS LIST
 	MiscTab->AddControl(new CCheckBox(L"Voice Menu Spam", &gCvars.misc_voice)); // NEEDS LIST (?) // Apple, when you add the options to this feature please add to menu. Thanks. - Wolfie

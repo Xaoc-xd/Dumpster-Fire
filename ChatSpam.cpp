@@ -59,6 +59,11 @@ void CChatSpam::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		std::string spamString = source->at(current_index);
 		std::string msg;
 		msg.append("say ");
+		if (gCvars.misc_chatspam_newline)//\x0D
+		{
+			msg.append(" ");
+			msg.append(repeat(gCvars.misc_chatspam_newline, "\x0D"));
+		}
 		msg.append(spamString);
 
 		gInts.Engine->ClientCmd(msg.c_str());
