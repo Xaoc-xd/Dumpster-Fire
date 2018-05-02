@@ -164,3 +164,19 @@ void CDrawManager::DrawCrosshair(int iValue)
 	}
 
 }
+
+void CDrawManager::DrawCornerBox(int x, int y, int w, int h, int cx, int cy, Color Col)
+{
+	gDraw.DrawLine(x, y, x + (w / cx), y, Col);
+	gDraw.DrawLine(x, y, x, y + (h / cy), Col);
+
+	gDraw.DrawLine(x + w, y, x + w - (w / cx), y, Col);
+	gDraw.DrawLine(x + w, y, x + w, y + (h / cy), Col);
+
+	gDraw.DrawLine(x, y + h, x + (w / cx), y + h, Col);
+	gDraw.DrawLine(x, y + h, x, y + h - (h / cy), Col);
+
+	gDraw.DrawLine(x + w, y + h, x + w - (w / cx), y + h, Col);
+	gDraw.DrawLine(x + w, y + h, x + w, y + h - (h / cy), Col);
+
+}

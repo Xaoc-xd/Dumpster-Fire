@@ -90,6 +90,7 @@ public:
 	int misc_chatspam_delay;
 	bool misc_killsay_enabled;
 	int misc_killsay_selection;
+	int esp_box_selection;
 	bool misc_roll_speedhack;
 	bool misc_wowsweet;
 	bool misc_voice;

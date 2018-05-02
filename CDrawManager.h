@@ -24,6 +24,7 @@ public:
 	void DrawRect( int x, int y, int w, int h, Color clrColor);
 	void OutlineRect( int x, int y, int w, int h, Color clrColor);
 	void DrawCrosshair(int iValue);
+	void DrawCornerBox(int x, int y, int w, int h, int cx, int cy, Color Col); 
 	bool WorldToScreen( Vector &vOrigin, Vector &vScreen );
 	Color GetPlayerColor(CBaseEntity* pPlayer);
 };

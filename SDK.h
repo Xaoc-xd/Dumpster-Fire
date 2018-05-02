@@ -207,6 +207,10 @@ public:
 		typedef int(__thiscall* OriginalFn)(PVOID);
 		return getvfunc<OriginalFn>(pNetworkable, 9)(pNetworkable);
 	}
+	Vector GetVecOrigin()
+	{
+		DYNVAR_RETURN(Vector, this, "DT_BaseEntity", "m_vecOrigin");
+	}
 	/*const char* CBaseEntity::GetModelName()
 	{
 		return gInts.ModelInfo->GetModelName(this->GetModel());

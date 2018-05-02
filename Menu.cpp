@@ -73,7 +73,7 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Enabled", &gCvars.esp_active));
 	ESPTab->AddControl(new CCheckBox(L"Enemies Only", &gCvars.esp_enemyonly));
 	ESPTab->AddControl(new CCheckBox(L"Box", &gCvars.esp_box));
-	ESPTab->AddControl(new CSlider<int>(L"Thickness", 0, 4, &gCvars.esp_box_thickness));
+	ESPTab->AddControl(new CCombo(&gCvars.esp_box_selection, { L"None", L"Outlined", L"Box", L"Filled", L"Corner" })); 
 	ESPTab->AddControl(new CCheckBox(L"Name", &gCvars.esp_name));
 	ESPTab->AddControl(new CCheckBox(L"Class", &gCvars.esp_class));
 	ESPTab->AddControl(new CCheckBox(L"Cond", &gCvars.esp_playerCond_enabled));

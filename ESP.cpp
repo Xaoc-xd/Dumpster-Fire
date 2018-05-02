@@ -121,13 +121,6 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 	if (iHp > iMaxHp)
 		iHp = iMaxHp;
 
-	if (gCvars.esp_box) {
-		for (int i = 0; i < gCvars.esp_box_thickness; i++)
-		{
-			gDraw.OutlineRect(x + i, y + i, w - i * 2, h - i * 2, clrPlayerCol);
-		}
-	}
-
 	if (gCvars.esp_removeDisguise)
 	{
 		int curCond = pEntity->GetCond();
@@ -188,6 +181,29 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		DrawBone(pEntity, iLeftLegBones, 3, clrBoneCol);
 		DrawBone(pEntity, iRightLegBones, 3, clrBoneCol);
 	}
+	int x_strings = x + 3;
+	if (gCvars.esp_box)
+	{
+		switch (gCvars.esp_box_selection)
+		{
+		case 1://Outlined
+			gDraw.OutlineRect(x - 1, y - 1, w + 2, h + 2, Color::Black());
+			gDraw.OutlineRect(x, y, w, h, clrPlayerCol);
+			gDraw.OutlineRect(x + 1, y + 1, w - 2, h - 2, Color::Black());
+			break;
+		case 2://Not outlined
+			gDraw.OutlineRect(x, y, w, h, clrPlayerCol);
+			break;
+		case 3://Filled
+			gDraw.DrawRect(x, y, w, h, clrPlayerCol);
+			break;
+		case 4://Corner
+			gDraw.DrawCornerBox(x, y, w, h - 1, 3, 5, clrPlayerCol);
+			break;
+		break;
+		}
+	}
+
 
 	if (gCvars.esp_face)
 		DrawFace(pEntity, clrPlayerCol);
