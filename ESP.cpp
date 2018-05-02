@@ -274,46 +274,6 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 					gDraw.DrawString(x + w + 2, y + iY, Color(102, 178, 255, 255), "*OVER HEALED*");
 				iY += gDraw.GetESPHeight();
 			}
-			if (pBaseEntityCond& TFCond_Disguised && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Disguised;
-			}
-			if (pBaseEntityCond& TFCond_Cloaked && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Cloaked;
-			}
-			if (pBaseEntityCond& TFCond_Slowed && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Slowed;
-			}
-			if (pBaseEntityCond& TFCond_OnFire && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_OnFire;
-			}
-			if (pBaseEntityCond& TFCond_Bonked && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Bonked;
-			}
-			if (pBaseEntityCond& TFCond_Zoomed && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Zoomed;
-			}
-			if (pBaseEntityCond& TFCond_Jarated && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Jarated;
-			}
-			if (pBaseEntityCond& TFCond_Ubercharged && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Ubercharged;
-			}
-			if (pBaseEntityCond& TFCond_UberchargeFading && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_UberchargeFading;
-			}
-			if (pBaseEntityCond& TFCond_Healing && gCvars.esp_playerCond)
-			{
-				pBaseEntityCond &= ~TFCond_Healing;
-			}
 		}
 	}
 }

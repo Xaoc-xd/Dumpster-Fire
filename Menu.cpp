@@ -92,7 +92,7 @@ void Menu::Init()
 	Main.AddControl(ESPTab);
 #pragma endregion
 #pragma region Anti Aim
-	auto AntiAimTab = new CChild(230, 122, 220, L"Anti Aim");
+	auto AntiAimTab = new CChild(230, 142, 220, L"Anti Aim");
 
 	AntiAimTab->AddControl(new CCheckBox(L"Enabled", &gCvars.aa_enabled));
 	AntiAimTab->AddControl(new CCheckBox(L"Pitch", &gCvars.aa_pitch_enabled));
@@ -100,11 +100,12 @@ void Menu::Init()
 	AntiAimTab->AddControl(new CCheckBox(L"Yaw", &gCvars.aa_yaw_enabled));
 	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge", L"Fake Sideways" })); // NEEDS LIST // Finally, a string that actually uses a unicode character! // Well not anymore...
 	AntiAimTab->AddControl(new CSlider<int>(L"Spin Speed", 0, 360, &gCvars.aa_spinspeed));
+	AntiAimTab->AddControl(new CCheckBox(L"Resolver", &gCvars.aa_resolver));
 
 	Main.AddControl(AntiAimTab);
 #pragma endregion
 #pragma region Remove Cond
-	auto RemoveCondTab = new CChild(230, 232, 220, L"Remove Cond");
+	auto RemoveCondTab = new CChild(230, 262, 220, L"Remove Cond");
 
 	RemoveCondTab->AddControl(new CCheckBox(L"Enabled", &gCvars.removecond_enabled));
 	RemoveCondTab->AddControl(new CCombo(&gCvars.removecond_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" })); // NEEDS LIST
@@ -136,6 +137,7 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"Roll Speedhack", &gCvars.misc_roll_speedhack));
 	MiscTab->AddControl(new CCheckBox(L"wow sweet", &gCvars.misc_wowsweet));
 	MiscTab->AddControl(new CCheckBox(L"Big head", &gCvars.misc_bighead));
+	MiscTab->AddControl(new CCheckBox(L"Backtrack", &gCvars.backtrack));
 	MiscTab->AddControl(new CCheckBox(L"Clean Screenshot", &gCvars.misc_cleanScreenshot));
 	MiscTab->AddControl(new CSlider<int>(L"Field of View", 0, 120, &gCvars.misc_fov));
 	MiscTab->AddControl(new CSlider<int>(L"Viewmodel FOV", 0, 120, &gCvars.misc_viewmodel_fov));

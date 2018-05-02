@@ -91,6 +91,7 @@
     <ClCompile Include="Aimbot.cpp" />
     <ClCompile Include="AntiAim.cpp" />
     <ClCompile Include="AutoAirblast.cpp" />
+    <ClCompile Include="Backtrack.cpp" />
     <ClCompile Include="CBaseEntity.cpp" />
     <ClCompile Include="CDrawManager.cpp" />
     <ClCompile Include="ChatSpam.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="Aimbot.h" />
     <ClInclude Include="AntiAim.h" />
     <ClInclude Include="AutoAirblast.h" />
+    <ClInclude Include="Backtrack.h" />
     <ClInclude Include="bspflags.h" />
     <ClInclude Include="CDrawManager.h" />
     <ClInclude Include="CGlobalVars.h" />

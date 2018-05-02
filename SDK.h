@@ -229,6 +229,16 @@ public:
 		typedef matrix3x4 &(__thiscall * OriginalFn)(PVOID);
 		return getvfunc<OriginalFn>(pRenderable, 34)(pRenderable);
 	}
+	Vector& GetAngles()
+	{
+		static int offset = gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[0]");
+		return *(Vector*)(this + offset);
+	}
+	Vector& GetAnglesHTC()
+	{
+		static int offset = gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[1]");
+		return *(Vector*)(this + offset);
+	}
 
 	int GetMaxHealth()
 	{

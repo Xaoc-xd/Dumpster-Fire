@@ -8,6 +8,7 @@
 #include "AntiAim.h"
 #include "RemoveConditions.h"
 #include "AutoAirblast.h"
+#include "Backtrack.h"
 
 Vector qLASTTICK;
 
@@ -33,6 +34,7 @@ bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_
 		gTrigger.Run(pLocal, pCommand);
 		gChatSpam.Run(pLocal, pCommand);
 		gBlast.Run(pLocal, pCommand);
+		gBacktracking.Run(pCommand);
 	}
 	catch (...)
 	{
@@ -146,6 +148,44 @@ void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStag
 		{
 			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHeadScale"));
 			*size = 1.0f;
+		}
+	}
+
+	if (stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
+	{
+		for (auto i = 1; i <= gInts.Engine->GetMaxClients(); i++)
+		{
+			CBaseEntity *entity = nullptr;
+			player_info_t temp;
+
+			if (!(entity = gInts.EntList->GetClientEntity(i)))
+				continue;
+
+			if (entity->IsDormant())
+				continue;
+
+			if (!gInts.Engine->GetPlayerInfo(i, &temp))
+				continue;
+
+			if (!entity->GetLifeState() == LIFE_ALIVE)
+				continue;
+
+			Vector vX = entity->GetAngles();
+			Vector vY = entity->GetAnglesHTC();
+			auto *m_angEyeAnglesX = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[0]"));
+			auto *m_angEyeAnglesY = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[1]"));
+			if (gCvars.aa_resolver)
+			{
+				if (vX.x == 90) //Fake Up resolver
+				{
+					*m_angEyeAnglesX = -89;
+				}
+
+				if (vX.x == -90) //Fake Down resolver
+				{
+					*m_angEyeAnglesX = 89;
+				}
+			}
 		}
 	}
 	

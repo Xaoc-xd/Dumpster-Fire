@@ -66,6 +66,7 @@ public:
 	bool aa_enabled;
 	bool aa_pitch_enabled;
 	bool aa_yaw_enabled;
+	bool aa_resolver;
 
 	float removecond_switch;
 	bool removecond_enabled;
@@ -96,6 +97,8 @@ public:
 	int misc_viewmodel_fov = 70;// = 70;
 	bool misc_no_push;
 	bool misc_nozoom;
+	int backtrack_tick = 12;
+	bool backtrack;
 	bool misc_bighead;
 
 	int storedFOV;

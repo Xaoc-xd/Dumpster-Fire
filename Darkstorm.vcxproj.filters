@@ -80,6 +80,9 @@
     <ClCompile Include="AutoAirblast.cpp">
       <Filter>Hacks\AutoAirblast</Filter>
     </ClCompile>
+    <ClCompile Include="Backtrack.cpp">
+      <Filter>Hacks\Backtrack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -193,6 +196,9 @@
     <ClInclude Include="AutoAirblast.h">
       <Filter>Hacks\AutoAirblast</Filter>
     </ClInclude>
+    <ClInclude Include="Backtrack.h">
+      <Filter>Hacks\Backtrack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -278,6 +284,9 @@
     </Filter>
     <Filter Include="Hacks\AutoAirblast">
       <UniqueIdentifier>{32483575-ae4a-47a7-bf4b-a27d556b8a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks\Backtrack">
+      <UniqueIdentifier>{86a980d5-dfbe-44b6-b332-2271557a172b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
