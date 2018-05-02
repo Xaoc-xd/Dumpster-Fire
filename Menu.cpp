@@ -86,8 +86,7 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Bones", &gCvars.esp_bones_enabled));
 	ESPTab->AddControl(new CCombo(&gCvars.esp_bones, { L"OFF", L"White", L"Health", L"Team" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Happy Face", &gCvars.esp_face));
-	ESPTab->AddControl(new CCheckBox(L"SkyChanger", &gCvars.sky_changer));
-	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween", L"Halloween Night", L"Island", L"Day" }));
+	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween" }));
 	ESPTab->AddControl(new CCheckBox(L"Crosshair", &gCvars.esp_crosshair));
 
 	Main.AddControl(ESPTab);
@@ -99,7 +98,7 @@ void Menu::Init()
 	AntiAimTab->AddControl(new CCheckBox(L"Pitch", &gCvars.aa_pitch_enabled));
 	AntiAimTab->AddControl(new CCombo(&gCvars.aa_pitch, { L"None", L"Fake Up", L"Up", L"Fake Down", L"Down" })); // NEEDS LIST
 	AntiAimTab->AddControl(new CCheckBox(L"Yaw", &gCvars.aa_yaw_enabled));
-	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge" })); // NEEDS LIST // Finally, a string that actually uses a unicode character! // Well not anymore...
+	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge", L"Fake Sideways" })); // NEEDS LIST // Finally, a string that actually uses a unicode character! // Well not anymore...
 	AntiAimTab->AddControl(new CSlider<int>(L"Spin Speed", 0, 360, &gCvars.aa_spinspeed));
 
 	Main.AddControl(AntiAimTab);

@@ -67,42 +67,61 @@ void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStag
 		gInts.Engine->ClientCmd_Unrestricted("firstperson");
 	}
 
-	if (gCvars.sky_changer && gInts.Engine->IsInGame())
+	bool bSkyNeedsUpdate = true;
+	if (bSkyNeedsUpdate && gInts.Engine->IsInGame())
+	{
+		typedef bool(_cdecl* LoadNamedSkysFn)(const char*);
+		static LoadNamedSkysFn LoadSkys = (LoadNamedSkysFn)gSignatures.GetEngineSignature("55 8B EC 81 EC ? ? ? ? 8B 0D ? ? ? ? 53 56 57 8B 01 C7 45");
+
+		auto OriginalSky = gInts.cvar->FindVar("sv_skyname")->GetString();
+		OriginalSky;
 		if (gInts.cvar->FindVar("sv_skyname")->GetString() != "sky_night_01")
 		{
-			typedef bool(_cdecl* LoadNamedSkysFn)(const char*);
-			static LoadNamedSkysFn LoadSkys = (LoadNamedSkysFn)gSignatures.GetEngineSignature("55 8B EC 81 EC ? ? ? ? 8B 0D ? ? ? ? 53 56 57 8B 01 C7 45");
-
-
-			if (gCvars.sky_changer) {
-				switch ((int)gCvars.sky_changer_value)
-				{
-				case 1:
-					LoadSkys("sky_night_01");
-					break;
-				case 2:
-					LoadSkys("sky_nightfall_01");
-					break;
-				case 3:
-					LoadSkys("sky_harvest_night_01");
-					break;
-				case 4:
-					LoadSkys("sky_halloween");
-					break;
-				case 5:
-					LoadSkys("sky_halloween_night_01");
-					break;
-				case 6:
-					LoadSkys("sky_island_01");
-					break;
-				case 7:
-					LoadSkys("sky_day01_01");
-					break;
-				default:
-					break;
-				}
+			if (gCvars.sky_changer_value == 1)
+			{
+				LoadSkys("sky_night_01");
+				bool bSkyNeedsUpdate = true;
+			}
 		}
+
+		if (gInts.cvar->FindVar("sv_skyname")->GetString() != "sky_nightfall_01")
+		{
+			if (gCvars.sky_changer_value == 2)
+			{
+				LoadSkys("sky_nightfall_01");
+				bool bSkyNeedsUpdate = true;
+			}
+		}
+
+		if (gInts.cvar->FindVar("sv_skyname")->GetString() != "sky_harvest_night_01")
+		{
+			if (gCvars.sky_changer_value == 3)
+			{
+				LoadSkys("sky_harvest_night_01");
+				bool bSkyNeedsUpdate = true;
+			}
+		}
+
+		if (gInts.cvar->FindVar("sv_skyname")->GetString() != "sky_halloween")
+		{
+			if (gCvars.sky_changer_value == 4)
+			{
+				LoadSkys("sky_halloween");
+				bool bSkyNeedsUpdate = true;
+			}
+		}
+
+		if (gInts.cvar->FindVar("sv_skyname")->GetString() != "skybox")
+		{
+			if (gCvars.sky_changer_value == 0)
+			{
+				LoadSkys(OriginalSky);
+				bool bSkyNeedsUpdate = true;
+			}
+		}
+		bSkyNeedsUpdate = false;
 	}
+	
 	for (auto i = 1; i <= gInts.Engine->GetMaxClients(); i++)
 	{
 		CBaseEntity* pEntity = gInts.EntList->GetClientEntity(i);

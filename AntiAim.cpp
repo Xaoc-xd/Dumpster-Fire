@@ -161,6 +161,9 @@ void CAA::Run(CBaseEntity * pLocal, CUserCmd * pCommand)
 		case 6://Edge
 			if (findEdge(angles.y, gCvars.aa_pitch_enabled)) angles.y = useEdge(angles.y);
 			break;
+		case 7://FSideways
+			angles.y = pCommand->tick_count * 180 % 360;
+			break;
 		default:
 			break;
 		}
