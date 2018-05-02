@@ -11,11 +11,17 @@ public:
 
 	void MovementFix(CUserCmd *cmd, Vector angles);
 
+	float GetFOV(Vector angle, Vector src, Vector dst);
+
 private:
 
-	int GetBestTarget(CBaseEntity* pLocal);
+	int GetBestTarget(CBaseEntity* pLocal, CUserCmd* pCommand);
 
 	int GetBestHitbox(CBaseEntity* pLocal, CBaseEntity* pEntity);
+
+	void MakeVector(Vector angle, Vector & vector);
+
+	Vector calc_angle(Vector src, Vector dst);
 };
 
 extern CAimbot gAim;

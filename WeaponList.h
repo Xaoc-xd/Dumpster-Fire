@@ -120,6 +120,7 @@ enum pyroweapons
 	WPN_FestiveFlamethrower = 659,
 	WPN_Phlogistinator = 594,
 	WPN_Rainblower = 741,
+	WPN_NostromoNapalmer = 30474,
 	WPN_BotFlamethrowerS = 798,
 	WPN_BotFlamethrowerG = 807,
 	WPN_BotFlamethrowerR = 887,

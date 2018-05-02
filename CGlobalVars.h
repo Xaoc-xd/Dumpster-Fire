@@ -100,6 +100,8 @@ public:
 	bool misc_nozoom;
 	int backtrack_tick = 12;
 	bool backtrack;
+	bool misc_lagger;
+	int misc_lagkey;
 	bool misc_bighead;
 
 	int storedFOV;

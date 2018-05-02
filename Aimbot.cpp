@@ -22,7 +22,7 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		!(pLocal->GetCond() & TFCond_Zoomed))
 		return;
 
-	CBaseEntity* pEntity = GetBaseEntity(GetBestTarget(pLocal));
+	CBaseEntity* pEntity = GetBaseEntity(GetBestTarget(pLocal, pCommand));
 
 	if (!pEntity)
 		return;
@@ -89,13 +89,14 @@ float CAimbot::AngleDifference(Vector ViewAngles, Vector TargetAngles, float Dis
 	return sqrt(powf(pitch, 2.0) + powf(yaw, 2.0));
 }
 
-int CAimbot::GetBestTarget(CBaseEntity* pLocal)
+int CAimbot::GetBestTarget(CBaseEntity* pLocal, CUserCmd* pCommand)
 {
 	int iBestTarget = -1;
 
 	float flDistToBest = 8192.f;
 
 	Vector vLocal = pLocal->GetEyePosition();
+	float minimalDistance = 99999.0;
 
 	for (int i = 1; i <= gInts.Engine->GetMaxClients(); i++)
 	{
@@ -103,6 +104,10 @@ int CAimbot::GetBestTarget(CBaseEntity* pLocal)
 			continue;
 
 		CBaseEntity* pEntity = GetBaseEntity(i);
+
+		auto pWep = pLocal->GetActiveWeapon();
+		auto pClass = pWep->GetItemDefinitionIndex();
+
 
 		if (!pEntity)
 			continue;
@@ -137,19 +142,33 @@ int CAimbot::GetBestTarget(CBaseEntity* pLocal)
 
 		ClampAngle(vAngs);
 
-		float flDistToTarget = AngleDifference(gInts.Engine->GetViewAngles(), vAngs, 180);
-
-		if (flDistToTarget > gCvars.aimbot_fov)
-			continue;
-
-		if (flDistToTarget < flDistToBest)
-		{
-			flDistToBest = flDistToTarget;
-			iBestTarget = i;
-		}
-
-		if (gCvars.PlayerMode[i] == 2) // Rage targets are the first priorities
+		if (gCvars.PlayerMode[i] == 2)
 			return i;
+
+		auto demo = pClass == demomanweapons::WPN_Sword || pClass == demomanweapons::WPN_FestiveEyelander || pClass == demomanweapons::WPN_Golfclub || pClass == demomanweapons::WPN_ScottsSkullctter || pClass == demomanweapons::WPN_Headless;
+		if (pWep->GetSlot() == 2 && !demo)
+			minimalDistance = (float)8.4;
+
+		if (pClass == demomanweapons::WPN_Sword || pClass == demomanweapons::WPN_FestiveEyelander || pClass == demomanweapons::WPN_Golfclub || pClass == demomanweapons::WPN_ScottsSkullctter || pClass == demomanweapons::WPN_Headless)
+			minimalDistance = 12.0;
+
+		if (pLocal->szGetClass() == "Pyro" && (pClass == pyroweapons::WPN_Backburner || pClass == pyroweapons::WPN_Degreaser || pClass == pyroweapons::WPN_FestiveBackburner || pClass == pyroweapons::WPN_FestiveFlamethrower || pClass == pyroweapons::WPN_Flamethrower || pClass == pyroweapons::WPN_Phlogistinator || pClass == pyroweapons::WPN_Rainblower || pClass == pyroweapons::WPN_NostromoNapalmer))
+			minimalDistance = 17.0;
+
+		float flFOV = GetFOV(pCommand->viewangles, vLocal, vEntity);
+		float distance = Util->flGetDistance(vEntity, pLocal->GetEyePosition());
+
+		if (distance < minimalDistance)
+		{
+			if (flFOV < flDistToBest && flFOV < gCvars.aimbot_fov)
+			{
+				if (gCvars.PlayerMode[i] == 2)
+					return i;
+				flDistToBest = flFOV;
+				gCvars.iAimbotIndex = i;
+				iBestTarget = i;
+			}
+		}
 	}
 
 	return iBestTarget;
@@ -187,6 +206,47 @@ int CAimbot::GetBestHitbox(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		return -1;
 
 	return iBestHitbox;
+}
+
+Vector CAimbot::calc_angle(Vector src, Vector dst)
+{
+	Vector AimAngles, delta;
+	float hyp;
+	delta = src - dst;
+	hyp = sqrtf((delta.x * delta.x) + (delta.y * delta.y));
+	AimAngles.x = atanf(delta.z / hyp) * RADPI;
+	AimAngles.y = atanf(delta.y / delta.x) * RADPI;
+	AimAngles.z = 0.0f;
+	if (delta.x >= 0.0)
+		AimAngles.y += 180.0f;
+	return AimAngles;
+}
+
+void CAimbot::MakeVector(Vector angle, Vector& vector)
+{
+	float pitch, yaw, tmp;
+	pitch = float(angle[0] * PI / 180);
+	yaw = float(angle[1] * PI / 180);
+	tmp = float(cos(pitch));
+	vector[0] = float(-tmp * -cos(yaw));
+	vector[1] = float(sin(yaw)*tmp);
+	vector[2] = float(-sin(pitch));
+}
+
+float CAimbot::GetFOV(Vector angle, Vector src, Vector dst)
+{
+	Vector ang, aim;
+	float mag, u_dot_v;
+	ang = calc_angle(src, dst);
+
+
+	MakeVector(angle, aim);
+	MakeVector(ang, ang);
+
+	mag = sqrtf(pow(aim.x, 2) + pow(aim.y, 2) + pow(aim.z, 2));
+	u_dot_v = aim.Dot(ang);
+
+	return RAD2DEG(acos(u_dot_v / (pow(mag, 2))));
 }
 
 void CAimbot::MovementFix(CUserCmd *cmd, Vector angles) // Thanks to F1ssi0N for coding and plasma for sharing

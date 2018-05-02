@@ -14,7 +14,7 @@
     <ProjectGuid>{53348295-68AD-4FAE-8203-4B68A6C6A6E6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>basehook</RootNamespace>
-    <ProjectName>Dumpster Fire</ProjectName>
+    <ProjectName>DumpsterFire</ProjectName>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
