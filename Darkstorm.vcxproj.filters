@@ -83,6 +83,12 @@
     <ClCompile Include="Backtrack.cpp">
       <Filter>Hacks\Backtrack</Filter>
     </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Tools\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="json.cpp">
+      <Filter>Tools\Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aimbot.h">
@@ -199,6 +205,12 @@
     <ClInclude Include="Backtrack.h">
       <Filter>Hacks\Backtrack</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Tools\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="json.h">
+      <Filter>Tools\Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">
@@ -287,6 +299,9 @@
     </Filter>
     <Filter Include="Hacks\Backtrack">
       <UniqueIdentifier>{86a980d5-dfbe-44b6-b332-2271557a172b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Config">
+      <UniqueIdentifier>{fe084cb8-d066-4b44-9c42-334af20186a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

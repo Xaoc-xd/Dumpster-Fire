@@ -2,6 +2,7 @@
 #include "Client.h"
 #include "Panels.h"
 #include "KillSay.h"
+#include "Config.h"
 
 COffsets gOffsets;
 CGlobalVariables gCvars;
@@ -94,6 +95,8 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	XASSERT(gInts.steamfriends);
 	XASSERT(gInts.steamuser);
 
+	gConfig.LoadSettings(".\\Dumpster-Fire.json");
+
 	gInts.Engine->ClientCmd_Unrestricted("toggleconsole");
 	gInts.cvar->ConsolePrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
@@ -104,11 +107,11 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "AVexxed\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Wolfie\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Apple\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Lemon\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Castle\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "czcv333\n");
+	//gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Lemon\n");
+	//gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Castle\n");
+	//gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "czcv333\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "inhonia\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Tohfu\n");
+	//gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Tohfu\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Chris\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
 	CSteamID localID = gInts.steamuser->GetSteamID();
@@ -122,6 +125,7 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	InputSys::Get().RegisterHotkey(VK_INSERT, [lpArguments]()
 	{
 		Menu::Get().Toggle();
+		gConfig.SaveSettings(".\\Dumpster-Fire.json");
 	});
 
 	InputSys::Get().RegisterHotkey(VK_LBUTTON, [lpArguments]()
