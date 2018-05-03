@@ -142,7 +142,8 @@ void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStag
 		if (gCvars.misc_bighead)
 		{
 			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHeadScale"));
-			*size = 7.0f;
+			*size = gCvars.misc_bigheadsize;
+			//*size = 7.0f;
 		}
 		else if (!gCvars.misc_bighead)
 		{

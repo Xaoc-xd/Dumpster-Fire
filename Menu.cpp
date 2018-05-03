@@ -137,9 +137,11 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"Voice Menu Spam", &gCvars.misc_voice)); // NEEDS LIST (?) // Apple, when you add the options to this feature please add to menu. Thanks. - Wolfie
 	MiscTab->AddControl(new CCheckBox(L"Roll Speedhack", &gCvars.misc_roll_speedhack));
 	MiscTab->AddControl(new CCheckBox(L"wow sweet", &gCvars.misc_wowsweet));
-	MiscTab->AddControl(new CCheckBox(L"Big head", &gCvars.misc_bighead));
+	MiscTab->AddControl(new CCheckBox(L"Big Heads", &gCvars.misc_bighead));
+	MiscTab->AddControl(new CSlider<int>(L"Size", 0, 20, &gCvars.misc_bigheadsize));
 	MiscTab->AddControl(new CCheckBox(L"Backtrack", &gCvars.backtrack));
 	MiscTab->AddControl(new CCheckBox(L"Server Lagger", &gCvars.misc_lagger));
+	MiscTab->AddControl(new CSlider<int>(L"Lagger Power", 1, 100, &gCvars.misc_laggeramt));
 	MiscTab->AddControl(new CCombo(&gCvars.misc_lagkey, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" }));
 	MiscTab->AddControl(new CCheckBox(L"Clean Screenshot", &gCvars.misc_cleanScreenshot));
 	MiscTab->AddControl(new CSlider<int>(L"Field of View", 0, 120, &gCvars.misc_fov));

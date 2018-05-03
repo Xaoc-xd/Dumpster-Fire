@@ -97,53 +97,10 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	}
 		if (gCvars.misc_lagger && Util->IsKeyPressed(gCvars.misc_lagkey))
 		{
-			gInts.Engine->ClientCmd("vogIntscemenu 0 0 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 1");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 2 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 3 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 4");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 5");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 6 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 7 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 0 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 1 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 2");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 3");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 4 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 5");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 6 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 0 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 1 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 2");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 3");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 4 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 5 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 6");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 7");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 0 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 1");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 2 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 3 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 4");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 5");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 6 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 0 7 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 0 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 1 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 2");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 3");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 4 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 5");
-			gInts.Engine->ClientCmd("vogIntscemenu 1 6 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 0 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 1 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 2");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 3");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 4 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 5 ");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 6");
-			gInts.Engine->ClientCmd("vogIntscemenu 2 7");
-
+			for (int i = 1; i > gCvars.misc_laggeramt; i++)
+			{
+				gInts.Engine->ClientCmd("use");
+			}
 		}
 
 }
