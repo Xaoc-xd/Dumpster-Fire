@@ -141,8 +141,8 @@ void Menu::Init()
 	MiscTab->AddControl(new CSlider<int>(L"Size", 0, 20, &gCvars.misc_bigheadsize));
 	MiscTab->AddControl(new CCheckBox(L"Backtrack", &gCvars.backtrack));
 	MiscTab->AddControl(new CCheckBox(L"Server Lagger", &gCvars.misc_lagger));
-	MiscTab->AddControl(new CSlider<int>(L"Lagger Power", 1, 100, &gCvars.misc_laggeramt));
-	MiscTab->AddControl(new CCombo(&gCvars.misc_lagkey, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" }));
+//	MiscTab->AddControl(new CSlider<int>(L"Lagger Power", 1, 100, &gCvars.misc_laggeramt));
+//	MiscTab->AddControl(new CCombo(&gCvars.misc_lagkey, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" }));
 	MiscTab->AddControl(new CCheckBox(L"Clean Screenshot", &gCvars.misc_cleanScreenshot));
 	MiscTab->AddControl(new CSlider<int>(L"Field of View", 0, 120, &gCvars.misc_fov));
 	MiscTab->AddControl(new CSlider<int>(L"Viewmodel FOV", 0, 120, &gCvars.misc_viewmodel_fov));

@@ -95,11 +95,11 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		gInts.Engine->ClientCmd_Unrestricted(voicemenu);
 		fLastSpam = gInts.globals->curtime;
 	}
-		if (gCvars.misc_lagger && Util->IsKeyPressed(gCvars.misc_lagkey))
+		if (gCvars.misc_lagger)
 		{
-			for (int i = 1; i > gCvars.misc_laggeramt; i++)
+			for (int i = 0; i < (int)40; i++)
 			{
-				gInts.Engine->ClientCmd("use");
+				gInts.Engine->ClientCmd("voicemenu 0 0");
 			}
 		}
 
