@@ -197,7 +197,7 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["SmoothAMT"] = gCvars.aimbot_smooth_amt;
 		settings[section]["FovAMT"] = gCvars.aimbot_fov;
 		settings[section]["IgnoreCloak"] = gCvars.aimbot_ignore_cloak;
-		settings[section]["ZommedOnly"] = gCvars.aimbot_zoomedonly;
+		settings[section]["ZoomedOnly"] = gCvars.aimbot_zoomedonly;
 
 
 		section = "Triggerbot";
