@@ -167,7 +167,7 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["Backtrack"], &gCvars.backtrack);
 	GetVal(settings[section]["ServerLagger"], &gCvars.misc_lagger);
 	GetVal(settings[section]["ServerLaggerAMT"], &gCvars.misc_laggeramt);
-	//GetVal(settings[section]["LaggerKey"], &gCvars.misc_lagkey);
+	GetVal(settings[section]["LaggerKey"], &gCvars.misc_lagkey);
 	GetVal(settings[section]["CleanSS"], &gCvars.misc_cleanScreenshot);
 	GetVal(settings[section]["FOV"], &gCvars.misc_fov);
 	GetVal(settings[section]["VFOV"], &gCvars.misc_viewmodel_fov);
@@ -270,7 +270,7 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["Backtrack"] = gCvars.backtrack;
 		settings[section]["ServerLagger"] = gCvars.misc_lagger;
 		settings[section]["ServerLaggerAMT"] = gCvars.misc_laggeramt;
-		//settings[section]["LaggerKey"] = gCvars.misc_lagkey;
+		settings[section]["LaggerKey"] = gCvars.misc_lagkey;
 		settings[section]["CleanSS"] = gCvars.misc_cleanScreenshot;
 		settings[section]["FOV"] = gCvars.misc_fov;
 		settings[section]["VFOV"] = gCvars.misc_viewmodel_fov;
