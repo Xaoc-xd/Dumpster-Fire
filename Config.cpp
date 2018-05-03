@@ -163,9 +163,11 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["RollSpeedhack"], &gCvars.misc_roll_speedhack);
 	GetVal(settings[section]["WOWSweet"], &gCvars.misc_wowsweet);
 	GetVal(settings[section]["BigHead"], &gCvars.misc_bighead);
+	GetVal(settings[section]["BigHeadSize"], &gCvars.misc_bigheadsize);
 	GetVal(settings[section]["Backtrack"], &gCvars.backtrack);
 	GetVal(settings[section]["ServerLagger"], &gCvars.misc_lagger);
-	GetVal(settings[section]["LaggerKey"], &gCvars.misc_lagkey);
+	GetVal(settings[section]["ServerLaggerAMT"], &gCvars.misc_laggeramt);
+	//GetVal(settings[section]["LaggerKey"], &gCvars.misc_lagkey);
 	GetVal(settings[section]["CleanSS"], &gCvars.misc_cleanScreenshot);
 	GetVal(settings[section]["FOV"], &gCvars.misc_fov);
 	GetVal(settings[section]["VFOV"], &gCvars.misc_viewmodel_fov);
@@ -264,9 +266,11 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["RollSpeedhack"] = gCvars.misc_roll_speedhack;
 		settings[section]["WOWSweet"] = gCvars.misc_wowsweet;
 		settings[section]["BigHead"] = gCvars.misc_bighead;
+		settings[section]["BigHeadSize"] = gCvars.misc_bigheadsize;
 		settings[section]["Backtrack"] = gCvars.backtrack;
 		settings[section]["ServerLagger"] = gCvars.misc_lagger;
-		settings[section]["LaggerKey"] = gCvars.misc_lagkey;
+		settings[section]["ServerLaggerAMT"] = gCvars.misc_laggeramt;
+		//settings[section]["LaggerKey"] = gCvars.misc_lagkey;
 		settings[section]["CleanSS"] = gCvars.misc_cleanScreenshot;
 		settings[section]["FOV"] = gCvars.misc_fov;
 		settings[section]["VFOV"] = gCvars.misc_viewmodel_fov;
