@@ -50,6 +50,7 @@ public:
 	int esp_bones;
 	bool esp_face;
 	bool esp_crosshair;
+	bool esp_local;
 
 	bool sky_changer;
 	int sky_changer_value;

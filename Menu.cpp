@@ -72,6 +72,7 @@ void Menu::Init()
 
 	ESPTab->AddControl(new CCheckBox(L"Enabled", &gCvars.esp_active));
 	ESPTab->AddControl(new CCheckBox(L"Enemies Only", &gCvars.esp_enemyonly));
+	ESPTab->AddControl(new CCheckBox(L"Local", &gCvars.esp_local));
 	ESPTab->AddControl(new CCheckBox(L"Box", &gCvars.esp_box));
 	ESPTab->AddControl(new CCombo(&gCvars.esp_box_selection, { L"None", L"Outlined", L"Box", L"Filled", L"Corner" })); 
 	ESPTab->AddControl(new CCheckBox(L"Name", &gCvars.esp_name));
@@ -109,7 +110,7 @@ void Menu::Init()
 
 	RemoveCondTab->AddControl(new CCheckBox(L"Enabled", &gCvars.removecond_enabled));
 	RemoveCondTab->AddControl(new CCombo(&gCvars.removecond_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" })); // NEEDS LIST
-	RemoveCondTab->AddControl(new CSlider<int>(L"Value", 0, 1000, &gCvars.removecond_value));
+	RemoveCondTab->AddControl(new CSlider<int>(L"Value", 0, 2500, &gCvars.removecond_value));
 	RemoveCondTab->AddControl(new CCheckBox(L"Auto Medkit", &gCvars.removecond_automedkit));
 	RemoveCondTab->AddControl(new CCheckBox(L"Auto Instant Cap", &gCvars.removecond_autoinstantcap));
 	RemoveCondTab->AddControl(new CCheckBox(L"Instant Weapon Switch", &gCvars.removecond_instantweaponswitch));

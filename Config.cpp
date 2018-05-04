@@ -117,6 +117,7 @@ bool GConfig::LoadSettings(const char* path)
 
 	section = "ESP";
 	GetVal(settings[section]["Enabled"], &gCvars.esp_active);
+	GetVal(settings[section]["Local"], &gCvars.esp_local);
 	GetVal(settings[section]["EnemiesOnly"], &gCvars.esp_enemyonly);
 	GetVal(settings[section]["Box"], &gCvars.esp_box);
 	GetVal(settings[section]["BoxSelection"], &gCvars.esp_box_selection);
@@ -220,6 +221,7 @@ bool GConfig::SaveSettings(const char* path)
 
 		section = "ESP";
 		settings[section]["Enabled"] = gCvars.esp_active;
+		settings[section]["Local"] = gCvars.esp_local;
 		settings[section]["EnemiesOnly"] = gCvars.esp_enemyonly;
 		settings[section]["Box"] = gCvars.esp_box;
 		settings[section]["BoxSelection"] = gCvars.esp_box_selection;

@@ -15,8 +15,10 @@ void CESP::Run(CBaseEntity* pLocal)
 
 	for (int i = 1; i <= gInts.Engine->GetMaxClients(); i++)
 	{
-		if (i == me)
-			continue;
+		if (!gCvars.esp_local) {
+			if (i == me)
+				continue;
+		}
 
 		if (gCvars.esp_crosshair)
 		{
