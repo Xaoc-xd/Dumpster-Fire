@@ -97,9 +97,9 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	}
 		if (gCvars.misc_lagger)
 		{
-			for (int i = 0; i < (int)40; i++)
+			for (int i = 0; i < gCvars.misc_laggeramt; i++)
 			{
-				gInts.Engine->ClientCmd("voicemenu 0 0");
+				gInts.Engine->ClientCmd("voicemenu 0 0 ");
 			}
 		}
 

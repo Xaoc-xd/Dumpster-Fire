@@ -165,7 +165,7 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["BigHead"], &gCvars.misc_bighead);
 	GetVal(settings[section]["BigHeadSize"], &gCvars.misc_bigheadsize);
 	GetVal(settings[section]["Backtrack"], &gCvars.backtrack);
-	GetVal(settings[section]["ServerLagger"], &gCvars.misc_lagger);
+	//GetVal(settings[section]["ServerLagger"], &gCvars.misc_lagger);
 	GetVal(settings[section]["ServerLaggerAMT"], &gCvars.misc_laggeramt);
 	GetVal(settings[section]["LaggerKey"], &gCvars.misc_lagkey);
 	GetVal(settings[section]["CleanSS"], &gCvars.misc_cleanScreenshot);
@@ -268,7 +268,7 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["BigHead"] = gCvars.misc_bighead;
 		settings[section]["BigHeadSize"] = gCvars.misc_bigheadsize;
 		settings[section]["Backtrack"] = gCvars.backtrack;
-		settings[section]["ServerLagger"] = gCvars.misc_lagger;
+	//	settings[section]["ServerLagger"] = gCvars.misc_lagger;
 		settings[section]["ServerLaggerAMT"] = gCvars.misc_laggeramt;
 		settings[section]["LaggerKey"] = gCvars.misc_lagkey;
 		settings[section]["CleanSS"] = gCvars.misc_cleanScreenshot;
