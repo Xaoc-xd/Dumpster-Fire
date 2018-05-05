@@ -12,6 +12,7 @@ public:
 
 	float aimbot_switch;
 	bool aimbot_active;
+	bool aimbot_waitforcharge;
 	int aimbot_key;
 	bool aimbot_hitscan;
 	int aimbot_hitbox;
@@ -20,7 +21,7 @@ public:
 	bool aimbot_silent;
 	bool aimbot_zoomedonly;
 	bool aimbot_ignore_cloak;
-	bool aimbot_smooth;
+	int aimbot_smooth;
 	int aimbot_smooth_amt;
 
 	float triggerbot_switch;

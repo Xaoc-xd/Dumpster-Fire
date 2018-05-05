@@ -88,6 +88,7 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["Enabled"], &gCvars.aimbot_active);
 	GetVal(settings[section]["Silent"], &gCvars.aimbot_silent);
 	GetVal(settings[section]["Autoshoot"], &gCvars.aimbot_autoshoot);
+	GetVal(settings[section]["WaitForChargeAmby"], &gCvars.aimbot_waitforcharge);
 	GetVal(settings[section]["Hitscan"], &gCvars.aimbot_hitscan);
 	GetVal(settings[section]["Aimkey"], &gCvars.aimbot_key);
 	GetVal(settings[section]["Hitbox"], &gCvars.aimbot_hitbox);
@@ -186,8 +187,9 @@ bool GConfig::SaveSettings(const char* path)
 	{
 		Json::Value settings;
 		Json::StyledWriter styledWriter;
-
+		
 		auto section = "Aimbot";
+		settings[section]["WaitForChargeAmby"] = gCvars.aimbot_waitforcharge;
 		settings[section]["Enabled"] = gCvars.aimbot_active;
 		settings[section]["Silent"] = gCvars.aimbot_silent;
 		settings[section]["Autoshoot"] = gCvars.aimbot_autoshoot;

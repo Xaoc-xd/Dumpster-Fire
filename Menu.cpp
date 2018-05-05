@@ -40,16 +40,10 @@ void Menu::Init()
 	AimbotTab->AddControl(new CCheckBox(L"Autoshoot", &gCvars.aimbot_autoshoot));
 	AimbotTab->AddControl(new CCheckBox(L"Hitscan", &gCvars.aimbot_hitscan));
 	AimbotTab->AddControl(new CCombo(&gCvars.aimbot_key, { L"Always", L"Mouse 1", L"Mouse 2", L"Mouse 3", L"Mouse 4", L"Mouse 5", L"Shift", L"Alt", L"F" }));
-	AimbotTab->AddControl(new CCombo(&gCvars.aimbot_hitbox, {
-		L"Auto", L"Head", L"Pelvis", L"Lower Torse", L"Lower Mid. Torse", L"Upper Mid. Torse", L"Upper Torse",
-		L"Left Upper Arm", L"Left Lower Arm", L"Left Hand", L"Right Upper Arm",
-		L"Right Lower Arm", L"Right Hand", L"Left Hip", L"Left Knee", L"Left Foot",
-		L"Right Hip", L"Right Knee", L"Right Foot"
-	}));
-	AimbotTab->AddControl(new CCheckBox(L"Smooth", &gCvars.aimbot_smooth));
-	AimbotTab->AddControl(new CSlider<int>(L"Amount", 0, 180, &gCvars.aimbot_smooth_amt));
+	AimbotTab->AddControl(new CSlider<int>(L"Smooth", 0, 180, &gCvars.aimbot_smooth));
 	AimbotTab->AddControl(new CCheckBox(L"Ignore Cloak", &gCvars.aimbot_ignore_cloak));
 	AimbotTab->AddControl(new CCheckBox(L"Zoomed Only", &gCvars.aimbot_zoomedonly));
+	AimbotTab->AddControl(new CCheckBox(L"Amby", &gCvars.aimbot_waitforcharge));
 
 	Main.AddControl(AimbotTab);
 #pragma endregion

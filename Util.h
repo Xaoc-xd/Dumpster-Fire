@@ -31,6 +31,8 @@ public:
 	bool IsReadyToBackstab(CBaseEntity* pLocal, CBaseCombatWeapon* pWep);
 
 	void silentMovementFix(CUserCmd *pUserCmd, Vector angles);
+
+	Vector EstimateAbsVelocity(CBaseEntity * ent);
 	
 	PVOID InitKeyValue();
 

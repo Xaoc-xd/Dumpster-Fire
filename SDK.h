@@ -20,6 +20,26 @@
 
 using namespace std;
 
+enum MoveType_t
+{
+	MOVETYPE_NONE = 0,
+	MOVETYPE_ISOMETRIC,
+	MOVETYPE_WALK,
+	MOVETYPE_STEP,
+	MOVETYPE_FLY,
+	MOVETYPE_FLYGRAVITY,
+	MOVETYPE_VPHYSICS,
+	MOVETYPE_PUSH,
+	MOVETYPE_NOCLIP,
+	MOVETYPE_LADDER,
+	MOVETYPE_OBSERVER,
+	MOVETYPE_CUSTOM,
+
+	MOVETYPE_LAST = MOVETYPE_CUSTOM,
+
+	MOVETYPE_MAX_BITS = 4,
+};
+
 typedef void* ( __cdecl* CreateInterface_t )( const char*, int* );
 typedef void* (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
 
@@ -50,6 +70,8 @@ class CBaseCombatWeapon;
 #define FLOW_INCOMING 1
 #define BLU_TEAM 3
 #define RED_TEAM 2
+#define ZOOM_BASE_DAMAGE 150.0f
+#define SNIPERRIFLE_BASE_DAMANGE 50.0f
 #define COLORCODE(r,g,b,a)((DWORD)((((r)&0xff)<<24)|(((g)&0xff)<<16)|(((b)&0xff)<<8)|((a)&0xff)))
 
 typedef struct player_info_s
@@ -160,6 +182,29 @@ enum ClientFrameStage_t
 	FRAME_RENDER_END
 };
 
+enum class tf_hitbox : int
+{
+	head = 0,
+	pelvis = 1,
+	spine_0 = 2,
+	spine_1 = 3,
+	spine_2 = 4,
+	spine_3 = 5,
+	upperArm_L = 6,
+	lowerArm_L = 7,
+	hand_L = 8,
+	upperArm_R = 9,
+	lowerArm_R = 10,
+	hand_R = 11,
+	hip_L = 12,
+	knee_L = 13,
+	foot_L = 14,
+	hip_R = 15,
+	knee_R = 16,
+	foot_R = 17,
+};
+
+
 class CBaseEntity
 {
 public:
@@ -170,14 +215,30 @@ public:
 		n.SetValue(this, fov);
 		n2.SetValue(this, fov);
 	}
+	float m_flLastFireTime()
+	{
+		DYNVAR_RETURN(float, this, "DT_TFWeaponBase", "LocalActiveTFWeaponData", "m_flLastFireTime");
+	}
 	void SetCond(int c)
 	{
 		DYNVAR(n, int, "DT_TFPlayer", "m_Shared", "m_nPlayerCond");
 		return n.SetValue(this, c);
 	}
+	int GetHitboxSet()
+	{
+		DYNVAR_RETURN(int, this, "DT_BaseAnimating", "m_nHitboxSet");
+	}
+	MoveType_t GetMoveType()
+	{
+		DYNVAR_RETURN(MoveType_t, this, "DT_BaseEntity", "movetype");
+	}
 	int GetOwner()
 	{
 		DYNVAR_RETURN(int, this, "DT_BaseEntity", "m_hOwnerEntity");
+	}
+	float GetChargeDamage()
+	{
+		DYNVAR_RETURN(float, this, "DT_TFSniperRifle", "SniperRifleLocalData", "m_flChargedDamage");
 	}
 
 	Vector& GetAbsOrigin()
