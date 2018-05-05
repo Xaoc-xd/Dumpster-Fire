@@ -37,6 +37,8 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 			if( gInts.Engine->IsDrawingLoadingImage() || !gInts.Engine->IsInGame( ) || !gInts.Engine->IsConnected() || gInts.Engine->Con_IsVisible( ) )
 			{
 				gDraw.DrawString(8, iHeight / 16, Color::White(), "Dumpster Fire - Build %s @ %s", __DATE__, __TIME__);
+				Menu::Get().PaintTraverse();
+				gInts.Panels->SetMouseInputEnabled(vguiPanel, Menu::Get().IsVisible());
 				return; //No need to draw the rest.
 			}
 

@@ -21,6 +21,12 @@ CreateInterface_t CvarFactory = NULL;
 //TEST AAAAA
 typedef void(__thiscall *OverrideViewFn) (void*, CViewSetup*);
 
+ITFMatchGroupDescription* GetMatchGroupDescription(int& idx) //credits blackfire62
+{
+	typedef ITFMatchGroupDescription* (_cdecl* GetFn)(int&);
+	static GetFn Get = (GetFn)(gSignatures.GetClientSignature("55 8B EC 8B 45 08 8B 00 83 F8 FF"));
+	return Get(idx);
+}
 void __fastcall Hooked_OverrideView(void* _this, void* _edx, CViewSetup* pSetup) // credits, ActualCheats and outi - plasma
 {
 
@@ -149,6 +155,19 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 			panelHook->Init(gInts.Panels);
 			panelHook->HookMethod(&Hooked_PaintTraverse, gOffsets.iPaintTraverseOffset);
 			panelHook->Rehook();
+		}
+	}
+	for (int i = 0; i < 12; i++)//credits blackfire62
+	{
+		ITFMatchGroupDescription* desc = GetMatchGroupDescription(i);
+
+		if (!desc || desc->m_iID > 9) //ID's over 9 are invalid
+			continue;
+
+		if (desc->m_bForceCompetitiveSettings)
+		{
+			desc->m_bForceCompetitiveSettings = false;
+			gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Competitive CVars Successfully Bypassed!\n");
 		}
 	}
 
