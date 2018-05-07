@@ -219,6 +219,10 @@ public:
 	{
 		DYNVAR_RETURN(float, this, "DT_TFWeaponBase", "LocalActiveTFWeaponData", "m_flLastFireTime");
 	}
+	inline int GetBuildingHealth()
+	{
+		DYNVAR_RETURN(int, this, "DT_BaseObject", "m_iHealth");
+	}
 	void SetCond(int c)
 	{
 		DYNVAR(n, int, "DT_TFPlayer", "m_Shared", "m_nPlayerCond");

@@ -119,8 +119,10 @@ bool GConfig::LoadSettings(const char* path)
 	section = "ESP";
 	GetVal(settings[section]["Enabled"], &gCvars.esp_active);
 	GetVal(settings[section]["Local"], &gCvars.esp_local);
+	GetVal(settings[section]["Weapon"], &gCvars.esp_weapons);
 	GetVal(settings[section]["EnemiesOnly"], &gCvars.esp_enemyonly);
 	GetVal(settings[section]["Box"], &gCvars.esp_box);
+	GetVal(settings[section]["BoxBuildings"], &gCvars.esp_box_buildings);
 	GetVal(settings[section]["BoxSelection"], &gCvars.esp_box_selection);
 	GetVal(settings[section]["Name"], &gCvars.esp_name);
 	GetVal(settings[section]["Class"], &gCvars.esp_class);
@@ -136,6 +138,8 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["HappyFace"], &gCvars.esp_face);
 	GetVal(settings[section]["Skychanger"], &gCvars.sky_changer_value);
 	GetVal(settings[section]["Crosshair"], &gCvars.esp_crosshair);
+	GetVal(settings[section]["Objects"], &gCvars.esp_objects);
+	GetVal(settings[section]["HealthBuildings"], &gCvars.esp_health_buildings);
 
 	section = "RemoveCond";
 	GetVal(settings[section]["Enabled"], &gCvars.removecond_enabled);
@@ -224,8 +228,10 @@ bool GConfig::SaveSettings(const char* path)
 		section = "ESP";
 		settings[section]["Enabled"] = gCvars.esp_active;
 		settings[section]["Local"] = gCvars.esp_local;
+		settings[section]["Weapon"] = gCvars.esp_weapons;
 		settings[section]["EnemiesOnly"] = gCvars.esp_enemyonly;
 		settings[section]["Box"] = gCvars.esp_box;
+		settings[section]["BoxBuildings"] = gCvars.esp_box_buildings;
 		settings[section]["BoxSelection"] = gCvars.esp_box_selection;
 		settings[section]["Name"] = gCvars.esp_name;
 		settings[section]["Class"] = gCvars.esp_class;
@@ -241,6 +247,8 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["HappyFace"] = gCvars.esp_face;
 		settings[section]["Skychanger"] = gCvars.sky_changer_value;
 		settings[section]["Crosshair"] = gCvars.esp_crosshair;
+		settings[section]["Objects"] = gCvars.esp_objects;
+		settings[section]["HealthBuildings"] = gCvars.esp_health_buildings;
 
 		section = "RemoveCond";
 		settings[section]["Enabled"] = gCvars.removecond_enabled;

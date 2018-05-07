@@ -35,6 +35,11 @@ public:
 
 	float esp_switch;
 	bool esp_active;
+	bool esp_objects;
+	int esp_health_buildings;
+	bool esp_weapons;
+	bool esp_box_buildings;
+	bool esp_buildings;
 	bool esp_enemyonly;
 	bool esp_box;
 	int esp_box_thickness = 1;

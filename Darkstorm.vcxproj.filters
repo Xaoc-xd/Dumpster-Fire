@@ -151,9 +151,6 @@
     <ClInclude Include="CMenu.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="CGlobalVars.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="ChatSpam.h">
       <Filter>Hacks\ChatSpam</Filter>
     </ClInclude>
@@ -211,6 +208,7 @@
     <ClInclude Include="json.h">
       <Filter>Tools\Config</Filter>
     </ClInclude>
+    <ClInclude Include="CGlobalVars.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Hacks">

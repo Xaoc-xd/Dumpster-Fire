@@ -4,6 +4,8 @@
 class CUtil
 {
 public:
+	void TrimStart(std::string & s);
+
 	void VectorTransform(const Vector& vSome, const matrix3x4& vMatrix, Vector& vOut);
 
 	float RandFloatRange(float min, float max);

@@ -27,7 +27,7 @@ void Menu::Init()
 {
 	m_isVisible = false;
 
-	CWindow Main(100, 100, 703, 500);
+	CWindow Main(100, 100, 703, 600);
 
 	// checkbox: 12 pixels
 
@@ -71,6 +71,7 @@ void Menu::Init()
 	ESPTab->AddControl(new CCombo(&gCvars.esp_box_selection, { L"None", L"Outlined", L"Box", L"Filled", L"Corner" })); 
 	ESPTab->AddControl(new CCheckBox(L"Name", &gCvars.esp_name));
 	ESPTab->AddControl(new CCheckBox(L"Class", &gCvars.esp_class));
+	ESPTab->AddControl(new CCheckBox(L"Weapon", &gCvars.esp_weapons));
 	ESPTab->AddControl(new CCheckBox(L"Cond", &gCvars.esp_playerCond_enabled));
 	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"OFF", L"Dumpster Fire", L"NullCore" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Remove Cloak", &gCvars.esp_removeCloak));
@@ -83,6 +84,9 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Happy Face", &gCvars.esp_face));
 	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween" }));
 	ESPTab->AddControl(new CCheckBox(L"Crosshair", &gCvars.esp_crosshair));
+	ESPTab->AddControl(new CCheckBox(L"Sentry", &gCvars.esp_buildings));
+	ESPTab->AddControl(new CCheckBox(L"Box", &gCvars.esp_box_buildings));
+	ESPTab->AddControl(new CCombo(&gCvars.esp_health_buildings, { L"OFF", L"Text", L"Bar", L"Both" }));
 
 	Main.AddControl(ESPTab);
 #pragma endregion

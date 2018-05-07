@@ -1,4 +1,6 @@
 #include "Util.h"
+#include <algorithm>
+#include <ctype.h>
 
 CUtil* Util;
 
@@ -24,6 +26,14 @@ void CUtil::ReplaceString(std::string& input, const std::string& what, const std
 		input.replace(index, what.size(), with_what);
 		index = input.find(what, index + with_what.size());
 	}
+}
+
+void CUtil::TrimStart(std::string &s)
+{
+	s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch)
+	{
+		return (ch);
+	}));
 }
 
 Vector CUtil::EstimateAbsVelocity(CBaseEntity *ent)

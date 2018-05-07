@@ -1,5 +1,6 @@
 #include "ESP.h"
 #include "CDrawManager.h"
+#include "Util.h"
 /*
 
 aaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHH
@@ -16,8 +17,11 @@ void CESP::Run(CBaseEntity* pLocal)
 	for (int i = 1; i <= gInts.Engine->GetMaxClients(); i++)
 	{
 		if (!gCvars.esp_local) {
-			if (i == me)
-				continue;
+			if (!gCvars.misc_thirdPerson)
+			{
+				if (i == me)
+					continue;
+			}
 		}
 
 		if (gCvars.esp_crosshair)
@@ -45,6 +49,143 @@ void CESP::Run(CBaseEntity* pLocal)
 			continue;
 
 		Player_ESP(pLocal, pEntity);
+	}
+	for (int i = 1; i <= gInts.EntList->GetHighestEntityIndex(); i++)
+	{
+		Vector vOrigin, yousell;
+		CBaseEntity *pEntity = gInts.EntList->GetClientEntity(i);
+		if (pEntity == NULL)
+			continue;
+		if (!pEntity)
+			continue;
+		if (pEntity->GetIndex() == me)
+			continue;
+
+		if (pEntity->GetClientClass()->iClassID != 88)
+			continue;
+
+		if (!gCvars.esp_buildings)
+			continue;
+
+		int hpBuilding = 0;
+
+		if (pEntity->GetBuildingHealth() == NULL)
+			continue;
+
+		hpBuilding = pEntity->GetBuildingHealth();
+		const matrix3x4& vMatrix = pEntity->GetRgflCoordinateFrame();
+		Color clrBuildingColor = gDraw.GetPlayerColor(pEntity);
+		pEntity->GetWorldSpaceCenter(vOrigin);
+		Vector vMin = pEntity->GetCollideableMins();
+		Vector vMax = pEntity->GetCollideableMaxs();
+
+		Vector vPointList[] = {
+			Vector(vMin.x, vMin.y, vMin.z),
+			Vector(vMin.x, vMax.y, vMin.z),
+			Vector(vMax.x, vMax.y, vMin.z),
+			Vector(vMax.x, vMin.y, vMin.z),
+			Vector(vMax.x, vMax.y, vMax.z),
+			Vector(vMin.x, vMax.y, vMax.z),
+			Vector(vMin.x, vMin.y, vMax.z),
+			Vector(vMax.x, vMin.y, vMax.z)
+		};
+		Vector a;
+		Vector vTransformed[8];
+
+		for (int i = 0; i < 8; i++)
+			for (int j = 0; j < 3; j++)
+				vTransformed[i][j] = vPointList[i].Dot((Vector&)vMatrix[j]) + vMatrix[j][3];
+
+		Vector flb, brt, blb, frt, frb, brb, blt, flt;
+
+		if (!gDraw.WorldToScreen(vTransformed[3], flb) ||
+			!gDraw.WorldToScreen(vTransformed[0], blb) ||
+			!gDraw.WorldToScreen(vTransformed[2], frb) ||
+			!gDraw.WorldToScreen(vTransformed[6], blt) ||
+			!gDraw.WorldToScreen(vTransformed[5], brt) ||
+			!gDraw.WorldToScreen(vTransformed[4], frt) ||
+			!gDraw.WorldToScreen(vTransformed[1], brb) ||
+			!gDraw.WorldToScreen(vTransformed[7], flt))
+			return;
+
+		Vector arr[] = { flb, brt, blb, frt, frb, brb, blt, flt };
+
+		float left = flb.x;
+		float top = flb.y;
+		float right = flb.x;
+		float bottom = flb.y;
+
+		for (int i = 0; i < 8; i++)
+		{
+			if (left > arr[i].x)
+				left = arr[i].x;
+			if (top < arr[i].y)
+				top = arr[i].y;
+			if (right < arr[i].x)
+				right = arr[i].x;
+			if (bottom > arr[i].y)
+				bottom = arr[i].y;
+		}
+
+		Color clrTeam = Color(255, 255, 255, 255);
+		if (pEntity->GetTeamNum() == 2)
+			clrTeam = Color(255, 20, 20, 255); //red
+		else if (pEntity->GetTeamNum() == 3)
+			clrTeam = Color(0, 153, 255, 255);//blue
+
+
+		float x = left;
+		float y = bottom;
+		float w = right - left;
+		float h = top - bottom;
+
+		x += ((right - left) / 8);
+		w -= ((right - left) / 8) * 2;
+		int iY = 0;
+		int iHp = pEntity->GetHealth(), iMaxHp = pEntity->GetMaxHealth();
+		if (iHp > iMaxHp)
+			iHp = iMaxHp;
+		if (gDraw.WorldToScreen(vOrigin, yousell))
+		{
+
+			if (gCvars.esp_name)
+			{
+				gDraw.DrawString(x + w + 2, y + iY, clrBuildingColor, "Sentry");
+				iY += gDraw.GetESPHeight();
+			}
+			if (gCvars.esp_health_buildings == 1 && gCvars.esp_health_enabled || gCvars.esp_health_buildings == 3 && gCvars.esp_health_enabled)
+			{
+				gDraw.DrawString(x + w + 2, y + iY, clrBuildingColor, "%d HP", hpBuilding);
+				iY += gDraw.GetESPHeight();
+			}
+			if (gCvars.esp_health_buildings == 2 && gCvars.esp_health_enabled || gCvars.esp_health_buildings == 3 && gCvars.esp_health_enabled)
+			{
+				gDraw.OutlineRect(x - 6, y - 1, 5, h, Color::Black());
+				gDraw.DrawRect(x - 5, y + (h - (h / iMaxHp * hpBuilding)) - 1, 3, h / iMaxHp * hpBuilding, Color::Green());
+			}
+			if (gCvars.esp_box_buildings)
+			{
+				switch (gCvars.esp_box_selection)
+				{
+				case 1://Outlined
+					gDraw.OutlineRect(x - 1, y - 1, w + 2, h + 2, Color::Black());
+					gDraw.OutlineRect(x, y, w, h, clrBuildingColor);
+					gDraw.OutlineRect(x + 1, y + 1, w - 2, h - 2, Color::Black());
+					break;
+				case 2://Not outlined
+					gDraw.OutlineRect(x, y, w, h, clrBuildingColor);
+					break;
+				case 3://Filled
+					gDraw.DrawRect(x, y, w, h, clrBuildingColor);
+					break;
+				case 4://Corner
+					gDraw.DrawCornerBox(x, y, w, h - 1, 3, 5, clrBuildingColor);
+					break;
+					break;
+				}
+			}
+
+		}
 	}
 }
 
@@ -115,6 +256,8 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 	x += ((right - left) / 8); //pseudo fix for those THICC boxes
 	w -= ((right - left) / 8) * 2;
 
+	int x_strings = x + 3;
+
 	Color clrPlayerCol = gDraw.GetPlayerColor(pEntity);
 	Color clrBoneCol = gCvars.esp_bones == 1 ? Color::White() : gCvars.esp_bones == 2 ? Color::Green() : clrPlayerCol;
 	int iY = 0;
@@ -166,6 +309,23 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		iY += gDraw.GetESPHeight();
 	}
 	
+	CBaseCombatWeapon* pWep = pEntity->GetActiveWeapon();
+	if (pWep)
+	{
+		if (gCvars.esp_weapons)
+		{
+			std::string name = pWep->GetName();
+			Util->ReplaceString(name, "#", "");
+			Util->ReplaceString(name, "_", " ");
+			Util->ReplaceString(name, "TF", "");
+			Util->ReplaceString(name, "Weapon", "");
+			Util->ReplaceString(name, "tf weapon", "");
+			Util->ReplaceString(name, "syringegun medic", "syringegun");
+			Util->TrimStart(name);
+			gDraw.DrawString(x + w + 2, y + iY, clrPlayerCol, "%s", name.c_str());
+			iY += gDraw.GetESPHeight();
+		}
+	}
 
 	if (gCvars.esp_bones && gCvars.esp_bones_enabled) //bones
 	{
@@ -183,7 +343,6 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		DrawBone(pEntity, iLeftLegBones, 3, clrBoneCol);
 		DrawBone(pEntity, iRightLegBones, 3, clrBoneCol);
 	}
-	int x_strings = x + 3;
 	if (gCvars.esp_box)
 	{
 		switch (gCvars.esp_box_selection)
