@@ -17,11 +17,8 @@ void CESP::Run(CBaseEntity* pLocal)
 	for (int i = 1; i <= gInts.Engine->GetMaxClients(); i++)
 	{
 		if (!gCvars.esp_local) {
-			if (!gCvars.misc_thirdPerson)
-			{
 				if (i == me)
 					continue;
-			}
 		}
 
 		if (gCvars.esp_crosshair)
@@ -54,12 +51,8 @@ void CESP::Run(CBaseEntity* pLocal)
 	{
 		Vector vOrigin, yousell;
 		CBaseEntity *pEntity = gInts.EntList->GetClientEntity(i);
-		if (pEntity == NULL)
-			continue;
-		if (!pEntity)
-			continue;
-		if (pEntity->GetIndex() == me)
-			continue;
+
+		if (!pEntity) continue;
 
 		if (pEntity->GetClientClass()->iClassID != 88)
 			continue;
@@ -67,10 +60,9 @@ void CESP::Run(CBaseEntity* pLocal)
 		if (!gCvars.esp_buildings)
 			continue;
 
-		int hpBuilding = 0;
+		if (gCvars.esp_enemyonly && pEntity->GetTeamNum() == pLocal->GetTeamNum()) continue;
 
-		if (pEntity->GetBuildingHealth() == NULL)
-			continue;
+		int hpBuilding = 0;
 
 		hpBuilding = pEntity->GetBuildingHealth();
 		const matrix3x4& vMatrix = pEntity->GetRgflCoordinateFrame();
