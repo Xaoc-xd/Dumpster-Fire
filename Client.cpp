@@ -150,6 +150,26 @@ void __fastcall Hooked_FrameStageNotify(void* _this, void* _edx, ClientFrameStag
 			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHeadScale"));
 			*size = 1.0f;
 		}
+		if (gCvars.misc_bighead)
+		{
+			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flTorsoScale"));
+			*size = gCvars.misc_torsosize;
+		}
+		else if (!gCvars.misc_bighead)
+		{
+			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flTorsoScale"));
+			*size = 1.0f;
+		}
+		if (gCvars.misc_bighead)
+		{
+			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHandScale"));
+			*size = gCvars.misc_handsize;
+		}
+		else if (!gCvars.misc_bighead)
+		{
+			auto *size = reinterpret_cast<float*>(reinterpret_cast<DWORD>(pEntity) + gNetVars.get_offset("DT_TFPlayer", "m_flHandScale"));
+			*size = 1.0f;
+		}
 	}
 
 	if (stage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)

@@ -53,10 +53,9 @@ void CKillSay::FireGameEvent(IGameEvent *event)
 		msg.append(source->at(rand() % source->size()));
 
 		player_info_t pInfo;
-		if (gInts.Engine->GetPlayerInfo(vid, &pInfo))
+		if (gCvars.misc_killsay_enabled)
 		{
 			Util->ReplaceString(msg, "%name%", pInfo.name);
-			Util->ReplaceString(msg, "% name %", pInfo.name);
 		}
 		/*	Util->ReplaceString(msg, "\n", "\x0D");*/
 		gInts.Engine->ClientCmd(msg.c_str());

@@ -112,6 +112,8 @@ public:
 	int misc_laggeramt = 1;
 	int misc_lagkey;
 	bool misc_bighead;
+	int misc_torsosize = 1;
+	int misc_handsize = 1;
 	int misc_bigheadsize;
 
 	int storedFOV;

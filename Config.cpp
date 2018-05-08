@@ -170,6 +170,8 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["WOWSweet"], &gCvars.misc_wowsweet);
 	GetVal(settings[section]["BigHead"], &gCvars.misc_bighead);
 	GetVal(settings[section]["BigHeadSize"], &gCvars.misc_bigheadsize);
+	GetVal(settings[section]["BigTorsoSize"], &gCvars.misc_torsosize);
+	GetVal(settings[section]["BigHandSize"], &gCvars.misc_handsize);
 	GetVal(settings[section]["Backtrack"], &gCvars.backtrack);
 	//GetVal(settings[section]["ServerLagger"], &gCvars.misc_lagger);
 	GetVal(settings[section]["ServerLaggerAMT"], &gCvars.misc_laggeramt);
@@ -279,6 +281,8 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["WOWSweet"] = gCvars.misc_wowsweet;
 		settings[section]["BigHead"] = gCvars.misc_bighead;
 		settings[section]["BigHeadSize"] = gCvars.misc_bigheadsize;
+		settings[section]["BigTorsoSize"] = gCvars.misc_torsosize;
+		settings[section]["BigHandSize"] = gCvars.misc_handsize;
 		settings[section]["Backtrack"] = gCvars.backtrack;
 	//	settings[section]["ServerLagger"] = gCvars.misc_lagger;
 		settings[section]["ServerLaggerAMT"] = gCvars.misc_laggeramt;

@@ -137,7 +137,9 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"Roll Speedhack", &gCvars.misc_roll_speedhack));
 	MiscTab->AddControl(new CCheckBox(L"wow sweet", &gCvars.misc_wowsweet));
 	MiscTab->AddControl(new CCheckBox(L"Big Heads", &gCvars.misc_bighead));
-	MiscTab->AddControl(new CSlider<int>(L"Size", 0, 20, &gCvars.misc_bigheadsize));
+	MiscTab->AddControl(new CSlider<int>(L"HeadSize", 0, 20, &gCvars.misc_bigheadsize));
+	MiscTab->AddControl(new CSlider<int>(L"TorsoSize", 0, 20, &gCvars.misc_torsosize));
+	MiscTab->AddControl(new CSlider<int>(L"HandSize", 0, 20, &gCvars.misc_handsize));
 	MiscTab->AddControl(new CCheckBox(L"Backtrack", &gCvars.backtrack));
 	MiscTab->AddControl(new CCheckBox(L"Server Lagger", &gCvars.misc_lagger));
 	MiscTab->AddControl(new CSlider<int>(L"Lagger Power", 1, 100, &gCvars.misc_laggeramt));
