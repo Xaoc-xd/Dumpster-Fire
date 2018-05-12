@@ -11,56 +11,34 @@ void CKillSay::InitKillSay()
 
 void CKillSay::FireGameEvent(IGameEvent *event)
 {
+	if (strcmp(event->GetName(), "player_death") || !gCvars.misc_killsay_selection || !gCvars.misc_killsay_enabled)
+		return;
 
-	if (!strcmp(event->GetName(), "player_death") && gCvars.misc_killsay_selection > 0 && gCvars.misc_killsay_enabled)
-	{
-		int vid = event->GetInt("userid");
-		int kid = event->GetInt("attacker");
-		if (kid == vid) return;
-		if (gInts.Engine->GetPlayerForUserID(kid) != gInts.Engine->GetLocalPlayer()) return;
+	int vid = event->GetInt("userid");
+	int kid = event->GetInt("attacker");
+	if (kid == vid) return;
 
-		const std::vector<std::string>* source = nullptr;
-		std::string msg;
-		msg.append("say ");
+	const std::vector<std::string>* source = nullptr;
+	std::string msg;
+	msg.append("say ");
 
-		// Can't use a float in an if statement because it is not an integral type
+	if (gCvars.misc_killsay_selection == 1)
+		source = &KillSay::niggerhook;
+	else if (gCvars.misc_killsay_selection == 2)
+		source = &KillSay::ncc;
+	else
+		source = &killsayFile.lines;
 
-		if (gCvars.misc_killsay_selection == 1)
-			source = &KillSay::niggerhook;
-		else if (gCvars.misc_killsay_selection == 2)
-			source = &KillSay::ncc;
-		else
-			source = &killsayFile.lines;
+	msg.append(source->at(rand() % source->size()));
 
-		/*switch (gCvars.misc_killsay_selection)
-		{
-		case 1:
-			source = &KillSay::niggerhook;
-			break;
-		case 2:
-			source = &KillSay::ncc;
-			break;
-		case 3:
-			source = &killsayFile.lines;
-			break;
-		}
+	player_info_t pInfo;
+	if (!gInts.Engine->GetPlayerInfo(kid, &pInfo))
+		return;
+	
+	const int iBuffer = 256;
+	char szCommand[iBuffer];
+	if (gCvars.misc_killsay_enabled)
+		sprintf_s(szCommand, iBuffer, msg.c_str(), pInfo.name);
 
-		if (gCvars.killsay.newlines)//\x0D
-		{
-			msg.append(" ");
-			msg.append(repeat(gCvars.killsay.newlines, "\x0D"));
-		}*/
-		msg.append(source->at(rand() % source->size()));
-
-		player_info_t pInfo;
-		if (gCvars.misc_killsay_enabled)
-		{
-			Util->ReplaceString(msg, "%name%", pInfo.name);
-		}
-		/*	Util->ReplaceString(msg, "\n", "\x0D");*/
-		gInts.Engine->ClientCmd(msg.c_str());
-
-
-
-	}
+	gInts.Engine->ClientCmd(szCommand);
 }

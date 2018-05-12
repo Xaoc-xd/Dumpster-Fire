@@ -68,25 +68,25 @@ void Menu::Init()
 	ESPTab->AddControl(new CCheckBox(L"Enemies Only", &gCvars.esp_enemyonly));
 	ESPTab->AddControl(new CCheckBox(L"Local", &gCvars.esp_local));
 	ESPTab->AddControl(new CCheckBox(L"Box", &gCvars.esp_box));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_box_selection, { L"None", L"Outlined", L"Box", L"Filled", L"Corner" })); 
+	ESPTab->AddControl(new CCombo(&gCvars.esp_box_selection, { L"Outlined", L"Box", L"Filled", L"Corner" })); 
 	ESPTab->AddControl(new CCheckBox(L"Name", &gCvars.esp_name));
 	ESPTab->AddControl(new CCheckBox(L"Class", &gCvars.esp_class));
 	ESPTab->AddControl(new CCheckBox(L"Weapon", &gCvars.esp_weapons));
 	ESPTab->AddControl(new CCheckBox(L"Cond", &gCvars.esp_playerCond_enabled));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"OFF", L"Dumpster Fire", L"NullCore" })); // NEEDS LIST
+	ESPTab->AddControl(new CCombo(&gCvars.esp_playerCond, { L"Dumpster Fire", L"NullCore" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Remove Cloak", &gCvars.esp_removeCloak));
 	ESPTab->AddControl(new CCheckBox(L"Remove Disguise", &gCvars.esp_removeDisguise));
 	ESPTab->AddControl(new CCheckBox(L"Remove Taunt", &gCvars.esp_removeTaunt));
 	ESPTab->AddControl(new CCheckBox(L"Health", &gCvars.esp_health_enabled));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_health, { L"OFF", L"Text", L"Bar", L"Both" })); // NEEDS LIST
+	ESPTab->AddControl(new CCombo(&gCvars.esp_health, { L"Text", L"Bar", L"Both" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Bones", &gCvars.esp_bones_enabled));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_bones, { L"OFF", L"White", L"Health", L"Team" })); // NEEDS LIST
+	ESPTab->AddControl(new CCombo(&gCvars.esp_bones, { L"White", L"Health", L"Team" })); // NEEDS LIST
 	ESPTab->AddControl(new CCheckBox(L"Happy Face", &gCvars.esp_face));
 	ESPTab->AddControl(new CCombo(&gCvars.sky_changer_value, { L"None", L"Night", L"Nightfall", L"Harvest Night", L"Halloween" }));
 	ESPTab->AddControl(new CCheckBox(L"Crosshair", &gCvars.esp_crosshair));
 	ESPTab->AddControl(new CCheckBox(L"Sentry", &gCvars.esp_buildings));
 	ESPTab->AddControl(new CCheckBox(L"Box", &gCvars.esp_box_buildings));
-	ESPTab->AddControl(new CCombo(&gCvars.esp_health_buildings, { L"OFF", L"Text", L"Bar", L"Both" }));
+	ESPTab->AddControl(new CCombo(&gCvars.esp_health_buildings, { L"Text", L"Bar", L"Both" }));
 
 	Main.AddControl(ESPTab);
 #pragma endregion
@@ -95,9 +95,9 @@ void Menu::Init()
 
 	AntiAimTab->AddControl(new CCheckBox(L"Enabled", &gCvars.aa_enabled));
 	AntiAimTab->AddControl(new CCheckBox(L"Pitch", &gCvars.aa_pitch_enabled));
-	AntiAimTab->AddControl(new CCombo(&gCvars.aa_pitch, { L"None", L"Fake Up", L"Up", L"Fake Down", L"Down" })); // NEEDS LIST
+	AntiAimTab->AddControl(new CCombo(&gCvars.aa_pitch, { L"Fake Up", L"Up", L"Fake Down", L"Down" })); // NEEDS LIST
 	AntiAimTab->AddControl(new CCheckBox(L"Yaw", &gCvars.aa_yaw_enabled));
-	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"None", L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge", L"Fake Sideways" })); // NEEDS LIST // Finally, a string that actually uses a unicode character! // Well not anymore...
+	AntiAimTab->AddControl(new CCombo(&gCvars.aa_yaw, { L"Right", L"Left", L"Back", L"Random", L"Spin", L"Edge", L"Fake Sideways" })); // NEEDS LIST // Finally, a string that actually uses a unicode character! // Well not anymore...
 	AntiAimTab->AddControl(new CSlider<int>(L"Spin Speed", 0, 360, &gCvars.aa_spinspeed));
 	AntiAimTab->AddControl(new CCheckBox(L"Resolver", &gCvars.aa_resolver));
 
@@ -128,11 +128,11 @@ void Menu::Init()
 	MiscTab->AddControl(new CCheckBox(L"No Zoom", &gCvars.misc_nozoom));
 	MiscTab->AddControl(new CCheckBox(L"No Push", &gCvars.misc_no_push));
 	MiscTab->AddControl(new CCheckBox(L"Chat Spam", &gCvars.misc_chatspam_enabled));
-	MiscTab->AddControl(new CCombo(&gCvars.misc_chatspam_selection, { L"None", L"NullCore", L"LMAOBOX", L"Lithium", L"Cathook", L"Empty Lines", L"Speedhook", L"Freebox", L"Catbot", L"Dumpster Fire" })); // NEEDS LIST
+	MiscTab->AddControl(new CCombo(&gCvars.misc_chatspam_selection, { L"NullCore", L"LMAOBOX", L"Lithium", L"Cathook", L"Empty Lines", L"Speedhook", L"Freebox", L"Catbot", L"Dumpster Fire" })); // NEEDS LIST
 	MiscTab->AddControl(new CSlider<int>(L"Delay", 1000, 3000, &gCvars.misc_chatspam_delay));
 	MiscTab->AddControl(new CSlider<int>(L"Newlines", 0, 32, &gCvars.misc_chatspam_newline));
 	MiscTab->AddControl(new CCheckBox(L"Kill Say", &gCvars.misc_killsay_enabled));
-	MiscTab->AddControl(new CCombo(&gCvars.misc_killsay_selection, { L"None", L"NiggerHOOK", L"NullCore", L"File" })); // NEEDS LIST
+	MiscTab->AddControl(new CCombo(&gCvars.misc_killsay_selection, { L"NiggerHOOK", L"NullCore", L"File" })); // NEEDS LIST
 	MiscTab->AddControl(new CCheckBox(L"Voice Menu Spam", &gCvars.misc_voice)); // NEEDS LIST (?) // Apple, when you add the options to this feature please add to menu. Thanks. - Wolfie
 	MiscTab->AddControl(new CCheckBox(L"Roll Speedhack", &gCvars.misc_roll_speedhack));
 	MiscTab->AddControl(new CCheckBox(L"wow sweet", &gCvars.misc_wowsweet));

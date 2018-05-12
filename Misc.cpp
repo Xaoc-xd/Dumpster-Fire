@@ -6,18 +6,16 @@ CMisc gMisc;
 
 void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 {
-	//if (gInts.cvar->FindVar("viewmodel_fov")->GetInt != gCvars.misc_viewmodel_fov)
-	gInts.cvar->FindVar("viewmodel_fov")->SetValue(gCvars.misc_viewmodel_fov);
+	static ConVar* viewmodel_fov = gInts.cvar->FindVar("viewmodel_fov");
+	viewmodel_fov->SetValue(gCvars.misc_viewmodel_fov);
 	//pLocal->setfov(gCvars.misc_fov); // im gonna keep this code here because its funny and cute - plasma
 	
 	if (gCvars.misc_no_push)
 	{
-		ConVar* tf_avoidteammates_pushaway = gInts.cvar->FindVar("tf_avoidteammates_pushaway");
+		static ConVar* tf_avoidteammates_pushaway = gInts.cvar->FindVar("tf_avoidteammates_pushaway");
 		if (tf_avoidteammates_pushaway->GetInt() == 1)
 			tf_avoidteammates_pushaway->SetValue(0);
 	}
-
-
 
 	if (!(pLocal->GetFlags() & FL_ONGROUND) && pCommand->buttons & IN_JUMP)
 	{
@@ -41,16 +39,6 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 			gInts.Engine->ServerCmdKeyValues(kv);
 		}
 	}
-
-	/*if (gCvars.misc_thirdPerson)
-	{
-		pLocal->ForceTauntCam(true);
-	}
-	else
-	{
-		pLocal->ForceTauntCam(false);
-	}*/ // Swapping this out for new code that supports AA in thirdperson
-
 	
 	if (gCvars.misc_roll_speedhack && !(pCommand->buttons & IN_ATTACK) && (pCommand->buttons & IN_DUCK)) // who changed my comment >:(
 	{
@@ -95,14 +83,14 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		gInts.Engine->ClientCmd_Unrestricted(voicemenu);
 		fLastSpam = gInts.globals->curtime;
 	}
-		if (gCvars.misc_lagger)
-		{
-			for (int i = 0; i < gCvars.misc_laggeramt; i++)
-			{
-				gInts.Engine->ClientCmd("voicemenu 0 0 ");
-			}
-		}
 
+	if (gCvars.misc_lagger)
+	{
+		// This method is detected. You can instead try the 'use' command
+		// You will need a higher lag amount for the same effect with it
+		for (int i = 0; i < gCvars.misc_laggeramt; i++)
+			gInts.Engine->ClientCmd("voicemenu 0 0 ");
+	}
 }
 
 void CMisc::NoisemakerSpam(PVOID kv) //Credits gir https://www.unknowncheats.me/forum/team-fortress-2-a/141108-infinite-noisemakers.html

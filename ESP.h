@@ -4,14 +4,12 @@
 class CESP
 {
 public:
-
 	void Run(CBaseEntity* pLocal);
 
 private:
-
 	void Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity);
-
 	void DrawFace(CBaseEntity * pEntity, Color clr);
+	void SetupBounds(CBaseEntity* pEntity, int& x, int& y, int& w, int& h);
 
 	//Other funcs
 

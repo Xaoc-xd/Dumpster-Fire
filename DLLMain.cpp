@@ -101,14 +101,23 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	XASSERT(gInts.steamfriends);
 	XASSERT(gInts.steamuser);
 
-	gConfig.LoadSettings(".\\Dumpster-Fire.json");
+	try
+	{
+		gConfig.LoadSettings(".\\Dumpster-Fire.json");
+	}
+	catch (...)
+	{
+		Log::Fatal("Dumpster Fire failed to load your config. It may be outdated.\nClick okay to reset your config.");
+		if (remove(".\\Dumpster-Fire.json") != 0)
+			Log::Error("Failed to delete Dumpster Fire's config.");
+	}
 
 	gInts.Engine->ClientCmd_Unrestricted("toggleconsole");
 	gInts.cvar->ConsolePrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "______________________________________________________________________________\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Dumpster Fire Successfully Injected!\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Credits\n");
-	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Hold On\n");
+	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Hold on!\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "channel32\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "AVexxed\n");
 	gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Wolfie\n");
@@ -131,7 +140,16 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 	InputSys::Get().RegisterHotkey(VK_INSERT, [lpArguments]()
 	{
 		Menu::Get().Toggle();
-		gConfig.SaveSettings(".\\Dumpster-Fire.json");
+		try
+		{
+			gConfig.SaveSettings(".\\Dumpster-Fire.json");
+		}
+		catch (...)
+		{
+			Log::Fatal("Dumpster Fire failed to save your config. It may be outdated.\nClick okay to reset your config.");
+			if (remove(".\\Dumpster-Fire.json") != 0)
+				Log::Error("Failed to delete Dumpster Fire's config.");
+		}
 	});
 
 	InputSys::Get().RegisterHotkey(VK_LBUTTON, [lpArguments]()
