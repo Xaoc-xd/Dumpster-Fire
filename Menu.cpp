@@ -103,7 +103,7 @@ void Menu::Init()
 
 	Main.AddControl(AntiAimTab);
 #pragma endregion
-#pragma region Remove Cond
+/*#pragma region Remove Cond
 	auto RemoveCondTab = new CChild(230, 262, 220, L"Remove Cond");
 
 	RemoveCondTab->AddControl(new CCheckBox(L"Enabled", &gCvars.removecond_enabled));
@@ -115,7 +115,7 @@ void Menu::Init()
 	RemoveCondTab->AddControl(new CCheckBox(L"Sticky Spam", &gCvars.removecond_stickyspam));
 
 	Main.AddControl(RemoveCondTab);
-#pragma endregion
+#pragma endregion*/
 #pragma region Misc
 	auto MiscTab = new CChild(460, 0, 220, L"Misc");
 

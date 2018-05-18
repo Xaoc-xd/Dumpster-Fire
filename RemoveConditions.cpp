@@ -1,4 +1,4 @@
-#include "RemoveConditions.h"
+/*#include "RemoveConditions.h"
 
 RemoveCondExploits gCond;
 
@@ -153,4 +153,4 @@ void RemoveCondExploits::RemoveConds(CBaseEntity * local, CUserCmd * cmd, int va
 void RemoveCondExploits::RemoveConds(CBaseEntity *local, int value)
 {
 	RemoveConds(local, new CUserCmd(), value);
-}
+}*/

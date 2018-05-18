@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "SDK.h"
 #include "Util.h"
 //a
@@ -20,4 +20,4 @@ public:
 
 };
 
-extern RemoveCondExploits gCond;
+extern RemoveCondExploits gCond;*/

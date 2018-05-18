@@ -141,14 +141,14 @@ bool GConfig::LoadSettings(const char* path)
 	GetVal(settings[section]["Objects"], &gCvars.esp_objects);
 	GetVal(settings[section]["HealthBuildings"], &gCvars.esp_health_buildings);
 
-	section = "RemoveCond";
+	/*section = "RemoveCond";
 	GetVal(settings[section]["Enabled"], &gCvars.removecond_enabled);
 	GetVal(settings[section]["Key"], &gCvars.removecond_key);
 	GetVal(settings[section]["Value"], &gCvars.removecond_value);
 	GetVal(settings[section]["AutoMedkit"], &gCvars.removecond_automedkit);
 	GetVal(settings[section]["AutoCap"], &gCvars.removecond_autoinstantcap);
 	GetVal(settings[section]["InstaWeapSwitch"], &gCvars.removecond_instantweaponswitch);
-	GetVal(settings[section]["Stickyspam"], &gCvars.removecond_stickyspam);
+	GetVal(settings[section]["Stickyspam"], &gCvars.removecond_stickyspam);*/
 
 	section = "Misc";
 	GetVal(settings[section]["BunnyHop"], &gCvars.misc_bunnyhop);
@@ -252,14 +252,14 @@ bool GConfig::SaveSettings(const char* path)
 		settings[section]["Objects"] = gCvars.esp_objects;
 		settings[section]["HealthBuildings"] = gCvars.esp_health_buildings;
 
-		section = "RemoveCond";
+		/*section = "RemoveCond";
 		settings[section]["Enabled"] = gCvars.removecond_enabled;
 		settings[section]["Key"] = gCvars.removecond_key;
 		settings[section]["Value"] = gCvars.removecond_value;
 		settings[section]["AutoMedkit"] = gCvars.removecond_automedkit;
 		settings[section]["AutoCap"] = gCvars.removecond_autoinstantcap;
 		settings[section]["InstaWeapSwitch"] = gCvars.removecond_instantweaponswitch;
-		settings[section]["Stickyspam"] = gCvars.removecond_stickyspam;
+		settings[section]["Stickyspam"] = gCvars.removecond_stickyspam;*/
 
 		section = "Misc";
 		settings[section]["BunnyHop"] = gCvars.misc_bunnyhop;
